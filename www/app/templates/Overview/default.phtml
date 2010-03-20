@@ -1,0 +1,108 @@
+{block #title}JCOP{/block}
+{block #chapter}1.1{/block}
+{block #content}
+<h3 id="what-is-jcop">What is JCOP</h3>
+
+<p>
+  JCOP stands for <b>J</b>ava <b>C</b>ombinatorial <b>O</b>ptimization <b>P</b>latform. Its development began in 2009 as
+  a part of Ondřej Skalička's diploma thesis. It was created with two main goals in mind. First is to make a platform
+  which allows to create combinatorial algorithms and problems in such a way that it is possible to apply (almost) every
+  algorithm on every problem, without any modifications. This way it should be possible to benchmark several settings of
+  the same algorithm or even different algorithms on one problem and tell which performed better. It is not intended to
+  be able to solve problems extremely fast, just to be able to tell which one is better among the others to be preferred
+  and used on a problem. 
+</p>
+
+<p>
+  The second goal of JCOP is that it is both easy to use and contains several algorithms and problems bundled with it.
+  This is because of it will be used as part of teaching process on <a href="http://fel.cvut.cz/en/">Faculty of Electrical
+  Engineering on Czech Technical University in Prague</a> by students to make their end-term projects, in which several
+  algorithms of increasing complexity will be implemented. 
+</p>
+
+<p>
+  JCOP comes bundled with several problems and algorithms of its own (see appendixes for description) so you can
+  begin playing with it right away. After you have seen how it works, you can add your own algorithms and problems to it
+  and see how better (or worse) do they fare against built-in ones.
+</p>
+
+<h3 id="where-to-get-it">Where to get it</h3>
+
+<p>
+  JCOP is currently versioned only on a private SVN server and a beta distribution is available online. Beta can be
+  downloaded from <a href="{link Overview:download}">download page</a>.
+</p>
+
+<h3 id="how-does-it-work">How does it work</h3>
+
+<p>
+  When it comes to start solving problems using in-built or your own algorithms, benchmarking different algorithms or
+  just testing how algorithm settings affects solutions, JCOP stands on four main pillars - Solver, Problem, Algorithm
+  and Result. Solver takes Algorithm(s) and Problem(s) and begins to solve the Problems (either sequentially one at a time
+  or possibly some switching etc.). During this time Result begins to collect important data. When Solver is finished,
+  Result displays collected data to user in varying formats. To be able to have these four main parts to interact
+  together, JCOP uses lots of interfaces through which components interact with each other.
+</p>
+
+<h4 id="solver">Solver</h4>
+
+<p>
+  Solver is responsible for proper initializing of algorithm and problem, applying of algorithm on the problem, creating
+  results and terminating whole process. This process is called a Solver Iteration and many solvers repeat it several
+  times (to use several algorithms on a single problem for example). The most basic implementation - SimpleSolver - just
+  takes single algorithm and applies it to a single problem. Other solvers tests multiple algorithms on same problem or
+  benchmarks how good does one algorithm solve different problems. Furthermore Solver package contains StopConditions,
+  a set of rules that determine when to stop, and messages passed to different listeners.
+</p>
+
+<h4 id="result">Result</h4>
+
+<p>
+  Result takes care of collecting results from solver (both final result and collecting runtime data) and presenting
+  collected information to user. This includes printing results to xml/html/txt or console, making plots or creating
+  summaries for benchmarks. Result itself is registered to a solver which is  responsible for informing it about
+  anything of importance.
+</p>
+
+<h4 id="problem">Problem</h4>
+
+<p>
+  Problem contains all information about one combinatorial problem. This ranges from different forms of
+  initialization (loading from file, arrays etc.), through implementing required interfaces (providing fitness,
+  operations), to adding the optional interfaces (support for global search algorithms, random configurations,
+  destination problems and more).
+</p>
+
+<p>
+  Problems are a bit more difficult to understand than other part of the platform. This is because Problem must be able
+  to cover lots of different real world problems and be able to provide all necessary information about it. JCOP works
+  with the fact that most combinatorial problems can be defined with following:
+</p>
+
+<ul>
+  <li>Every configuration (point in search space) has final number of variables (also called dimension), each having final number of available values.</li>
+  <li>For every configuration, there is final set of operations that can be applied on that configuration.</li>
+  <li>Every configuration can have its fitness calculated.</li>
+</ul>
+
+<p>
+  This list is the minimal requirements for a problem to be able to exist in JCOP. There are other additional
+  information that problem can provide and algorithms may require to run. These are optional, but the more information
+  a problem provides the more algorithms could be used to solve it.
+</p>
+
+<h4 id="algorithm">Algorithm</h4>
+
+<p>
+  Algorithm on the other hand has one simple interface, two main parts of which are initialization of algorithm on a
+  given problem and performing one optimization step. Also, algorithms may be able to dynamically adapt to a problem if
+  they recognize some of its features (for example algorithm can choose to use own fitness calculation for problems
+  derived from SAT).
+</p>
+
+<h4 id="util">Util</h4>
+
+<p>
+  Util contains some useful utilities which are used in JCOP. Such may include utilities for measuring precise time,
+  random with special properties and commonly used comparators.
+</p>

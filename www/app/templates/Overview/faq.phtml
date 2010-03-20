@@ -1,0 +1,29 @@
+{block #title}Frequently Asked Questions{/block}
+{block #chapter}1.3{/block}
+{block #content}
+
+<p>
+  This chapter covers some frequently asked questions and common mistakes made be new users.
+</p>
+
+<h3>log4j:WARN No appenders could be found for logger (...)</h3>
+<p>
+  I get a
+</p>
+<pre>
+log4j:WARN No appenders could be found for logger (...).
+log4j:WARN Please initialize the log4j system properly.
+</pre>
+<p>
+  error in console.
+</p>
+<h4>Solution:</h4>
+<p>
+  You need to initialize Log4j properly. You can do this by adding <code>log4j.properties</code> file to your classpath
+  (which is preferred and there is default properties file in jcop), using manual configuration such as
+</p>
+<pre class="brush: java;">org.apache.log4j.BasicConfigurator.configure();</pre>
+<p>
+  or disabling logs entirely with
+</p>
+<pre class="brush: java;">Logger.getRootLogger().setLevel(Level.OFF);</pre>

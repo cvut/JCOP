@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright © 2010 by Ondrej Skalicka. All Rights Reserved
+  -->
+
+<html>
+<head></head>
+<body>
+Basic implementation of genetic algorithm.
+
+Starts with random population (with given size) and in every iteration creates new population from previous one.
+Individuals to become parents are randomly selected from population based on their fitness such that higher fitness
+means higher chance of became parent. Two parents produces two children, which could be possibly mutated. Repeating this
+creates new population.
+
+Package consists of interfaces to add own Mutation, Reproduction and Selection. Default implementations are
+SimpleMutation, OnePointCrossoverReproduction and TournamentSelection (respectively).
+</body>
+</html>

@@ -1,0 +1,84 @@
+/*
+ * Copyright © 2010 by Ondrej Skalicka. All Rights Reserved
+ */
+
+/*Design by Free CSS Templateshttp://www.freecsstemplates.orgReleased for free under a Creative Commons Attribution 2.5 License*/
+body{margin:0;padding:0;background:#000000 url(../images/img01.jpg) repeat left top;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#4D4D4D;}
+h1,h2,h3{margin:0;padding:0;font-weight:normal;color:#3E3530;}
+h1{font-size:2em;}
+h2{font-size:2.8em;}
+h3{font-size:1.6em;}
+p,ul,ol{margin-top:0;line-height:180%;}
+ul,ol{}
+a{color:#3E3530;}
+a:hover{}
+#wrapper{margin:0 auto;padding:0;}
+/* Header */
+#header{width:960px;height:100px;margin:0 auto;padding:20px 0px 0px 30px;background:url(../images/img02.jpg) no-repeat left top;}
+/* Logo */
+#logo{margin:0;padding:0;color:#000000;}
+#logo h1,#logo p{margin:0;padding:0;}
+#logo h1{letter-spacing:-1px;text-transform:lowercase;font-size:3.8em;}
+#logo p{margin:0;padding:0px 0 0 2px;font:normal 14px Georgia,"Times New Roman",Times,serif;font-style:italic;color:#FFFFFF;}
+#logo a{border:none;background:none;text-decoration:none;color:#FFFFFF;}
+/* Search */
+#search{float:left;width:250px;height:30px;padding:20px 0px 0px 0px;}
+#search form{height:41px;margin:0;padding:10px 0 0 50px;}
+#search fieldset{margin:0;padding:0;border:none;}
+#search-text{width:120px;padding:6px 5px 2px 5px;border:1px solid #DEDEDE;background:#FFFFFF;text-transform:lowercase;font:normal 11px Arial,Helvetica,sans-serif;color:#5D781D;}
+#search-submit{width:50px;height:22px;border:none;background:#B9B9B9;color:#000000;}
+/* Menu */
+#menu{width:980px;height:90px;margin:0 auto;padding:0;}
+#menu ul{margin:0;padding:50px 0px 0px 0px;list-style:none;line-height:normal;}
+#menu li{float:left;}
+#menu a{display:block;width:130px;height:30px;margin-right:1px;padding:9px 0px 0px 0px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#FFFFFF;border:none;}
+#menu a:hover,#menu .current_page_item a{}
+#menu .current_page_item a{padding-left:0;}
+/* Page */
+#page{width:1000px;margin:0 auto;background:url(../images/img04.jpg) repeat-y left top;padding:0px;}
+#page-bgtop{background:url(../images/img03.jpg) no-repeat left top;}
+#page-bgbtm{background:url(../images/img05.jpg) no-repeat left bottom;}
+/* Content */
+#content{float:right;width:720px;padding:20px 10px 0px 0px;}
+.post{border-bottom:1px dotted #E7E2DC;}
+.post .title{letter-spacing:-.5px;padding:20px 10px 0px 30px;font-size:30px;}
+.post .title a{color:#3E3530;border:none;}
+.post .meta{margin-bottom:30px;padding:0px 30px 0px 30px;text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;font-style:italic;}
+.post .meta .date{float:left;}
+.post .meta .posted{float:right;}
+.post .meta a{}
+.post .entry{padding:0px 30px 20px 30px;padding-bottom:20px;text-align:justify;}
+.links{padding-top:20px;font-size:12px;font-weight:bold;}
+/* Sidebar */
+#sidebar{float:left;width:270px;margin:0px;padding:0px 0px 0px 0px;color:#787878;}
+#sidebar ul{margin:0;padding:0;list-style:none;}
+#sidebar li{margin:0;padding:0;}
+#sidebar li ul{margin:0px 0px;padding-left:25px;padding-bottom:30px;}
+#sidebar li li{line-height:30px;margin:0px 30px;padding:0px 0px 0px 15px;border-left:none;background:url(../images/img07.jpg) no-repeat left 12px;}
+#sidebar li li a {padding: 0px 15px 0px 0px;}
+#sidebar li li a:hover, #sidebar li li a.active {background:url(../images/img07.jpg) no-repeat right;}
+#sidebar h2{height:46px;padding-top:13px;padding-left:50px;margin-bottom:10px;background:url(../images/img06.jpg) no-repeat left 4px;letter-spacing:-.5px;font-size:1.8em;color:#696969;}
+#sidebar p{margin:0 0px;padding:0px 30px 20px 50px;text-align:justify;}
+#sidebar a{border:none;color:#4D4D4D;text-decoration:none;}
+#sidebar a:hover{text-decoration:underline;color:#8A8A8A;}
+/* Calendar */
+#calendar{}
+#calendar_wrap{padding:20px;}
+#calendar table{width:100%;}
+#calendar tbody td{text-align:center;}
+#calendar #next{text-align:right;}
+/* Footer */
+#footer{height:50px;margin:0 auto;padding:0px 0 15px 0;font-family:Arial,Helvetica,sans-serif;}
+#footer p{margin:0;padding-top:20px;line-height:normal;font-size:9px;text-transform:uppercase;text-align:center;color: #797979;}
+#footer a{color: #676767;}
+
+/* Custom */
+.fig {text-align: center;}
+.fig-title {text-align: center;color:#888;font-size: 90%;}
+a.javadoc {white-space:nowrap; font-family: Courier New, monospace;}
+table.full {width: 100%; border-collapse: collapse;margin-top: 10px;}
+table.full td {vertical-align:top;}
+table.full th {background-color: #eee;}
+table.full th, table.full td {border: 1px solid #eee; padding-left: 3px; padding-right: 3px;}
+.nobr {white-space:nowrap;}
+#sidebar li li a img {margin-bottom: 0px;  border: none; vertical-align: middle;}

@@ -1,0 +1,43 @@
+{block #title}Introduction{/block}
+{block #chapter}2.1{/block}
+{block #content}
+
+<p>
+  This chapter will show you the basic usage of JCOP, how it main components works and how to use them yourself. It will
+  show you whether you have installed JCOP properly and teach you how to make basic solvers, problems, algorithms
+  and renders work together. It is divided into six parts after which you should be able to use JCOP yourself.
+</p>
+
+<p>
+  In <a href="#fig1">figure 1</a> you can see how can solver, result, problem and algorithm interact together. Note
+  that because all parts of the interaction (mostly solver and algorithm) are free to implement their methods, this
+  diagram will be different for every different solver/algorithm. What is shown below is the basic idea how the process
+  works (actually it shows how {javadoc "solver.SimpleSolver"} works).
+</p>
+{include "../fig.phtml", "url" => "sd-algorithm-problem-solver-render.png", "url_thumb" => "sd-algorithm-problem-solver-render_resize.png", "title" => "Sequence diagram of basic algorithm-problem-solver-result interaction", "fig" => "1"}
+<p>
+  Basic scenario is that user (programmer) creates a problem and an algorithm instances. This is also when algorithm is
+  configured (for example starting temperature and anneal for simulated annealing) and problem is loaded (from file,
+  string or other data structure). Once they are ready, they are passed to a solver (either as argument to constructor
+  as shown in picture or added via a method). Finally user can add additional renders (or listeners, but do not mind
+  them yet). This ends the preparation phase.
+</p>
+<p>
+  Then is the main phase - where algorithms are used to solve problems and statistics are collected. After user invokes
+  {javadoc "solver.Solver#run()"}, solver restarts algorithm and begins to apply algorithms on problems. What these
+  parts contain depends on which algorithm is used, but restart commonly takes at least {javadoc "problem.StartingConfigurationProblem#getStartingConfiguration()"}
+  (algorithms such as BFS/DFS) 
+  or {javadoc "problem.RandomConfigurationProblem#getRandomConfiguration()"} (for genetics algorithm or simulated
+  annealing) from problem to have some starting point.
+  After that, solver repeatedly calls {javadoc "algorithm.Algorithm#optimize()"}, which performs one optimization step.
+  In this optimization step algorithm might for example take operations with {javadoc "problem.Problem#getOperationIterator(cz.cvut.felk.cig.jcop.problem.Configuration)"}
+  and expand his current configuration. When solver decides it is time to end one solver iteration, it creates a report
+  about it (called {javadoc "result.ResultEntry"}) and adds it to {javadoc "result.Result"}.
+</p>
+<p>
+  If there are no more solver iterations left (no algorithms to be used on problems and vice versa), final phase begins.
+  Here user usually just tells solver to render all its result entries with assigned renders. This is done by calling
+  {javadoc "solver.Solver#render()"}. When results are rendered (to files, console, database etc.), life cycle of JCOP
+  ends. 
+</p>
+

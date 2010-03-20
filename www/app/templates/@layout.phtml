@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-language" content="cs" />
+
+  <title>Java Combinatorial Optimization Platform - {include #title}</title>
+
+  <meta name='description' content="Java Combinatorial Optimization Platform is used to solve combinatorial problems using common interface." />
+  <meta name='keywords' content="Java, Combinatorial, Problem, Algorithm, Optimization" />
+
+  <meta name="date" content="17.02.2010 00:05:59" />
+  <meta name="author" content="Ondrej Skalicka" />
+  <meta name="robots" content="index,follow" />
+  <meta name="google-site-verification" content="Uq6-2NQWfBymMZ9OkbBXgFCgQ5sU6PEP5btuNj5PSAQ" />
+
+  <link type="text/css" rel="stylesheet" href="{$basePath}/css/style.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="{$basePath}/css/shCore.css"/>
+  <link type="text/css" rel="stylesheet" href="{$basePath}/css/shThemeDefault.css"/>
+  <link type="text/css" rel="stylesheet" href="{$basePath}/css/colorbox.css"/>
+
+  <script type="text/javascript" src="{$basePath}/js/shCore.js"></script>
+  <script type="text/javascript" src="{$basePath}/js/shBrushJava.js"></script>
+  <script type="text/javascript" src="{$basePath}/js/shBrushPlain.js"></script>
+  <script type="text/javascript" src="{$basePath}/js/shBrushXml.js"></script>
+  <script type="text/javascript" src="{$basePath}/js/jquery-1.4.min.js"></script>
+  <script type="text/javascript" src="{$basePath}/js/jquery.colorbox-min.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all();
+    $(document).ready(function(){
+      $("a[rel='colorbox']").colorbox({ transition:"fade"});
+    });
+  </script>
+
+  <link rel="shortcut icon" href="{$basePath}/favicon.ico" />
+</head>
+<body>
+<div id="wrapper">
+	<div id="header-wrapper">
+	<div id="header">
+		<div id="logo">
+			<h1><a href="{link overview:default}">JCOP   </a></h1>
+			<p> <b>J</b>ava <b>C</b>ombinatorial <b>O</b>ptimization <b>P</b>latform</p>
+		</div>
+	</div>
+	</div>
+	<!-- end #header -->
+	<div id="page">
+	<div id="page-bgtop">
+	<div id="page-bgbtm">
+		<div id="content">
+			<div class="post">
+				<div class="entry">
+
+                    <h2>{block #chapter}{/block} {include #title}</h2>
+					{include #content}
+				</div>
+			</div>
+		<div style="clear: both;">&nbsp;</div>
+		</div>
+		<!-- end #content -->
+		<div id="sidebar">
+			<ul>
+				<li>
+					<div id="search" >
+
+					<form method="get" action="http://www.google.com/search">
+
+              <div>
+                  <input type="text"   name="q" size="15" maxlength="255" value="" />
+                  <input type="submit" value="Search" />
+
+                  <label><input type="checkbox" name="sitesearch" value="jcop.savannahsoft.eu" checked="checked" />&nbsp;only search JCOP</label><br />
+              </div>
+
+          </form>
+					</div>
+					<div style="clear: both;">&nbsp;</div>
+				</li>
+				<li>
+					<h2>Follow us on</h2>
+					<ul>
+            <li><a href="http://twitter.com/cig_jcop">Twitter</a></li>
+            <li><a href="http://sourceforge.net/projects/jcop/">SourceForge</a></li>
+            <li><a href="https://sourceforge.net/tracker/?func=add&amp;group_id=310929&amp;atid=1309046">SourceForge bugs <img src="{$basePath}/images/bug_error_16.png" alt="BUG" /></a></li>
+					</ul>
+				</li>
+				<li>
+					<h2>JCOP</h2>
+					<ul>
+            <li><a href="{link Overview:}"{ifCurrent overview:} class="active"{/if}>Introduction</a></li>
+            <li><a href="{link Overview:download}"{ifCurrent overview:download} class="active"{/if}>Download</a></li>
+            <li><a href="{link Overview:faq}"{ifCurrent overview:faq} class="active"{/if}>FAQ</a></li>
+					</ul>
+				</li>
+				<li>
+					<h2>Basic usage</h2>
+					<ul>
+						<li><a href="{link BasicUsage:}"{ifCurrent basicUsage:} class="active"{/if}>Introduction</a></li>
+						<li><a href="{link BasicUsage:installation}"{ifCurrent basicUsage:installation} class="active"{/if}>Installation</a></li>
+						<li><a href="{link BasicUsage:solver}"{ifCurrent basicUsage:solver} class="active"{/if}>Solver</a></li>
+						<li><a href="{link BasicUsage:result}"{ifCurrent basicUsage:result} class="active"{/if}>Result</a></li>
+						<li><a href="{link BasicUsage:problem}"{ifCurrent basicUsage:problem} class="active"{/if}>Problem</a></li>
+						<li><a href="{link BasicUsage:algorithm}"{ifCurrent basicUsage:algorithm} class="active"{/if}>Algorithm</a></li>
+						<li><a href="{link BasicUsage:util}"{ifCurrent basicUsage:util} class="active"{/if}>Util</a></li>
+					</ul>
+				</li>
+				<li>
+					<h2>Advanced tweaks</h2>
+					<ul>
+						<li><a href="#">Aliquam libero</a></li>
+						<li><a href="#">Consectetuer adipiscing elit</a></li>
+						<li><a href="#">Metus aliquam pellentesque</a></li>
+						<li><a href="#">Suspendisse iaculis mauris</a></li>
+						<li><a href="#">Urnanet non molestie semper</a></li>
+						<li><a href="#">Proin gravida orci porttitor</a></li>
+					</ul>
+				</li>
+				<li>
+					<h2>Appendixes</h2>
+					<ul>
+						<li><a href="{link Appendix:Solvers}"{ifCurrent Appendix:Solvers} class="active"{/if}>Solvers</a></li>
+						<li><a href="{link Appendix:Algorithms}"{ifCurrent Appendix:Algorithms} class="active"{/if}>Algorithms</a></li>
+						<li><a href="{link Appendix:Problems}"{ifCurrent Appendix:Problems} class="active"{/if}>Problems</a></li>
+						<li><a href="{link Appendix:StopConditions}"{ifCurrent Appendix:StopConditions} class="active"{/if}>StopConditions</a></li>
+						<li><a href="{link Appendix:RendersListeners}"{ifCurrent Appendix:RendersListeners} class="active"{/if}>Renders, Listeners</a></li>
+						<li><a href="{link Appendix:Libraries}"{ifCurrent Appendix:Libraries} class="active"{/if}>Libraries</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
+	</div>
+	<!-- end #page -->
+</div>
+	<div id="footer">
+		<p>Copyright &copy; 2010 Ondrej Skalicka, All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+	</div>
+	<!-- end #footer -->
+</body>
+</html>

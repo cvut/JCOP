@@ -1,0 +1,172 @@
+{block #title}Installation{/block}
+{block #chapter}2.2{/block}
+{block #content}
+
+<p>
+  First of all, you need to download JCOP files. Download latest version from <a href="{link Overview:download}">download
+  page</a>.
+</p>
+<p>
+  The archive contains all you need to run JCOP - both its JAR file
+  and all libraries used in JCOP (such as <a href="http://logging.apache.org/log4j/">log4j</a> or
+  <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>). Contents of the archive are displayed in 
+  <a href="#fig1">figure 1</a>. You can extract this folder anywhere you like, you will just have to add it to your
+  libraries.
+</p>
+<p>
+  Usually you will need to add just <code>jcop.jar</code> and other libraries will be loaded automatically. If not, add
+  them manually the same way as you added <code>jcop.jar</code>. Follows instructions on how to add JARs to a project
+  for commonly used IDE.
+</p>
+
+{include "../fig.phtml", "url" => "jcop-archive.png", "url_thumb" => "jcop-archive_resize.png", "title" => "JCOP archive contents", "fig" => "1"}
+
+<h3>IntelliJ IDEA 9.0.1 Community Edition</h3>
+
+<p>
+  Create new project from File 	&rarr; New Project. Select Create project from scratch and follow the wizard (don't forget
+  to add at least one module). Then go to File 	&rarr; Project Structure and choose Libraries from Project settings.
+  Click the New Project Library ("+" icon, alt+insert) and type jcop as name. You should see something like
+  <a href="#fig2">figure 2</a>. 
+</p>
+
+{include "../fig.phtml", "url" => "idea-new-library.png", "url_thumb" => "idea-new-library_resize.png", "title" => "IntelliJ IDEA new library", "fig" => "2"}
+
+<p>
+  After you have created new library, click Attach Classes and add <code>jcop.jar</code> file. Result should look
+  like <a href="#fig3">figure 3</a>.
+</p>
+
+{include "../fig.phtml", "url" => "idea-attach-jar.png", "url_thumb" => "idea-attach-jar_resize.png", "title" => "IntelliJ IDEA Attached Jar Directories", "fig" => "3"}
+
+<p>JCOP is now ready! To test it, try to run a <a href="#test-app">test application</a>.</p>
+
+
+<h3>NetBeans IDE 6.8</h3>
+
+<p>
+  Create new Java Application project in File 	&rarr; New Project, select category as shown in <a href="#fig4">figure 4</a>.
+</p>
+
+{include "../fig.phtml", "url" => "netbeans-new-project.png", "url_thumb" => "netbeans-new-project_resize.png", "title" => "NetBeans IDE new project", "fig" => "4"}
+
+<p>
+  Right click on Libraries in project tree and select Add JAR/Folder as show in <a href="#fig5">figure 5</a>
+   and add <code>jcop.jar</code>.
+</p>
+
+{include "../fig.phtml", "url" => "netbeans-add-jar.png", "url_thumb" => "netbeans-add-jar_resize.png", "title" => "NetBeans IDE Add JAR/Folder", "fig" => "5"}
+
+<p>JCOP is now ready! To test it, try to run a <a href="#test-app">test application</a>.</p>
+
+<h3>Eclipse IDE for Java Developers	(1.2.1.20090918-0703)</h3>
+
+<p>
+  Create new project from File 	&rarr; New 	&rarr; Java project. Right click on project and select Properties as show in
+  <a href="#fig6">figure 6</a>.
+</p>
+
+{include "../fig.phtml", "url" => "eclipse-properties.png", "url_thumb" => "eclipse-properties_resize.png", "title" => "Eclipse project properties", "fig" => "6"}
+
+<p>
+  Navigate to Java Build Path and select Libraries. There, click Add External JARs and <code>jcop.jar</code> as in
+  <a href="#fig7">figure 7</a>.
+</p>
+
+{include "../fig.phtml", "url" => "eclipse-add-jars.png", "url_thumb" => "eclipse-add-jars_resize.png", "title" => "Eclipse Add External JARs", "fig" => "7"}
+
+<p>JCOP is now ready! To test it, try to run a <a href="#test-app">test application</a>.</p>
+
+<h3 id="test-app">Test Application</h3>
+
+<p>
+  To test that JCOP was installed, you can use this simple application. Just add new Java Main Class to your project with
+  following code and run it (you might need to change package to one that you put Main Class in).
+</p>
+
+<pre class="brush: java;">
+package jcoptest;
+
+import cz.cvut.felk.cig.jcop.algorithm.graphsearch.bfs.BreadthFirstSearch;
+import cz.cvut.felk.cig.jcop.problem.knapsack.Knapsack;
+import cz.cvut.felk.cig.jcop.result.render.CSVRender;
+import cz.cvut.felk.cig.jcop.result.render.JFreeChartRender;
+import cz.cvut.felk.cig.jcop.result.render.SimpleRender;
+import cz.cvut.felk.cig.jcop.result.render.XMLRender;
+import cz.cvut.felk.cig.jcop.solver.SimpleSolver;
+import cz.cvut.felk.cig.jcop.solver.Solver;
+import java.io.File;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Solver solver = new SimpleSolver(new BreadthFirstSearch(), new Knapsack("9000 4 100 18 114 42 136 88 192 3 223"));
+        solver.addListener(new JFreeChartRender("Test"));
+        solver.addRender(new SimpleRender());
+        solver.addRender(new CSVRender(new File("test.csv")));
+        solver.addRender(new XMLRender(new File("test.xml")));
+        solver.run();
+        solver.render();
+    }
+}
+</pre>
+
+<p>
+  If everything went fine you should see this in console:
+</p>
+
+<pre class="brush: plain;">
+0 [main] INFO cz.cvut.felk.cig.jcop.solver.SimpleSolver  - Started solver.
+16 [main] INFO cz.cvut.felk.cig.jcop.solver.SimpleSolver  - Started optimize, BreadthFirstSearch [] on Knapsack [line=9000 4 100 18 114 42 136 88 192 3 223].
+16 [main] WARN cz.cvut.felk.cig.jcop.solver.SimpleSolver  - Got exception CannotContinueException.
+16 [main] INFO cz.cvut.felk.cig.jcop.solver.SimpleSolver  - Stopped optimize.
+31 [main] INFO cz.cvut.felk.cig.jcop.solver.SimpleSolver  - Stopped solver.
+
+=== Algorithm BreadthFirstSearch [] used on problem Knapsack [line=9000 4 100 18 114 42 136 88 192 3 223] ===
+  CPU Time:                       1 [ms]
+  System Time:                    1 [ms]
+  User Time:                      1 [ms]
+  Clock Time:                    15 [ms]
+  Optimize counter:              16 [-]
+  Optimize/sec (CPU):         16000 [1/s]
+  Optimize/sec (Clock):        1066 [1/s]
+  Best solution:         Configuration{!="{"}attributes=[1, 1, 0, 1], operationHistory={!="{"}0:Empty knapsack created, 1:AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=0, weight=18, price=114}}, 2:AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=1, weight=42, price=136}}, 3:AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=3, weight=3, price=223}}}}
+  Depth:                          3 [-]
+  Fitness:                    473,0 [-]
+  Ended with exception:  cz.cvut.felk.cig.jcop.algorithm.CannotContinueException: No more items in queue
+ </pre>
+
+ <p>
+   , graph like <a href="#fig8">figure 8</a> should pop up and files <code>test.xml</code> and <code>test.csv</code>
+   should be in your application working directory (see expected contents, xml and csv respectively, below).
+ </p>
+
+ {include "../fig.phtml", "url" => "test-app-graph.png", "url_thumb" => "test-app-graph_resize.png", "title" => "Graph of test application", "fig" => "8"}
+
+<pre class="brush: xml;">
+&lt;?xml version="1.0" standalone="yes"?&gt;
+&lt;result&gt;
+  &lt;experiment date='Tue Mar 16 10:26:59 CET 2010'&gt;&lt;/experiment&gt;
+  &lt;entry exception='CannotContinueException' clock-time='15' system-time='1' user-time='16' algorithm='BreadthFirstSearch []' cpu-time='16' optimize-counter='16' problem='Knapsack [line=9000 4 100 18 114 42 136 88 192 3 223]'&gt;
+    &lt;best-solution fitness='473.0'&gt;
+      &lt;operations&gt;
+        &lt;operation index='0' label='Empty knapsack created'&gt;&lt;/operation&gt;
+        &lt;operation index='1' label='AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=0, weight=18, price=114}}'&gt;&lt;/operation&gt;
+        &lt;operation index='2' label='AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=1, weight=42, price=136}}'&gt;&lt;/operation&gt;
+        &lt;operation index='3' label='AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=3, weight=3, price=223}}'&gt;&lt;/operation&gt;
+      &lt;/operations&gt;
+      &lt;attributes&gt;
+        &lt;attribute index='0' value='1' human-readable-value='1'&gt;&lt;/attribute&gt;
+        &lt;attribute index='1' value='1' human-readable-value='1'&gt;&lt;/attribute&gt;
+        &lt;attribute index='2' value='0' human-readable-value='0'&gt;&lt;/attribute&gt;
+        &lt;attribute index='3' value='1' human-readable-value='1'&gt;&lt;/attribute&gt;
+      &lt;/attributes&gt;
+    &lt;/best-solution&gt;
+  &lt;/entry&gt;
+&lt;/result&gt;
+</pre>
+
+<pre class="brush: plain;">
+Algorithm,Problem,CPU Time [ms],System Time [ms],User Time [ms],Clock Time [ms],Optimize counter,Optimize/sec (CPU) [1/s],Optimize/sec (Clock) [1/s],Exception,Best solution,Depth,Fitness,Operations
+BreadthFirstSearch [],Knapsack [line=9000 4 100 18 114 42 136 88 192 3 223],16,1,16,15,16,1000,1066,class cz.cvut.felk.cig.jcop.algorithm.CannotContinueException,"[1, 1, 0, 1]",3,473.0,"Empty knapsack created, AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=0, weight=18, price=114}}, AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=1, weight=42, price=136}}, AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=3, weight=3, price=223}}"
+</pre>
