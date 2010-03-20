@@ -217,7 +217,7 @@ public void myMethod(Problem problem) {
   different solution - it introduces an {javadoc "problem.ObjectiveProblem"} interface and its basic implementation
   {javadoc "problem.BaseObjectiveProblem"}. It is kind of wrapper around problem which implements all problem
   interfaces. When you create a {javadoc "problem.BaseObjectiveProblem"}, you supply a {javadoc "problem.Problem"} to
-  it as argument in constructor. All calls to this baseObjectiveProblem is then either redirected to the problem
+  it as an argument in constructor. All calls to this baseObjectiveProblem is then either redirected to the problem
   (properly casted) or raises an exception if original problem did not implement such interface. So you can work with
   {javadoc "problem.ObjectiveProblem"} instead of normal one and does not need to worry about casting or instanceOf
   checks.
