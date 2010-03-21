@@ -1,0 +1,128 @@
+\documentclass[]{article} 
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{url}
+
+\oddsidemargin=-5mm
+\evensidemargin=-5mm
+\marginparwidth=.08in
+\marginparsep=.01in
+\marginparpush=5pt
+\topmargin=-15mm
+\headheight=12pt
+\headsep=25pt
+%\footheight=12pt
+\footskip=30pt
+\textheight=25cm
+\textwidth=17cm
+\columnsep=2mm
+\columnseprule=1pt
+\parindent=15pt
+\parskip=2pt
+
+\begin{document}
+\begin{center}
+\bf Diploma thesis outline:\\[5mm]
+    Java Combinatorial Optimization Package (JCOP)\\[5mm] 
+       Ondřej Skalička\\[2mm]
+5th year, FEL ČVUT, Karlovo nám. 13, 121 35 Praha 2\\[2mm]
+\today
+\end{center}
+
+\section{Introduction}
+
+
+\subsection{Motivation}
+
+Why to create JCOP (missing a tool for easy comparison of different algorithms which allows simple problem-algorithm communication; education at FEL.CVUT)
+
+\subsection{Purpose}
+
+What should and should not be JCOP used for (benchmarking - comparing different algs)
+
+\subsection{State of the Art}
+
+Other similar projects (JCOOL, OAT, FakeGame...)
+
+\section{Combinatorial Problems}
+
+Where are they used, what for, theoretical importance , P/NP/NP-C, common problems (SAT, TSP, Knapsack...)
+
+\subsection{Algorithms}
+
+DFS/BFS (+other graph search based), local non-graph based (SA, Tabu), global search (genetics and variations)
+
+\section{Analysis}
+
+\subsection{Use cases}
+
+What can different users (developer/student, teacher, ...) do
+
+\subsection{Functional/Nonfunctional/Other requirements}
+
+Exceptations what JCOP should be able to do, platform (why java) etc. (+mention tutorials)
+
+\section{Implementation}
+
+\subsection{Technologies}
+
+Java, SVN, SourceForge, Enterprise Architect
+
+\subsection{JCOP}
+
+Main parts of platform, what is responsible for what
+
+\subsection{Implementation details}
+
+Core of thesis, details (text, source code examples, model/diagram screenshots) about all parts of JCOP, why, where, how about them
+
+\subsection{Adding new elements}
+\label{sec:adding-new-elements}
+
+How to add new algorithms/problems/conditions/renders/solvers
+
+\subsection{Tests}
+
+Unit tests (TestNG)
+
+\section{Experimental results}
+
+\subsection{Expected/Real results}
+
+Expectations such as "genetics performs poorly on SAT" etc, benchmark these known result and confirm that JCOP works ok
+
+\section{Conclusion}
+
+\subsection{Future work}
+
+Possible extensions (GUI, adding new elements as in \ref{sec:adding-new-elements}, distributed execution..)
+
+\subsection{references}
+
+\subsection{appendixes}
+
+Much like appendixes online, lists of all implemented problems/solver/algorithms, used utils/libraries etc.
+
+
+%\section{Literatura}
+%
+%\begin{thebibliography}{1}
+%\bibitem{web1}{\em Stránky předmětu X36PAR na Service} \\
+%               \url{http://service.felk.cvut.cz/courses/X36PAR/}
+%\end{thebibliography}
+
+\end{document}
+
+
+
+
+
+
+
+
