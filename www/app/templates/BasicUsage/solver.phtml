@@ -103,8 +103,13 @@ public class DemoPrimitiveSolver {
   <a href="{$basePath}/media/tutorial/basicusage.solver.7z">7z</a>).
 </p>
 
+<h3>Bundled Solvers</h3>
+
 <p>
-  Full list of bundled solvers can be found in <a href="{link Appendix:solvers}">Appendix A</a>.
+  There are several Solvers bundled with JCOP and they are preferred to use instead of creating your own. {javadoc
+  "solver.SimpleSolver"} is used if you want to run a single algorithm on a single problem, usually in development
+  stage. {javadoc "solver.AlgorithmCompareSolver"} is used to benchmark several algorithms against one problem. For a
+  full list see <a href="{link Appendix:solvers}">Appendix A</a>.
 </p>
 
 <h3>StopConditions</h3>
