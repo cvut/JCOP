@@ -1,20 +1,4 @@
 <?php
-
-/**
- * My Application
- *
- * @copyright  Copyright (c) 2010 John Doe
- * @package    MyApplication
- */
-
-
-
-/**
- * Error presenter.
- *
- * @author     John Doe
- * @package    MyApplication
- */
 class ErrorPresenter extends BasePresenter
 {
 

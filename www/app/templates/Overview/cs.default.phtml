@@ -1,0 +1,103 @@
+{block #title}JCOP{/block}
+{block #chapter}1.1{/block}
+{block #content}
+<h3 id="what-is-jcop">Co je JCOP</h3>
+
+<p>
+  JCOP znamená <b>J</b>ava <b>C</b>ombinatorial <b>O</b>ptimization <b>P</b>latform. Vývoj začal v roce 2009 jako součást
+  diplomové práce Ondřeje Skaličky. JCOP byl vytvořen s dvěma hlavními cíli. Zaprvé vytvořit platformu, která bude 
+  umožňovat vytvářet algoritmy a problémy takovým způsobem, že bude možné aplikovat libovolný algoritmus na téměř libovolný
+  problém, bez jakýchkoli modifikací. Díky tomuto bude možné porovnávat různá nastavení algoritmu nebo dokonce různé algoritmy
+  na jednom problému a určit který byl lepší. Cílem této práce není být schopen řešit problémy extrémně rychle, pouze říct
+  který algoritmus (a jeho nastavení) je na daný problém nejlepší.
+</p>
+
+<p>
+  Druhý cíl JCOPu je aby byl jednoduchý na použití a obsahoval základní problémy a algoritmy v sobě již implementované. Toto
+  je především z důvodu, že JCOP se bude využívat při výuce na <a href="http://fel.cvut.cz/cz/">Fakultě elektrotechnické Českého
+  vysokého učení technického</a> - studenti v něm budou psát jejich semestrální práce, ve kterých budou implementovat různě 
+  složité algoritmy.
+</p>
+
+<p>
+  JCOP v sobě obsahuje několik algoritmů a problémů již implementovaných (plný popis v dodatcích), takže ho můžete začít
+  hned využívat. Až zjistíte, jak zde věci fungují, můžete přidávat vlastní algoritmy a problémy a sledovat o kolik lepší
+  (nebo horší) jsou než předpřipravené.
+</p>
+
+<h3 id="where-to-get-it">Kde získat JCOP</h3>
+
+<p>
+  JCOP má zkompilovanou beta distribuci přístupnout na stránce <a href="http://sourceforge.net/projects/jcop/files/">ke stažení</a>.
+  Zdrojové kódy jsou k dispozici na <a href="http://sourceforge.net/projects/jcop/develop">SVN serveru</a>.
+</p>
+
+<h3 id="how-does-it-work">Jak to funguje</h3>
+
+<p>
+  Ať už jde o řešení problémů pomocí přepdpřipravených nebo vlastních algoritmů, srovnávání různých algoritmů nebo jenom
+  testování jak nastavení algoritmu ovlivní výsledek, JCOP stojí na čtyřech hlavních pilířích - Solver, Problém, Algoritmus a
+  Result (Výsledek). Solver vezme Algoritmus/-y a Problém/-y a začne Problémy řešit (ať už sekvenčně jeden po druhém nebo 
+  různé varianty přepínání). Během tohoto začne Result sbírat potřebné informace. Až Solver skončí, Result zobrazí nasbírané
+  informace uživateli v různých formátech. Aby tyto čtyři části mezi sebou mohly bez problémů komunikovat, JCOP používá velké
+  množství interfaců pro zajištění této komunikace.
+</p>
+
+<h4>Solver</h4>
+
+<p>
+  Solver je odpovědný za správnou inicializaci algoritmu a problému, aplikaci algoritmu na tento problém, vytváření výsledků
+  a řízení ukončení celého procesu. Celý tento proces se nazývá Iterace Solveru a některé solvery ji provádí opakovaně (např. aby
+  použily více algoritmů na jeden problém). Nejjednodušší implementace - {javadoc "solver.SimpleSolver"} - pouze 
+  vezme jeden algoritmus a aplikuje ho na jeden problém. Jiné solvery testují více algoritmů na jeden problém nebo srovnávají 
+  jak dobře jeden algoritmus řeší různé problémy. Navíc balíček Solver obsahuje StopConditions (ukončovací podmínky), množinu
+  pravidel, která určuje, kdy má solver skončit. 
+</p>
+
+<h4>Result (Výsledek)</h4>
+
+<p>
+  Result se stará o sběr výstupních dat ze solvera (jak finální výsledek tak průběžná data) a prezentováních nasbíraných informací
+  uživateli. To obsahuje výpis do xml/html/txt souborů nebo konzole, kreslení grafů nebo vytváření shrnutí pro benchmarky.
+  Result je registrován do solvera, který je zodpovědný za poskytování informací o všech důležitých změnách.
+</p>
+
+<h4>Problém</h4>
+
+<p>
+  Problém obsahuje všechny potřebné informace o jednom kombinatorickém problémů. Toto zahrnuje různé formy inicializace (načítání
+  ze souboru, z polí atd.), implementaci povinných interfaců (poskytování fitness, operací), přidávání nepovinný interfaců (podpora
+  pro globální prohledávání, náhodné konfigurace a další).
+</p>
+
+<p>
+  Problémy jsou o trochu složitější na pochopení než ostatní části aplikace. Je to způsobeno tím, že Problém musí být schopen
+  pokrýt velké množství reálných problémů tak, aby poskytoval všecny potřebné informace. JCOP staví na tom, že většina kombinatorických
+  problémů může být definovaná následujícími vlastnostmi:
+</p>
+
+<ul>
+  <li>Každá konfigurace (bod stavového prostoru) má konečný počet proměnných (dimenzi), každá proměnná nabývá konečného počtu hodnot.</li>
+  <li>Pro každou konfiguraci je konečná množina operací, které mohou být na danou operaci aplikovány.</li>
+  <li>Každé konfiguraci lze přiřadit hodnotu fitness.</li>
+</ul>
+
+<p>
+  Toto je nejmenší seznam požadavků na problém, aby mohl existovat v JCOPu. Existují i další informace, které může problém poskytovat
+  a algoritmus vyžadovat k běhu. Ty jsou nepovinné, ale čím více informací problém poskytuje, tím více algoritmů ho bude schopno řešit.
+</p>
+
+<h4>Algoritmus</h4>
+
+<p>
+  Algoritmus je, narozdíl od Problému, definovaný jedním jednoduchým interfacem, jehož dvě hlavní části jsou inicializace algoritmu na 
+  zadaný problém a vykonání jednoho optimalizačního kroku. Algoritmus může být navíc schopen se dynamicky adaptovat problému pokud
+  pozná nějaké jeho konkrétní vlastnosti (např. bude používat vlastní výpočet fitness pro problémy odvozené ze SATu).
+</p>
+
+<h4>Nástroje</h4>
+
+<p>
+  Tento balíček obsahuje šikovné nástroje, které jsou používány napříč JCOPem. Příkladem je přesný měřič času, náhodný generátor čísel
+  se speciálními vlastnostmi a běžně používané komparátory.
+</p>

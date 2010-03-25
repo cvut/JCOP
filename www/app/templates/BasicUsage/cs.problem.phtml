@@ -1,0 +1,228 @@
+{block #title}Problem{/block}
+{block #chapter}2.5{/block}
+{block #content}
+
+<p>
+  Problem defines how a single combinatorial problem works. There are some basic information that every problem must
+  provide and then additional which is not required but allows wider variety of algorithms to be used (or to be used
+  more effectively). Which information a problem provides is defined by interfaces it implements.
+</p>
+
+<p>
+  Different interfaces will be described more in detail later. Here
+  we will just show one problem implemented in JCOP, how does it work and how to modify it.
+</p>
+
+<p>
+  We will take a look at the {javadoc "problem.knapsack.Knapsack"} problem. A knapsack problem (or more precisely 0-1
+  knapsack problem) is given a set of items,
+  each having its value and weight, and knapsack capacity. The goal is to select a subset of items which weight in total
+  no more than is knapsack's capacity and have maximal possible total value. See image from wikipedia in
+  <a href="#fig1">figure 1</a>.
+</p>
+
+{include "../fig.phtml", "url" => "knapsack-wiki.png", "url_thumb" => "knapsack-wiki_resize.png", "title" => "Knapsack, source: <a href=\"http://en.wikipedia.org/wiki/Knapsack_problem\">wikipedia.org</a>", "fig" => "1"}
+
+<p>
+  As show in <a href="#fig2">figure 2</a>, Knapsack problem consists of six classes. Lets take a look what are
+  they for and how to use them.
+</p>
+
+{include "../fig.phtml", "url" => "knapsack-structure.png", "url_thumb" => "knapsack-structure_resize.png", "title" => "Knapsack structure", "fig" => "2"}
+
+<h3>Problem</h3>
+
+<p>
+  {javadoc "problem.knapsack.Knapsack"} is core of knapsack problem - it parses user input data into fully configured
+  problem, provides both random (random items in knapsack) and starting (empty knapsack) configurations, default fitness
+  for this problem and creates operation iterators to name the most important. 
+</p>
+
+<h3>KnapsackItem</h3>
+
+<p>
+  {javadoc "problem.knapsack.KnapsackItem"} is not required by JCOP and is only used by {javadoc "problem.knapsack.Knapsack"}
+  internally to keep track of items (their price and weight) in current knapsack instance.
+</p>
+
+<h3>Fitness</h3>
+
+<p>
+  {javadoc "problem.knapsack.KnapsackFitness"} is default fitness for a knapsack which assigns every configuration a
+  numeric value such that non full knapsack has higher fitness than overfilled and configurations with higher total
+  price has higher fitness than lower price. This is very important part of problems since vast majority of algorithms
+  uses default fitnesses to work properly.
+</p>
+
+<h3>Operations</h3>
+
+<p>
+  {javadoc "problem.knapsack.AddOperation"} and {javadoc "problem.knapsack.RemoveOperation"} are two members of a
+  concept we have not yet seen. There are two types of algorithms in JCOP - global search and local search. We will
+  cover global search later, but all local search algorithms works on same principle. They have one (or more)
+  configurations in search space and uses {javadoc "problem.Operation", "Operations"} to navigate in search space. If
+  you will represent search space as graph, operations will be oriented edges.
+</p>
+
+<p>
+  Operations are applied on configurations to create new configuration. They always transform one configuration into
+  one new configuration, no more (even though one operation could be applied to several configurations in turn). Lets
+  take a look at {javadoc "problem.knapsack.AddOperation"}.
+</p>
+
+<p>
+  In JCOP, operations implements {javadoc "problem.Operation"} interface, which requires just one method -
+  {javadoc "problem.Operation#execute(cz.cvut.felk.cig.jcop.problem.Configuration)"}. It takes one configuration and
+  returns another one, as simple as that. If we look on source code of the {javadoc "problem.knapsack.AddOperation"},
+  we can see that it just creates list of attributes from original configuration, sets one variable to 1 (effectively
+  adding an item with such index to knapsack) and return new configuration created from that list.
+</p>
+
+<pre class="brush: java;">
+  public Configuration execute(Configuration configuration) {
+      List&gt;Integer&lt; newConfiguration = configuration.asList();
+
+      newConfiguration.set(this.knapsackItem.getIndex(), 1);
+
+      return new Configuration(newConfiguration, new OperationHistory(this, configuration.getOperationHistory()));
+  }
+</pre>
+
+<p>
+  The only part not as easy to understand is second parameter - {javadoc "result.OperationHistory"}. Do not bother with it much now, it
+  will be discussed later. But a brief description is that some problems requires not just the solution, but entire way
+  how to get that solution (for example bucket problem), so you need to keep history of all operations applied to a
+  configuration.
+</p>
+
+<h3>OperationIterator</h3>
+
+<p>
+  In general, for every configuration in search space the list of valid operations is subset of all operations in the
+  problem. In knapsack problem, configuration with empty knapsack will have no {javadoc "problem.knapsack.RemoveOperation"},
+  but will have {javadoc "problem.knapsack.AddOperation"} for every item. But if problem will return a list of
+  operations for every configuration, JCOP wold consume large amounts of memory for some algorithms. To cope with this,
+  problem returns {javadoc "problem.OperationIterator"} which behaves just like iterator
+  over a List of Operations, but creates operations real time when they are needed (lazy initialization).
+</p>
+
+<p>
+  If we take a look on {javadoc "problem.knapsack.KnapsackIterator"} part by part, we see that it is created with
+  reference to problem and configuration, so it does consume almost no memory at all. 
+</p>
+
+<pre class="brush: java;">
+public class KnapsackIterator implements OperationIterator {
+    protected int counter = 0;
+    protected Configuration configuration;
+    protected Knapsack problem;
+
+    public KnapsackIterator(Configuration configuration, Knapsack problem) {
+        this.configuration = configuration;
+        this.problem = problem;
+        this.counter = 0;
+    }
+    /** ... */
+}
+</pre>
+
+<p>
+  Counter is here so we know which operation we have returned last. When asked for next operation (as we would in a
+  common list iterator), {javadoc "problem.knapsack.KnapsackIterator"} checks if there is an operation left. If yes,
+   it returns either {javadoc "problem.knapsack.AddOperation"} or {javadoc "problem.knapsack.RemoveOperation"},
+   depending on whether configuration has 1 or 0 on index <code>this.counter</code>. As Knapsack problem stores all
+   available operations in two lists ({javadoc "problem.knapsack.Knapsack#removeOperations"} and {javadoc "problem.knapsack.Knapsack#removeOperations"})
+   we just need to take an appropriate operation from one of these lists at index <code>this.counter</code>.
+</p>
+
+<pre class="brush: java;">
+  public Operation next() throws NoSuchElementException {
+      if (this.counter &gt;= this.problem.knapsackItems.size())
+          throw new NoSuchElementException("Knapsack iterator has no more operations");
+
+      if (this.configuration.valueAt(this.counter) == 1)
+          return this.problem.removeOperations.get(this.counter++);
+      return this.problem.addOperations.get(this.counter++);
+  }
+</pre>
+
+<p>
+  This is almost it! The only thing missing is to implement {javadoc "problem.OperationIterator#hasNext()"} and
+  {javadoc "problem.OperationIterator#getRandomOperation()"} but both are very easy to implement:
+</p>
+
+<pre class="brush: java;">
+public boolean hasNext() {
+    return this.counter &lt; this.problem.knapsackItems.size();
+}
+public Operation getRandomOperation() throws UnsupportedOperationException {
+    int i = JcopRandom.nextInt(this.problem.knapsackItems.size());
+    if (this.configuration.valueAt(i) == 1)
+        return this.problem.removeOperations.get(i);
+    return this.problem.addOperations.get(i);
+}
+</pre>
+
+<h3>Modification</h3>
+
+<p>
+  If you want to edit a problem, you usually change how problem is loaded, how fitness is calculated or which operations
+  (or in which order) does the problem provide. 
+</p>
+
+<p>
+  First one is easy - just add another constructor, which loads data in required way. If you want to change fitness,
+  keep in mind that you can always change only default fitness - no matter what a problem does, algorithm or solver are
+  always able to override this. But with this in mind, you just override {javadoc "problem.Problem#getDefaultFitness()"}:
+</p>
+
+<pre class="brush: java;">
+public Fitness getDefaultFitness() {
+    return new KnapsackFitness(this);
+}
+</pre>
+
+<p>
+  to return your own class. Please note that creating fitness class is not primitive to be done properly and it will be
+  covered in later chapters. But you can take inspiration in JCOP implementation if you don't want to wait.
+</p>
+
+<p>
+  Altering {javadoc "problem.OperationIterator"} is again very easy - you simply override method which returns next
+  operation ({javadoc "problem.OperationIterator#next()"}) and that is it!
+</p>
+
+<h3>ObjectiveProblem</h3>
+
+<p>
+  In previous chapters we have mentioned that an {javadoc "problem.ObjectiveProblem"} is used in solver (and in
+  algorithm as we will see later on) instead on just Problem. This is because of the fact that there are several
+  interfaces for a problem and since one problem can (and usually does) implement more than one, we will be pressed to
+  write something like this in an algorithm (or solver):
+</p>
+
+<pre class="brush: java;">
+public void myMethod(Problem problem) {
+    if (!problem instanceOf StartingConfigurationProblem) throw new Exception("required StartingConfigurationProblem problem");
+    if (!problem instanceOf DestinationProblem) throw new Exception("required DestinationProblem problem");
+
+    Configuration startingConfiguration = ((StartingConfigurationProblem)problem)->getStartingConfiguration();
+    Configuration DestinationProblem = ((DestinationProblem)problem)->getDestination();
+    /** ... */
+}
+</pre>
+
+<p>
+  Which is a lot of typecast all around, making the code confusing and difficult to maintain. JCOP comes with a
+  different solution - it introduces an {javadoc "problem.ObjectiveProblem"} interface and its basic implementation
+  {javadoc "problem.BaseObjectiveProblem"}. It is kind of wrapper around problem which implements all problem
+  interfaces. When you create a {javadoc "problem.BaseObjectiveProblem"}, you supply a {javadoc "problem.Problem"} to
+  it as an argument in constructor. All calls to this baseObjectiveProblem is then either redirected to the problem
+  (properly casted) or raises an exception if original problem did not implement such interface. So you can work with
+  {javadoc "problem.ObjectiveProblem"} instead of normal one and does not need to worry about casting or instanceOf
+  checks.
+</p>
+
+<p>
+  Full list of bundled problems can be found in <a href="{link Appendix:problems}">Appendix C</a>.
+</p>

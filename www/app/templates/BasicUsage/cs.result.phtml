@@ -1,0 +1,179 @@
+{block #title}Result{/block}
+{block #chapter}2.4{/block}
+{block #content}
+
+<p>
+  In our previous example, we've finished with solver which will successfully apply an algorithm to a problem, but we did
+  not get any information about it at all. This is where Result steps in. 
+</p>
+
+<p>
+  Due to nature of solvers being able to run several different algorithms or problems in one {javadoc "solver.Solver#run()"},
+  one solver must be able to hold several results. This is done by implementing interface {javadoc "result.Result"},
+  which can hold our results. This can be actually done by simple list as has its default implementation
+  {javadoc "result.SimpleResult"}. 
+</p>
+
+<p>
+  Where {javadoc "result.Result"} holds information about whole {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
+  provides information about just one solver iteration. Objects of this class contains all required
+  data about how did the algorithm's application ended, such as number of iterations, time spent or best found solution.
+</p>
+
+<p>
+  Let's try to add such a result entry to our demo from <a href="{link solver}">previous chapter</a>. Creating a result
+  entry is easy - just create a result entry using one of its constructors. We will use {javadoc "result.ResultEntry#ResultEntry(cz.cvut.felk.cig.jcop.algorithm.Algorithm, cz.cvut.felk.cig.jcop.problem.Problem, cz.cvut.felk.cig.jcop.problem.Configuration, double, int, cz.cvut.felk.cig.jcop.util.PreciseTimestamp)", "ResultEntry#ResultEntry(...)"}.
+  There is however one thing we have not seen yet - {javadoc "util.PreciseTimestamp"}. This class is used to measure
+  time more precisely than simple system time, but we need not to discuss in any further now. We will just create an
+  instance of it before we run our algorithm and then we'll add it to result entry as a start time.
+</p>
+
+<p>
+  From result entry requirements we have an algorithm and a problem we used and a {javadoc "util.PreciseTimestamp"}. It
+  also requires best {javadoc "problem.Configuration"}, best fitness and optimize counter. We take first two from
+  algorithm itself - algorithms are required to provide this information when they implement the
+  {javadoc "algorithm.Algorithm"} interface ({javadoc "algorithm.Algorithm#getBestConfiguration()"} and
+  {javadoc "algorithm.Algorithm#getBestFitness()"} methods). The last one, optimize counter, is responsibility of solver
+  to provide. But since we know we made 10 optimize steps, we could just supply number 10.
+</p>
+
+<pre class="brush: java;">
+package basicusage.result;
+
+import cz.cvut.felk.cig.jcop.algorithm.Algorithm;
+import cz.cvut.felk.cig.jcop.problem.BaseObjectiveProblem;
+import cz.cvut.felk.cig.jcop.problem.Problem;
+import cz.cvut.felk.cig.jcop.result.Result;
+import cz.cvut.felk.cig.jcop.result.ResultEntry;
+import cz.cvut.felk.cig.jcop.result.SimpleResult;
+import cz.cvut.felk.cig.jcop.solver.BaseSolver;
+import cz.cvut.felk.cig.jcop.solver.Solver;
+import cz.cvut.felk.cig.jcop.util.PreciseTimestamp;
+
+public class PrimitiveSolver extends BaseSolver implements Solver {
+    protected Problem problem;
+    protected Algorithm algorithm;
+    protected Result result = new SimpleResult();
+
+    public PrimitiveSolver(Algorithm algorithm, Problem problem) {
+        this.algorithm = algorithm;
+        this.problem = problem;
+    }
+
+    public void run() {
+        // init algorithm
+        this.algorithm.init(new BaseObjectiveProblem(this.problem));
+
+        // take starting time
+        PreciseTimestamp startTimestamp = new PreciseTimestamp();
+
+        // make 10 optimizations
+        for (int i = 0; i &lt; 10; i++) this.algorithm.optimize();
+
+        // create result entry
+        ResultEntry resultEntry = new ResultEntry(this.algorithm, this.problem, this.algorithm.getBestConfiguration(), this.algorithm.getBestFitness(), 10, startTimestamp);
+    }
+}
+</pre>
+
+<p>
+  Now we have result entry for our 10-steps-optimization solver iteration and we need to add it to a result. From {javadoc
+  "solver.Solver"} interface we are required to implement {javadoc "solver.Solver#getResult()"} method. But since we
+  are extending {javadoc "solver.BaseSolver"}, {javadoc "result.Result"} has been automatically created for us and we
+  will just add new result entry to it. 
+</p>
+
+<pre class="brush: java;">
+package basicusage.result;
+
+import /** ... */
+
+public class PrimitiveSolver extends BaseSolver implements Solver {
+    /** ... */
+    public void run() {
+        /** ... */
+        // add it to result
+        this.getResult().addEntry(resultEntry);
+    }
+}
+</pre>
+
+<p>
+  Now we have our results we need to display them (or better - render them). Classes implementing {javadoc "result.render.Render"}
+  interface are used to render results in different ways (for example XML, console etc). There are several in-built
+  renders and we will use {javadoc "result.render.SimpleRender"} which just dumps result to console. To register a render
+  to solver use {javadoc "solver.Solver#addRender(cz.cvut.felk.cig.jcop.result.render.Render)"}. This is usually done
+  outside of solver, because solver itself does not necessarily know how you want to render data. It know just how to
+  apply algorithms on problems, not how results are to be displayed. Lets update our DemoPrimitiveSolver from
+  <a href="{link BasicUsage:solver}#code-demo-primitive-solver-1">previous chapter</a>:
+</p>
+
+<pre class="brush: java;">
+package basicusage.result;
+
+import cz.cvut.felk.cig.jcop.algorithm.Algorithm;
+import cz.cvut.felk.cig.jcop.algorithm.graphsearch.bfs.BreadthFirstSearch;
+import cz.cvut.felk.cig.jcop.problem.Problem;
+import cz.cvut.felk.cig.jcop.problem.knapsack.Knapsack;
+import cz.cvut.felk.cig.jcop.result.render.SimpleRender;
+import cz.cvut.felk.cig.jcop.solver.Solver;
+
+public class DemoPrimitiveSolver {
+    public static void main(String[] args) {
+        // create problem &amp; algorithm
+        Problem problem = new Knapsack("9000 4 100 18 114 42 136 88 192 3 223");
+        Algorithm algorithm = new BreadthFirstSearch();
+
+        // create solver
+        Solver solver = new PrimitiveSolver(algorithm, problem);
+
+        // add simple render
+        solver.addRender(new SimpleRender());
+
+        // run!
+        solver.run();
+
+        // render results
+        solver.render();
+    }
+}
+</pre>
+
+<p>
+  We've added {javadoc "result.render.SimpleRender"} to out solver and after {javadoc "solver.Solver#run()"} is
+  finished, we've called {javadoc "solver.Solver#render()"}, which will render results with all registered renders. You
+  should get something like this in console, if not, you've probably done something wrong:
+</p>
+
+<pre class="brush: plain;">
+=== Algorithm BreadthFirstSearch [] used on problem Knapsack [line=9000 4 100 18 114 42 136 88 192 3 223] ===
+  CPU Time:                       1 [ms]
+  System Time:                    1 [ms]
+  User Time:                      1 [ms]
+  Clock Time:                    16 [ms]
+  Optimize counter:              10 [-]
+  Optimize/sec (CPU):         10000 [1/s]
+  Optimize/sec (Clock):         625 [1/s]
+  Best solution:         Configuration{!="{"}attributes=[0, 1, 0, 1], operationHistory={!="{"}0:Empty knapsack created, 1:AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=1, weight=42, price=136}}, 2:AddOperation{!="{"}knapsackItem=KnapsackItem{!="{"}index=3, weight=3, price=223}}}}
+  Depth:                          2 [-]
+  Fitness:                    359,0 [-]
+  Ended without exception
+</pre>
+
+<p>
+  Because of the fact that we used {javadoc "solver.BaseSolver"} as parent to our solver, we even do not need to add
+  {javadoc "result.render.SimpleRender"}, it is default one (if no other is supplied), so our DemoPrimitiveSolver could
+  be even shorter! Also note that there is {javadoc "solver.SimpleSolver"} implementation in JCOP which is very much
+  like the one we've just created, although it is a bit more sophisticated. But since for the most part it works the
+  same as our PrimitiveSolver, we will be using it instead in next chapters.
+</p>
+
+<p>
+  Both classes could be downloaded here (<a href="{$basePath}/media/tutorial/basicusage.result.zip">zip</a>,
+  <a href="{$basePath}/media/tutorial/basicusage.result.tgz">tgz</a>,
+  <a href="{$basePath}/media/tutorial/basicusage.result.7z">7z</a>).
+</p>
+
+<p>
+  Full list of bundled renders and listeners can be found in <a href="{link Appendix:rendersListeners}">Appendix E</a>.
+</p>

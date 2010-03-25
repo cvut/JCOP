@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="content-language" content="cs" />
 
-  <title>Java Combinatorial Optimization Platform - {include #title}</title>
+  <title>{include #title} - Java Combinatorial Optimization Platform</title>
 
   <meta name='description' content="Java Combinatorial Optimization Platform is used to solve combinatorial problems using common interface." />
   <meta name='keywords' content="Java, Combinatorial, Problem, Algorithm, Optimization" />
@@ -68,9 +68,9 @@
 
               <div>
                   <input type="text"   name="q" size="15" maxlength="255" value="" />
-                  <input type="submit" value="Search" />
+                  <input type="submit" value="{_"Search"}" />
 
-                  <label><input type="checkbox" name="sitesearch" value="jcop.savannahsoft.eu" checked="checked" />&nbsp;only search JCOP</label><br />
+                  <label><input type="checkbox" name="sitesearch" value="jcop.savannahsoft.eu" checked="checked" />&nbsp;{_"only search JCOP"}</label><br />
               </div>
 
           </form>
@@ -78,35 +78,42 @@
 					<div style="clear: both;">&nbsp;</div>
 				</li>
 				<li>
-					<h2>Follow us on</h2>
+					<h2>{_"Change language"}</h2>
+					<ul>
+            <li><a href="{link this, 'language' => 'en'}"{if $language=='en'} class="active"{/if}>{_"English"} <img src="{$basePath}/images/user/en.png" alt="{_"English"}" /></a></li>
+            <li><a href="{link this, 'language' => 'cs'}"{if $language=='cs'} class="active"{/if}>{_"Czech"} <img src="{$basePath}/images/user/cs.png" alt="{_"Czech"}" /></a></li>
+					</ul>
+				</li>
+				<li>
+					<h2>{_"Follow us on"}</h2>
 					<ul>
             <li><a href="http://twitter.com/cig_jcop">Twitter</a></li>
             <li><a href="http://sourceforge.net/projects/jcop/">SourceForge</a></li>
-            <li><a href="http://sourceforge.net/tracker/?func=add&amp;group_id=310929&amp;atid=1309046">SourceForge bugs <img src="{$basePath}/images/bug_error_16.png" alt="BUG" /></a></li>
+            <li><a href="http://sourceforge.net/tracker/?func=add&amp;group_id=310929&amp;atid=1309046">{_"SourceForge bugs"} <img src="{$basePath}/images/bug_error_16.png" alt="BUG" /></a></li>
 					</ul>
 				</li>
 				<li>
-					<h2>JCOP</h2>
+					<h2>{_"JCOP"}</h2>
 					<ul>
-            <li><a href="{link Overview:}"{ifCurrent overview:} class="active"{/if}>Introduction</a></li>
-            <li><a href="https://sourceforge.net/projects/jcop/files/">Download (SourceForge)</a></li>
-            <li><a href="{link Overview:faq}"{ifCurrent overview:faq} class="active"{/if}>FAQ</a></li>
+            <li><a href="{link Overview:}"{ifCurrent overview:} class="active"{/if}>{_"Introduction"}</a></li>
+            <li><a href="https://sourceforge.net/projects/jcop/files/">{_"Download"} (SourceForge)</a></li>
+            <li><a href="{link Overview:faq}"{ifCurrent overview:faq} class="active"{/if}>{_"FAQ"}</a></li>
 					</ul>
 				</li>
 				<li>
-					<h2>Basic usage</h2>
+					<h2>{_"Basic usage"}</h2>
 					<ul>
-						<li><a href="{link BasicUsage:}"{ifCurrent basicUsage:} class="active"{/if}>Introduction</a></li>
-						<li><a href="{link BasicUsage:installation}"{ifCurrent basicUsage:installation} class="active"{/if}>Installation</a></li>
-						<li><a href="{link BasicUsage:solver}"{ifCurrent basicUsage:solver} class="active"{/if}>Solver</a></li>
-						<li><a href="{link BasicUsage:result}"{ifCurrent basicUsage:result} class="active"{/if}>Result</a></li>
-						<li><a href="{link BasicUsage:problem}"{ifCurrent basicUsage:problem} class="active"{/if}>Problem</a></li>
-						<li><a href="{link BasicUsage:algorithm}"{ifCurrent basicUsage:algorithm} class="active"{/if}>Algorithm</a></li>
-						<li><a href="{link BasicUsage:util}"{ifCurrent basicUsage:util} class="active"{/if}>Util</a></li>
+						<li><a href="{link BasicUsage:}"{ifCurrent basicUsage:} class="active"{/if}>{_"Introduction"}</a></li>
+						<li><a href="{link BasicUsage:installation}"{ifCurrent basicUsage:installation} class="active"{/if}>{_"Installation"}</a></li>
+						<li><a href="{link BasicUsage:solver}"{ifCurrent basicUsage:solver} class="active"{/if}>{_"Solver"}</a></li>
+						<li><a href="{link BasicUsage:result}"{ifCurrent basicUsage:result} class="active"{/if}>{_"Result"}</a></li>
+						<li><a href="{link BasicUsage:problem}"{ifCurrent basicUsage:problem} class="active"{/if}>{_"Problem"}</a></li>
+						<li><a href="{link BasicUsage:algorithm}"{ifCurrent basicUsage:algorithm} class="active"{/if}>{_"Algorithm"}</a></li>
+						<li><a href="{link BasicUsage:util}"{ifCurrent basicUsage:util} class="active"{/if}>{_"Util"}</a></li>
 					</ul>
 				</li>
 				<li>
-					<h2>Advanced tweaks</h2>
+					<h2>{_"Advanced tweaks"}</h2>
 					<ul>
 						<li><a href="#">Aliquam libero</a></li>
 						<li><a href="#">Consectetuer adipiscing elit</a></li>
@@ -117,14 +124,14 @@
 					</ul>
 				</li>
 				<li>
-					<h2>Appendices</h2>
+					<h2>{_"Appendices"}</h2>
 					<ul>
-						<li><a href="{link Appendix:Solvers}"{ifCurrent Appendix:Solvers} class="active"{/if}>Solvers</a></li>
-						<li><a href="{link Appendix:Algorithms}"{ifCurrent Appendix:Algorithms} class="active"{/if}>Algorithms</a></li>
-						<li><a href="{link Appendix:Problems}"{ifCurrent Appendix:Problems} class="active"{/if}>Problems</a></li>
-						<li><a href="{link Appendix:StopConditions}"{ifCurrent Appendix:StopConditions} class="active"{/if}>StopConditions</a></li>
-						<li><a href="{link Appendix:RendersListeners}"{ifCurrent Appendix:RendersListeners} class="active"{/if}>Renders, Listeners</a></li>
-						<li><a href="{link Appendix:Libraries}"{ifCurrent Appendix:Libraries} class="active"{/if}>Libraries</a></li>
+						<li><a href="{link Appendix:Solvers}"{ifCurrent Appendix:Solvers} class="active"{/if}>{_"Solvers"}</a></li>
+						<li><a href="{link Appendix:Algorithms}"{ifCurrent Appendix:Algorithms} class="active"{/if}>{_"Algorithms"}</a></li>
+						<li><a href="{link Appendix:Problems}"{ifCurrent Appendix:Problems} class="active"{/if}>{_"Problems"}</a></li>
+						<li><a href="{link Appendix:StopConditions}"{ifCurrent Appendix:StopConditions} class="active"{/if}>{_"StopConditions"}</a></li>
+						<li><a href="{link Appendix:RendersListeners}"{ifCurrent Appendix:RendersListeners} class="active"{/if}>{_"Renders, Listeners"}</a></li>
+						<li><a href="{link Appendix:Libraries}"{ifCurrent Appendix:Libraries} class="active"{/if}>{_"Libraries"}</a></li>
 					</ul>
 				</li>
 			</ul>

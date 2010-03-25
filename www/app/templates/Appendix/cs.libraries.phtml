@@ -1,0 +1,43 @@
+{block #title}Libraries{/block}
+{block #chapter}F.{/block}
+{block #content}
+
+<h3>List of all third party libraries used in JCOP</h3>
+
+<p>
+  In <a href="#table-1">table 1</a> is a list of all third party libraries used in JCOP, along with their brief
+  description, homepage and which parts of JCOP uses it.
+</p>
+
+<table class="full" id="table-1">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Homepage</th>
+    <th>Usage</th>
+  </tr>
+  <tr>
+    <td><a href="#ecs" class="nobr">Jakarta ECS</a></td>
+    <td>ECS allows to use Java Objects to generate markup code such as (X)HTML/XML</td>
+    <td><a href="http://jakarta.apache.org/ecs/" class="nobr">jakarta.apache.org/ecs/</a></td>
+    <td>{javadoc "result.render.XMLRender"}</td>
+  </tr>
+  <tr>
+    <td><a href="#java-csv" class="nobr">Java CSV</a></td>
+    <td>Library for reading and writing CSV files.</td>
+    <td><a href="http://sourceforge.net/projects/javacsv/" class="nobr">sourceforge.net/projects/javacsv/</a></td>
+    <td>{javadoc "result.render.CSVRender"}</td>
+  </tr>
+  <tr>
+    <td><a href="#jfreechart">JFreeChart</a></td>
+    <td>Displays various types of charts.</td>
+    <td><a href="http://jfree.org/jfreechart/" class="nobr">jfree.org/jfreechart/</a></td>
+    <td>{javadoc "result.render.JFreeChartRender"}</td>
+  </tr>
+  <tr>
+    <td><a href="#jfreechart">Log4j</a></td>
+    <td>Allows for logging and debugging code.</td>
+    <td><a href="http://logging.apache.org/log4j/" class="nobr">logging.apache.org/log4j/</a></td>
+    <td>many places in the project</td>
+  </tr>
+</table>

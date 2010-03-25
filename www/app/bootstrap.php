@@ -18,7 +18,8 @@ require LIBS_DIR . '/Nette/loader.php';
 
 // Step 2: Configure environment
 // 2a) enable Nette\Debug for better exception and error visualisation
-Debug::enable(null, null, 'savannah@seznam.cz');
+//Debug::enable(null, null, 'savannah@seznam.cz');
+Debug::enable(E_NONE, null, 'savannah@seznam.cz');
 
 // 2b) load configuration from config.ini file
 Environment::loadConfig();
@@ -40,22 +41,29 @@ $application->errorPresenter = 'Error';
 // Step 4: Setup application router
 $router = $application->getRouter();
 
-$router[] = new Route('index.php', array(
+/*Route::setStyleProperty('action', Route::FILTER_TABLE, array(
+    'prx' => 'problem',
+));*/
+
+
+$router[] = new Route('[index.html]', array(
 	'presenter' => 'Overview',
 	'action' => 'default',
+  'language' => 'en',
 ), Route::ONE_WAY);
 
-$router[] = new Route('index.html', array(
+
+$router[] = new Route('<language en|cs>/index.html', array(
   'presenter' => 'Overview',
   'action' => 'default',
 ));
 
-$router[] = new Route('<action>.html', array(
+$router[] = new Route('<language en|cs>/<action>.html', array(
 	'presenter' => 'Overview',
 	'action' => 'default',
 ));
 
-$router[] = new Route('<presenter>/<action>.html', array(
+$router[] = new Route('<language en|cs>/<presenter>/<action>.html', array(
 	'presenter' => 'Overview',
 	'action' => 'default',
 ));
