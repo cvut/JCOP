@@ -1,87 +1,93 @@
-{block #title}Installation{/block}
+{block #title}Instalace{/block}
 {block #chapter}2.2{/block}
 {block #content}
 
 <p>
-  First of all, you need to download JCOP files. Download latest version from <a href="http://sourceforge.net/projects/jcop/files/">download
-  page</a>.
+  Nejprve je nutné stáhnout JCOP soubory. Nejnovější verze se nachází na stránce <a href="http://sourceforge.net/projects/jcop/files/">ke
+  stažení</a>.
 </p>
 <p>
-  The archive contains all you need to run JCOP - both its JAR file
-  and all libraries used in JCOP (such as <a href="http://logging.apache.org/log4j/">log4j</a> or
-  <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>). Contents of the archive are displayed in 
-  <a href="#fig1">figure 1</a>. You can extract this folder anywhere you like, you will just have to add it to your
-  libraries.
+  Archiv obsahuje všechno, co potřebujete k běhu JCOPu - jak JAR soubor tak všechny knihovny, které JCOP používá (jako
+  například <a href="http://logging.apache.org/log4j/">log4j</a> nebo <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>).
+  Obsah archivu je zobrazen na <a href="#fig1">obrázku 1</a>. Můžete ho rozbalit kam chcete, jenom ho budete muset přidat
+  do knihoven v projektu.
 </p>
 <p>
-  Usually you will need to add just <code>jcop.jar</code> and other libraries will be loaded automatically. If not, add
-  them manually the same way as you added <code>jcop.jar</code>. Follows instructions on how to add JARs to a project
-  for commonly used IDE.
+  Obvykle je třeba pouze přidat soubor <code>jcop.jar</code> a všechny ostatní knihovny se přidají automaticky. Pokud ne,
+  přidejte je manuálně, stejně jako jste přidali <code>jcop.jar</code>. Následují pokyny jak přidat JAR soubor do projektu
+  pro běžně používaná IDE.
 </p>
 
-{include "../fig.phtml", "url" => "jcop-archive.png", "url_thumb" => "jcop-archive_resize.png", "title" => "JCOP archive contents", "fig" => "1"}
+{include "../fig.phtml", "url" => "jcop-archive.png", "url_thumb" => "jcop-archive_resize.png", "title" => "obsah archivu JCOP", "fig" => "1"}
 
 <h3>IntelliJ IDEA 9.0.1 Community Edition</h3>
 
 <p>
-  Create new project from File 	&rarr; New Project. Select Create project from scratch and follow the wizard (don't forget
-  to add at least one module). Then go to File 	&rarr; Project Structure and choose Libraries from Project settings.
-  Click the New Project Library ("+" icon, alt+insert) and type jcop as name. You should see something like
-  <a href="#fig2">figure 2</a>. 
+  Vytvořte nový projekt pomocí File &rarr; New Project. Vyberte Create project from scratch a postupujte podle průvodce
+  (nezapomeňte přidat alespoň jeden modul). Poté jděte do File &rarr; Project Structure a vyberte Libraries z Project
+  settings. Klikněte na New Project Library (ikonka plusu nebo alt+insert) a vyplňte jcop jako název. Měli byste vidět
+  něco jako je na <a href="#fig2">obrázku 2</a>.
 </p>
 
-{include "../fig.phtml", "url" => "idea-new-library.png", "url_thumb" => "idea-new-library_resize.png", "title" => "IntelliJ IDEA new library", "fig" => "2"}
+{include "../fig.phtml", "url" => "idea-new-library.png", "url_thumb" => "idea-new-library_resize.png", "title" => "IntelliJ IDEA nová knihovna", "fig" => "2"}
 
 <p>
-  After you have created new library, click Attach Classes and add <code>jcop.jar</code> file. Result should look
-  like <a href="#fig3">figure 3</a>.
+  Poté, co jste přidali novou knihovny, klikněte na Attach Classes a přidejte soubor <code>jcop.jar</code>. Výsledek by
+  měl vypadat jako na <a href="#fig3">obrázku 3</a>.
 </p>
 
-{include "../fig.phtml", "url" => "idea-attach-jar.png", "url_thumb" => "idea-attach-jar_resize.png", "title" => "IntelliJ IDEA Attached Jar Directories", "fig" => "3"}
+{include "../fig.phtml", "url" => "idea-attach-jar.png", "url_thumb" => "idea-attach-jar_resize.png", "title" => "IntelliJ IDEA přidaný JAR soubor", "fig" => "3"}
 
-<p>JCOP is now ready! To test it, try to run a <a href="#test-app">test application</a>.</p>
+<p>
+  JCOP by měl být připraven. Vyzkoušejte ho tak, že si  <a href="#test-app">uděláte testovací aplikaci</a>.
+</p>
 
 
 <h3>NetBeans IDE 6.8</h3>
 
 <p>
-  Create new Java Application project in File 	&rarr; New Project, select category as shown in <a href="#fig4">figure 4</a>.
+  Vytvořte nový projekt Java Application pomocí File &rarr; New Project, kategorii zvolte jako je na <a href="#fig4">obrázku 4</a>.
 </p>
 
-{include "../fig.phtml", "url" => "netbeans-new-project.png", "url_thumb" => "netbeans-new-project_resize.png", "title" => "NetBeans IDE new project", "fig" => "4"}
+{include "../fig.phtml", "url" => "netbeans-new-project.png", "url_thumb" => "netbeans-new-project_resize.png", "title" => "NetBeans IDE nový projekt", "fig" => "4"}
 
 <p>
-  Right click on Libraries in project tree and select Add JAR/Folder as show in <a href="#fig5">figure 5</a>
-   and add <code>jcop.jar</code>.
+  Klikněte pravým tlačítkem na Libraries ve stromu projektu a vyberte Add JAR/Folder jako je na  <a href="#fig5">obrázku 5</a>
+  a přidejte <code>jcop.jar</code>.
 </p>
 
 {include "../fig.phtml", "url" => "netbeans-add-jar.png", "url_thumb" => "netbeans-add-jar_resize.png", "title" => "NetBeans IDE Add JAR/Folder", "fig" => "5"}
 
-<p>JCOP is now ready! To test it, try to run a <a href="#test-app">test application</a>.</p>
+<p>
+  JCOP by měl být připraven. Vyzkoušejte ho tak, že si  <a href="#test-app">uděláte testovací aplikaci</a>.
+</p>
 
 <h3>Eclipse IDE for Java Developers	(1.2.1.20090918-0703)</h3>
 
 <p>
-  Create new project from File 	&rarr; New 	&rarr; Java project. Right click on project and select Properties as show in
-  <a href="#fig6">figure 6</a>.
+  Vytvořte nový projekt pomocí File &rarr; New &rarr; Java project. Klikněte pravým tlačítkem na projekt a vyberte
+  Properties jako je zobrazeno v <a href="#fig6">obrázku 6</a>.
 </p>
 
-{include "../fig.phtml", "url" => "eclipse-properties.png", "url_thumb" => "eclipse-properties_resize.png", "title" => "Eclipse project properties", "fig" => "6"}
+{include "../fig.phtml", "url" => "eclipse-properties.png", "url_thumb" => "eclipse-properties_resize.png", "title" => "Eclipse Properties projektu", "fig" => "6"}
 
 <p>
-  Navigate to Java Build Path and select Libraries. There, click Add External JARs and <code>jcop.jar</code> as in
-  <a href="#fig7">figure 7</a>.
+  Najeďte na Java Build Path a vyberte Libraries. Poté klikněte na Add External JARs a vyberte <code>jcop.jar</code> jako
+  na <a href="#fig7">obrázku 7</a>.
 </p>
 
 {include "../fig.phtml", "url" => "eclipse-add-jars.png", "url_thumb" => "eclipse-add-jars_resize.png", "title" => "Eclipse Add External JARs", "fig" => "7"}
 
-<p>JCOP is now ready! To test it, try to run a <a href="#test-app">test application</a>.</p>
+<p>
+  JCOP by měl být připraven. Vyzkoušejte ho tak, že si  <a href="#test-app">uděláte testovací aplikaci</a>.
+</p>
 
-<h3 id="test-app">Test Application</h3>
+<h3 id="test-app">Testovací aplikace</h3>
 
 <p>
-  To test that JCOP was installed, you can use this simple application. Just add new Java Main Class to your project with
-  following code and run it (you might need to change package to one that you put Main Class in).
+  Abyste vyzkoušeli, že JCOP je správně nainstalován, použijte tuto jednoduchou aplikaci. Pouze přidejte do vašeho
+  projektu novu Java Main Class s následujícím kódem a pusťte ji (název package se může lišit podle toho, v jaké package
+  se nachází Main Class).
 </p>
 
 <pre class="brush: java;">
@@ -112,7 +118,7 @@ public class Main {
 </pre>
 
 <p>
-  If everything went fine you should see this in console:
+  Pokud vše proběhlo bez problémů, měli byste vidět text podobný následujícímu v konzoli:
 </p>
 
 <pre class="brush: plain;">
@@ -137,11 +143,11 @@ public class Main {
  </pre>
 
  <p>
-   , graph like <a href="#fig8">figure 8</a> should pop up and files <code>test.xml</code> and <code>test.csv</code>
-   should be in your application working directory (see expected contents, xml and csv respectively, below).
+  , graf podobný <a href="#fig8">obrázku 8</a> by se měl zobrazit a soubory <code>test.xml</code> a <code>test.csv</code>
+  by měly být ve working directory (pracovní složce). Jejich obsah by měl být podobný tomu, co je zobrazeno níže.
  </p>
 
- {include "../fig.phtml", "url" => "test-app-graph.png", "url_thumb" => "test-app-graph_resize.png", "title" => "Graph of test application", "fig" => "8"}
+ {include "../fig.phtml", "url" => "test-app-graph.png", "url_thumb" => "test-app-graph_resize.png", "title" => "Graf testovací aplikace", "fig" => "8"}
 
 <pre class="brush: xml;">
 &lt;?xml version="1.0" standalone="yes"?&gt;

@@ -68,6 +68,13 @@ $router[] = new Route('<language en|cs>/<presenter>/<action>.html', array(
 	'action' => 'default',
 ));
 
+$router[] = new Route('<presenter>/<action>.html', array(
+	'presenter' => 'Overview',
+	'action' => 'default',
+  'language' => 'en',
+), Route::ONE_WAY);
+
+
 
 
 // Step 5: Run the application!

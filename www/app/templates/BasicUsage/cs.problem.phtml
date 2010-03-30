@@ -1,81 +1,81 @@
-{block #title}Problem{/block}
+{block #title}Problém{/block}
 {block #chapter}2.5{/block}
 {block #content}
 
 <p>
-  Problem defines how a single combinatorial problem works. There are some basic information that every problem must
-  provide and then additional which is not required but allows wider variety of algorithms to be used (or to be used
-  more effectively). Which information a problem provides is defined by interfaces it implements.
+  Problém definuje jak se jeden konkrétní kombinatorický problém chová. Je několik základních informací, které musí
+  poskytovat každý problém, a řada nepovinných, které zaručí, že problém lze řešit větším množstvím algoritmů (nebo
+  využít existující algoritmy efektivněji). Které informace bude algoritmus poskytovat je dáno tím, které rozhraní
+  poskytuje.
 </p>
 
 <p>
-  Different interfaces will be described more in detail later. Here
-  we will just show one problem implemented in JCOP, how does it work and how to modify it.
+  Různá rozhraní budou probrána důkladně později, zde si teď ukážeme jeden problém, který je v JCOPu implementován, jak
+  funguje a jak ho upravit.
 </p>
 
 <p>
-  We will take a look at the {javadoc "problem.knapsack.Knapsack"} problem. A knapsack problem (or more precisely 0-1
-  knapsack problem) is given a set of items,
-  each having its value and weight, and knapsack capacity. The goal is to select a subset of items which weight in total
-  no more than is knapsack's capacity and have maximal possible total value. See image from wikipedia in
-  <a href="#fig1">figure 1</a>.
+  Podívejme se na {javadoc "problem.knapsack.Knapsack"} problém. Problém batohu (přesněji 0-1 problém batohu) má danou
+  množinu věcí (každá s danou hmotností a cenou) a kapacitu batohu. Cílem je vybrat podmnožinu věcí takovou, že jejich
+  celková hmotnost nepřekročí kapacitu batohu a zároveň cena je maximální možná. Problém demonstruje <a href="#fig1">obrázek 1</a>
+  převzatý z wikimedia.
 </p>
 
-{include "../fig.phtml", "url" => "knapsack-wiki.png", "url_thumb" => "knapsack-wiki_resize.png", "title" => "Knapsack, source: <a href=\"http://en.wikipedia.org/wiki/Knapsack_problem\">wikipedia.org</a>", "fig" => "1"}
+{include "../fig.phtml", "url" => "knapsack-wiki.png", "url_thumb" => "knapsack-wiki_resize.png", "title" => "Problém batohu, zdroj: <a href=\"http://en.wikipedia.org/wiki/Knapsack_problem\">wikipedia.org</a>", "fig" => "1"}
 
 <p>
-  As show in <a href="#fig2">figure 2</a>, Knapsack problem consists of six classes. Lets take a look what are
-  they for and how to use them.
+  Jak je ukázáno na <a href="#fig2">obrázku 2</a>, problém batohu se skládá ze šestice tříd. Podívejme se na to, k čemu
+  se která používá.
 </p>
 
-{include "../fig.phtml", "url" => "knapsack-structure.png", "url_thumb" => "knapsack-structure_resize.png", "title" => "Knapsack structure", "fig" => "2"}
+{include "../fig.phtml", "url" => "knapsack-structure.png", "url_thumb" => "knapsack-structure_resize.png", "title" => "Struktura problému batohu", "fig" => "2"}
 
-<h3>Problem</h3>
+<h3>Problém</h3>
 
 <p>
-  {javadoc "problem.knapsack.Knapsack"} is core of knapsack problem - it parses user input data into fully configured
-  problem, provides both random (random items in knapsack) and starting (empty knapsack) configurations, default fitness
-  for this problem and creates operation iterators to name the most important. 
+  {javadoc "problem.knapsack.Knapsack"} je jádrem problému - zpracovává především vstup od uživatele a převádí ho na plně
+  nakonfigurovaný problém, poskytuje jak náhodné (náhodně zvolené věci jsou v batohu) tak startovní (prázdný batoh)
+  konfigurace, výchozí fitness pro tento problém a vytváří operace (resp. OperationIterator, o něm více dále).
 </p>
 
 <h3>KnapsackItem</h3>
 
 <p>
-  {javadoc "problem.knapsack.KnapsackItem"} is not required by JCOP and is only used by {javadoc "problem.knapsack.Knapsack"}
-  internally to keep track of items (their price and weight) in current knapsack instance.
+  {javadoc "problem.knapsack.KnapsackItem"} není vyžadován přímo JCOPem a je pouze interně využíván {javadoc "problem.knapsack.Knapsack"},
+  aby bylo možné sledovat, které věci (jejich hmotnost, cena a index) jsou v daném problému.
 </p>
 
 <h3>Fitness</h3>
 
 <p>
-  {javadoc "problem.knapsack.KnapsackFitness"} is default fitness for a knapsack which assigns every configuration a
-  numeric value such that non full knapsack has higher fitness than overfilled and configurations with higher total
-  price has higher fitness than lower price. This is very important part of problems since vast majority of algorithms
-  uses default fitnesses to work properly.
+  {javadoc "problem.knapsack.KnapsackFitness"} je výchozí fitness, která ohodnotí každou konfiguraci problému tak, že
+  nepřetížený batoh má vždy vyšší fitness než přetížený a zároveň konfigurace s vyšší celkovou cenou má vyšší fitness
+  než konfigurace s nižší cenou (první jmenované má vyšší prioritu). Toto je velmi důležitá část problému, protože
+  obrovská většina algoritmů používá právě default fitness, aby mohly fungovat správně.
 </p>
 
-<h3>Operations</h3>
+<h3>Operace</h3>
 
 <p>
-  {javadoc "problem.knapsack.AddOperation"} and {javadoc "problem.knapsack.RemoveOperation"} are two members of a
-  concept we have not yet seen. There are two types of algorithms in JCOP - global search and local search. We will
-  cover global search later, but all local search algorithms works on same principle. They have one (or more)
-  configurations in search space and uses {javadoc "problem.Operation", "Operations"} to navigate in search space. If
-  you will represent search space as graph, operations will be oriented edges.
-</p>
-
-<p>
-  Operations are applied on configurations to create new configuration. They always transform one configuration into
-  one new configuration, no more (even though one operation could be applied to several configurations in turn). Lets
-  take a look at {javadoc "problem.knapsack.AddOperation"}.
+  {javadoc "problem.knapsack.AddOperation"} a {javadoc "problem.knapsack.RemoveOperation"} jsou dva představitelé
+  konceptu, který jsme zatím neviděli. V JCOPu jsou dva typy algoritmů - globální prohledávání a lokální. Globální
+  prohledávání probereme později, ale všechny lokální algoritmu fungují na stejném principu. Mají jednu nebo více
+  konfigurací ve stavovém prostoru a používají {javadoc "problem.Operation"} pro navigaci v tomto prostoru. Pokud by byl
+  stavový prostor reprezentován jako graf, operace by byly jeho orientované hrany.
 </p>
 
 <p>
-  In JCOP, operations implements {javadoc "problem.Operation"} interface, which requires just one method -
-  {javadoc "problem.Operation#execute(cz.cvut.felk.cig.jcop.problem.Configuration)"}. It takes one configuration and
-  returns another one, as simple as that. If we look on source code of the {javadoc "problem.knapsack.AddOperation"},
-  we can see that it just creates list of attributes from original configuration, sets one variable to 1 (effectively
-  adding an item with such index to knapsack) and return new configuration created from that list.
+  Operace se aplikují na konfiguraci a vznikne nové konfigurace. Vždy transformují výhradně jednu konfiguraci do jedné nové
+  (stará je zachována beze změny). Je však možné jednu operaci aplikovat opakovaně na několik různých konfigurací.
+  Podívejme se teď na {javadoc "problem.knapsack.AddOperation"}.
+</p>
+
+<p>
+  Na platformě JCOP musí operace implementovat rozhraní {javadoc "problem.Operation"}, které vyžaduje pouze jednu metodu
+  {javadoc "problem.Operation#execute(cz.cvut.felk.cig.jcop.problem.Configuration)"}. Jako parametr je jedna (vstupní)
+  konfigurace, výsledek je nová. Pokud se podíváme na zdrojový kód {javadoc "problem.knapsack.AddOperation"}, vidíme,
+  že operace pouze vezme seznam atributů ze vstupní konfigurace, nastaví jednu hodnotu na 1 (přidá věc s daným indexem
+  do batohu) a vrátí novou konfiguraci vytvořenou z tohoto seznamu.
 </p>
 
 <pre class="brush: java;">
@@ -89,26 +89,26 @@
 </pre>
 
 <p>
-  The only part not as easy to understand is second parameter - {javadoc "result.OperationHistory"}. Do not bother with it much now, it
-  will be discussed later. But a brief description is that some problems requires not just the solution, but entire way
-  how to get that solution (for example bucket problem), so you need to keep history of all operations applied to a
-  configuration.
+  Jediná složitější část je druhý parametr konstruktoru konfigurace - {javadoc "result.OperationHistory"}. Zatím si s ní
+  nelamte hlavu, bude vysvětlena později. Pouze rychlý popis - některé problémy potřebují nejen výsledek, ale i cestu k
+  němu (např. problém přelévání kýblů), takže je třeba si udržovat historii všech operací aplikovaných na konfiguraci.
 </p>
 
 <h3>OperationIterator</h3>
 
 <p>
-  In general, for every configuration in search space the list of valid operations is subset of all operations in the
-  problem. In knapsack problem, configuration with empty knapsack will have no {javadoc "problem.knapsack.RemoveOperation"},
-  but will have {javadoc "problem.knapsack.AddOperation"} for every item. But if problem will return a list of
-  operations for every configuration, JCOP wold consume large amounts of memory for some algorithms. To cope with this,
-  problem returns {javadoc "problem.OperationIterator"} which behaves just like iterator
-  over a List of Operations, but creates operations real time when they are needed (lazy initialization).
+  Obecně vzato, pro každou konfiguraci ve stavovém prostoru existuje seznam validních operací, který je podmnožinou všech
+  operací problému. V problému batohu, konfigurace s prázdným batohem nebude mít žádné {javadoc "problem.knapsack.RemoveOperation"},
+  ale bude mít operaci {javadoc "problem.knapsack.AddOperation"} pro každou věc v problému. Pokud by však problém vracel
+  seznam všech operací pro každou konfiguraci, JCOP by mohl mít velmi vysoké paměťové nároky pro některé algoritmy. Aby
+  se vyrovnal s tímto nedostatkem, problém vrací {javadoc "problem.OperationIterator"}, který se chová jako normální
+  iterátor na <a href="http://java.sun.com/javase/6/docs/api/java/util/List.html">List</a> operací, ale samotné
+  operace vytváří až za běhu, když jsou potřeba.
 </p>
 
 <p>
-  If we take a look on {javadoc "problem.knapsack.KnapsackIterator"} part by part, we see that it is created with
-  reference to problem and configuration, so it does consume almost no memory at all. 
+  Pokud se podíváme na {javadoc "problem.knapsack.KnapsackIterator"} část po části, uvidíme, že je vytvořen jen s referencí
+  na problém a konfiguraci, takže sám nespotřebovává prakticky žádnou paměť.
 </p>
 
 <pre class="brush: java;">
@@ -127,12 +127,13 @@ public class KnapsackIterator implements OperationIterator {
 </pre>
 
 <p>
-  Counter is here so we know which operation we have returned last. When asked for next operation (as we would in a
-  common list iterator), {javadoc "problem.knapsack.KnapsackIterator"} checks if there is an operation left. If yes,
-   it returns either {javadoc "problem.knapsack.AddOperation"} or {javadoc "problem.knapsack.RemoveOperation"},
-   depending on whether configuration has 1 or 0 on index <code>this.counter</code>. As Knapsack problem stores all
-   available operations in two lists ({javadoc "problem.knapsack.Knapsack#removeOperations"} and {javadoc "problem.knapsack.Knapsack#removeOperations"})
-   we just need to take an appropriate operation from one of these lists at index <code>this.counter</code>.
+  Atribut counter se zde používá pro to, abychom věděli, kterou operaci jsme naposled vrátili. Když je od iterátoru
+  požadována další operace (stejně jako bychom ji chtěli v normální iterátoru), {javadoc "problem.knapsack.KnapsackIterator"}
+  zkonstroluje, jestli ještě nějaká operace zbývá. Pokud ano, tak vrátí buď {javadoc "problem.knapsack.AddOperation"}
+  nebo {javadoc "problem.knapsack.RemoveOperation"}, podle toho, jestli konfigurace má 1 nebo 0 na indexu rovnému
+  <code>this.counter</code>. Problém batohu uchovává všechny možné operace ve dvou seznamech ({javadoc "problem.knapsack.Knapsack#removeOperations"}
+  a {javadoc "problem.knapsack.Knapsack#removeOperations"}), takže pouze potřebujeme vzít danou operaci z jednoho z těchto
+  listů a tu vrátit.
 </p>
 
 <pre class="brush: java;">
@@ -147,8 +148,8 @@ public class KnapsackIterator implements OperationIterator {
 </pre>
 
 <p>
-  This is almost it! The only thing missing is to implement {javadoc "problem.OperationIterator#hasNext()"} and
-  {javadoc "problem.OperationIterator#getRandomOperation()"} but both are very easy to implement:
+  Jediná věc, co zbývá implementovat, jsou {javadoc "problem.OperationIterator#hasNext()"} a
+  {javadoc "problem.OperationIterator#getRandomOperation()"}, ale obě jsou velmi jednoduché na implementaci:
 </p>
 
 <pre class="brush: java;">
@@ -163,17 +164,18 @@ public Operation getRandomOperation() throws UnsupportedOperationException {
 }
 </pre>
 
-<h3>Modification</h3>
+<h3>Úpravy</h3>
 
 <p>
-  If you want to edit a problem, you usually change how problem is loaded, how fitness is calculated or which operations
-  (or in which order) does the problem provide. 
+  Když chcete změnit existující problém, obvykle měníte buď jak se problém načítá, jak se počítá fitness nebo jaké operace
+  (popř. v jakém pořadí) problém poskytuje. 
 </p>
 
 <p>
-  First one is easy - just add another constructor, which loads data in required way. If you want to change fitness,
-  keep in mind that you can always change only default fitness - no matter what a problem does, algorithm or solver are
-  always able to override this. But with this in mind, you just override {javadoc "problem.Problem#getDefaultFitness()"}:
+  První změna je velmi jednoduchá - prostě pouze přidejte nový konstruktor,který načte data požadovaným způsobem. Pokud
+  chcete změnit fitness, je nutné si uvědomit, že smíte měnit pouze default fitness (výchozí fitness) - nezávisle na tom,
+  co provede problém, algoritmus nebo solver musejí být tuto věc přepsat. Pro měnu používané fitness je tedy třeba
+  přepsat metodu {javadoc "problem.Problem#getDefaultFitness()"}:
 </p>
 
 <pre class="brush: java;">
@@ -183,22 +185,23 @@ public Fitness getDefaultFitness() {
 </pre>
 
 <p>
-  to return your own class. Please note that creating fitness class is not primitive to be done properly and it will be
-  covered in later chapters. But you can take inspiration in JCOP implementation if you don't want to wait.
+  tak, aby vracela vaší třídu. Je důležité zmínit, že vytvoření vlastní třídy na výpočet fitness není zcela primitivní,
+  pokud má fitness fungovat bez problémů, a bude jí věnován prostor v příštích kapitolách. Pokud se nemůžete dočkat,
+  můžete se zkusit inspirovat ve fitness třídách již implementovaných v JCOPu.
 </p>
 
 <p>
-  Altering {javadoc "problem.OperationIterator"} is again very easy - you simply override method which returns next
-  operation ({javadoc "problem.OperationIterator#next()"}) and that is it!
+  Úprava {javadoc "problem.OperationIterator"} je opět velmi jednoduchá - pouze přepište metodu která vrací další
+  operaci ({javadoc "problem.OperationIterator#next()"}) a to je vše!
 </p>
 
 <h3>ObjectiveProblem</h3>
 
 <p>
-  In previous chapters we have mentioned that an {javadoc "problem.ObjectiveProblem"} is used in solver (and in
-  algorithm as we will see later on) instead on just Problem. This is because of the fact that there are several
-  interfaces for a problem and since one problem can (and usually does) implement more than one, we will be pressed to
-  write something like this in an algorithm (or solver):
+  V předchozích kapitolách bylo zmíněno, že v solveru (a algoritmu jak uvidíme dále) se používá {javadoc "problem.ObjectiveProblem"}
+  místo normálního {javadoc "problem.Problem"}. Tato technika se v JCOPu používá z důvodu, že jeden problém může splňovat
+  (a obvykle splňuje) velké nmožství různých interfaců, uživatel by byl nucen psát kódy v algoritmu (nebo solveru),
+  které jsou podobné následujícímu:
 </p>
 
 <pre class="brush: java;">
@@ -213,16 +216,16 @@ public void myMethod(Problem problem) {
 </pre>
 
 <p>
-  Which is a lot of typecast all around, making the code confusing and difficult to maintain. JCOP comes with a
-  different solution - it introduces an {javadoc "problem.ObjectiveProblem"} interface and its basic implementation
-  {javadoc "problem.BaseObjectiveProblem"}. It is kind of wrapper around problem which implements all problem
-  interfaces. When you create a {javadoc "problem.BaseObjectiveProblem"}, you supply a {javadoc "problem.Problem"} to
-  it as an argument in constructor. All calls to this baseObjectiveProblem is then either redirected to the problem
-  (properly casted) or raises an exception if original problem did not implement such interface. So you can work with
-  {javadoc "problem.ObjectiveProblem"} instead of normal one and does not need to worry about casting or instanceOf
-  checks.
+  Což znamená spoustu přetypovávání a instanceOf podmínek, které znepřehledňují kód a dělají ho složitější na údržbu.
+  JCOP přichází s jiným řešení - interface {javadoc "problem.ObjectiveProblem"} a jeho výchozí implementace
+  {javadoc "problem.BaseObjectiveProblem"}. Tato třída je jakýmsi wrapperem okolo problému, ale implementuje všechna
+  rozhraní problému. Když vytvoříte instanci {javadoc "problem.BaseObjectiveProblem"}, předáte {javadoc "problem.Problem"}
+  jako parametr v konstruktoru. Všechna volání metod na tento baseObjectiveProblem jsou poté přesměrována na původní
+  problem (správně přetypovaný) nebo vyvolají výjimku, pokud problém neimplementoval dané rozhraní. Díky tomuto můžete
+  pracovat s {javadoc "problem.ObjectiveProblem"} namísto normálního a nemusíte si dělat startosti s typováním a
+  instanceOf podmínkami.
 </p>
 
 <p>
-  Full list of bundled problems can be found in <a href="{link Appendix:problems}">Appendix C</a>.
+  Úplný seznam problémů připravených v JCOPu je uveden v <a href="{link Appendix:problems}">Příloze C</a>.
 </p>

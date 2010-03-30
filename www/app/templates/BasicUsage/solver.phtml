@@ -14,7 +14,7 @@
   Solver that takes one algorithm and one problem as arguments:
 </p>
 
-<pre class="brush: java;" id="code-primitive-solver-1">
+<pre class="brush: java;">
 package basicusage.solver;
 
 import cz.cvut.felk.cig.jcop.algorithm.Algorithm;
@@ -49,7 +49,7 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
   call. So, let us make solver which will make 10 optimize steps and then ends:
 </p>
 
-<pre class="brush: java;" id="code-primitive-solver-2">
+<pre class="brush: java;">
 package basicusage.solver;
 
 import /** ... */
@@ -66,12 +66,12 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 </pre>
 
 <p>
-  Well, that's it! If you want to run this solver, just create an instance of it and call its {javadoc "solver.Solver#run()"}
+  Well, that's it. If you want to run this solver, just create an instance of it and call its {javadoc "solver.Solver#run()"}
   method. Since we do not know much about algorithms and problems, take the following code and run the main method. You
   will not see any results yet - these will be explained in next chapter. 
 </p>
 
-<pre class="brush: java;" id="code-demo-primitive-solver-1">
+<pre class="brush: java;">
 package basicusage.solver;
 
 import cz.cvut.felk.cig.jcop.algorithm.Algorithm;
@@ -97,7 +97,7 @@ public class DemoPrimitiveSolver {
 </pre>
 
 <p>
-  If it finishes without exception, you've made your first own solver! If there is an error, take a look back through
+  If it finishes without exception, you've made your first own solver. If there is an error, take a look back through
   this tutorial and try to find our what you have done differently. Both classes could be downloaded here 
   (<a href="{$basePath}/media/tutorial/basicusage.solver.zip">zip</a>, <a href="{$basePath}/media/tutorial/basicusage.solver.tgz">tgz</a>, 
   <a href="{$basePath}/media/tutorial/basicusage.solver.7z">7z</a>).

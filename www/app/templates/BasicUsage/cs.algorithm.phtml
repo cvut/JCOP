@@ -1,17 +1,18 @@
-{block #title}Algorithm{/block}
+{block #title}Algoritmus{/block}
 {block #chapter}2.6{/block}
 {block #content}
 
 <p>
-  Now that we know how solvers and algorithms work, we will take a look on how to write an algorithm which will be able
-  to solve these problems. We will not create a very effective algorithm here, just a simple one which works like steepest
-  descend (takes the best improvement) and if there are no more improving steps it ends. 
+  Nyní když víme jak fungují solvery a problémy, nastal čas ukázat jak napsat vlastní algoritmus, který bude tyto problémy
+  řešit. Nebudeme zde tvořit velmi efektivní algoritmus, pouze jednoduchou ukázku která bude fungovat jako metoda steepest
+  descend (v každém kroku bere nejlepšího souseda lepšího než aktuální stav) a končí v případě, že neexistuje žádné zlepšení.
 </p>
 
 <p>
-  First thing to know is that we need not implement {javadoc "algorithm.Algorithm"} from scratch. There is abstract
-  class {javadoc "algorithm.BaseAlgorithm"} which we could use to reduce the amount of repetitive work. If we do so, we
-  need to implement only two methods, initialization and optimization step:
+  Pokud implementujeme nový algoritmus, není nutné ho psát úplně od začátku jako implementaci {javadoc "algorithm.Algorithm"}
+  rozhraní. V JCOPu existuje abstraktní třída {javadoc "algorithm.BaseAlgorithm"}, která je potomkem všech implementovaných
+  algoritmů a my ji můžeme využít, abychom zredukovali množství opakující se práce. Pokud tak učiníme, musíme
+  implementovat pouze dvě metody - inicializaci a optimalizační krok:
 </p>
 
 <pre class="brush: java;">
@@ -35,52 +36,55 @@ public class PrimitiveAlgorithm extends BaseAlgorithm {
 </pre>
 
 <p>
-  Note the exceptions those methods raises. {javadoc "algorithm.InvalidProblemException"} is used to denote that
-  algorithm required some interface which supplied problem (wrapped in {javadoc "problem.ObjectiveProblem"} as shown in
-  previous chapter) does not implement. In our example, we will require the problem to supply starting configuration by
-  implementing {javadoc "problem.StartingConfigurationProblem"}. Second method, {javadoc "algorithm.Algorithm#optimize()"}
-  throws a {javadoc "algorithm.CannotContinueException"}. This exception is raised when algorithm has nothing more to
-  do. In our example we will throw it when we cannot find a configuration with better fitness than current one. Whenever
-  any exception is raised in {javadoc "algorithm.Algorithm#optimize()"}, solver should immediately stop current solver
-  iteration as if any other condition was met.
+  Všimněte si, jaké výjimky tyto metody vrací. Výjimka {javadoc "algorithm.InvalidProblemException"} se používá, pokud
+  algoritmus dostane problém, který neimplementuje nějaké potřebné rozhraní. V našem příkladu budeme potřebovat, aby
+  problém poskytoval počáteční konfiguraci (implementoval rozhraní {javadoc "problem.StartingConfigurationProblem"}).
+  Druhá metoda, {javadoc "algorithm.Algorithm#optimize()"}, vyhazuje výjimku {javadoc "algorithm.CannotContinueException"}.
+  Pomocí této výjimky říká, že algoritmus již není schopen provádět další optimalizační kroky. V našem případě ji vyhodí,
+  pokud nemůže najít konfiguraci s lepší fitness než je naše aktuální. Kdykoli algoritmus vyvolá výjimku
+  v&nbsp;{javadoc "algorithm.Algorithm#init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem)"} nebo {javadoc "algorithm.Algorithm#optimize()"},
+  solver by měl okamžitě ukončit svou iteraci (stejně jako kdyby byla splněna jakákoli jiná ukončovací podmínka).
 </p>
 
 <p>
-  Also, since we use {javadoc "algorithm.BaseAlgorithm"} we are obliged to do certain steps in {javadoc "algorithm.Algorithm#init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem)"}.
-  List of things required to do is as follows:
+  Tím, že používáme {javadoc "algorithm.BaseAlgorithm"} jako základ našeho algoritmu, jsme povinni provést některé kroky
+  v {javadoc "algorithm.Algorithm#init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem)"}. Seznam požadovaných věcí je
+  následující:
 </p>
 
 <ol>
-  <li>Set {javadoc "algorithm.BaseAlgorithm#fitness"} (usually to {javadoc "problem.Problem#getDefaultFitness()"}</li>
-  <li>Set {javadoc "algorithm.BaseAlgorithm#bestConfiguration"} and {javadoc "algorithm.BaseAlgorithm#bestFitness"}
-    (if they are available before first optimize step)</li>
-  <li>Set {javadoc "algorithm.BaseAlgorithm#problem"} to problem being currently solved.</li>
-  <li>Set {javadoc "algorithm.BaseAlgorithm#label"} (optional)</li>
+  <li>Nastavit {javadoc "algorithm.BaseAlgorithm#fitness"} (nejčastěji na {javadoc "problem.Problem#getDefaultFitness()"}</li>
+  <li>Nastavit {javadoc "algorithm.BaseAlgorithm#bestConfiguration"} a {javadoc "algorithm.BaseAlgorithm#bestFitness"}
+    (pokud jsou k dispozici ještě před prvním optimalizačním krokem)</li>
+  <li>Nastavit {javadoc "algorithm.BaseAlgorithm#problem"} na aktuálně řešený problém.</li>
+  <li>Nastavit {javadoc "algorithm.BaseAlgorithm#label"} (nepovinné)</li>
 </ol>
 
 <p>
-  Also keep in mind that {javadoc "algorithm.Algorithm#init(init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem))"} is
-  called whenever there is need to restart the algorithm, so it should reset all internal variables.
+  Navíc dávejte pozor na to, že metoda {javadoc "algorithm.Algorithm#init(init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem))"}
+  je volána kdykoli by měl být algoritmus restartován, tudíž se zde musí nastavit všechny interní proměnné, které
+  se při restartu mají změnit.
 </p>
 
 <p>
-  Now we can start. First we check if given ObjectiveProblem holds valid problem:
+  Nyní můžeme začít. Nejprve zkontrolujeme, jestli daný {javadoc "problem.ObjectiveProblem"} obsahuje problém
+  požadovaných vlastností:
 </p>
 
 <pre class="brush: java;">
 public void init(ObjectiveProblem objectiveProblem) throws InvalidProblemException {
     if (!objectiveProblem.hasStartingConfiguration()) throw new InvalidProblemException("Our algorithm requires StartingConfigurationProblem interface");
-    
+
     this.problem = objectiveProblem;
 }
 </pre>
 
 <p>
-  Once we have our problem checked for type, we will take the fitness and starting configuration. Since it is only
-  configuration we have visited, we will store it to {javadoc "algorithm.BaseAlgorithm#bestConfiguration"}. In fact
-  because of nature of our algorithm, we will use {javadoc "algorithm.BaseAlgorithm#bestConfiguration"} to store our
-  active configuration all the time. Note that most other algorithms would not take this approach since they usually
-  allows expanding to worse configuration so they have to store active configuration in some other way.
+  Jakmile jsme otestovali problém, vezmeme z něj fitness a startovní konfiguraci. Tím, že toto je jediná (a tudíž nejlepší)
+  konfigurace, kterou jsme zatím prošli, uložíme ji do {javadoc "algorithm.BaseAlgorithm#bestConfiguration"}. Dokonce,
+  díky chování našeho algoritmu, můžeme používat {javadoc "algorithm.BaseAlgorithm#bestConfiguration"} pořád na ukládání
+  aktivní konfigurace. Tento přístup ale není vhodný pro většinu ostatních algoritmů, protože ty často povolují přesun
+  do horší konfigurace a tudíž si ukládají aktivní konfiguraci jiným způsobem.
 </p>
 
 <pre class="brush: java;">
@@ -97,18 +101,18 @@ public void init(ObjectiveProblem objectiveProblem) throws InvalidProblemExcepti
 </pre>
 
 <p>
-  Now we have our algorithm prepared, we will implement one optimization step. In each {javadoc "algorithm.Algorithm#optimize()"}
-  we expand current best configuration with all operations available for it. If any one is better, take the best one and
-  assign it to {javadoc "algorithm.BaseAlgorithm#bestConfiguration"} (along with {javadoc "algorithm.BaseAlgorithm#bestFitness"}).
-  If none is better than current best solution, end with {javadoc "algorithm.CannotContinueException"}. 
+  Nyní máme náš algoritmus připravený a můžeme implementovat optimalizační krok. V každém volání {javadoc "algorithm.Algorithm#optimize()"}
+  expandujeme naši nejlepší konfiguraci pomocí všech operací, které jsou pro ni k dispozici. Pokud najdeme nějaká lepší
+  řešení, vezmeme to nejlepší a uložíme si ho {javadoc "algorithm.BaseAlgorithm#bestConfiguration"} (společně s {javadoc "algorithm.BaseAlgorithm#bestFitness"}).
+  Pokud žádné není lepší, skončíme výjimkou {javadoc "algorithm.CannotContinueException"}.
 </p>
 
 <p>
-  In code below, first we create <code>nextBestConfiguration</code> and <code>nextBestFitness</code> to store candidates
-  for next best solution and an operation iterator <code>it</code> to get operations. Next step is to expand with all
-  operations we got, which is done by expanding as long as iterator provides operations
-  ({javadoc "problem.OperationIterator#hasNext()"}). Whenever we found a configuration with better fitness, we store it.
-  At least if we did not find any one better, end raising an exception. Otherwise store best found configuration.
+  V následujícím kódu nejprve vytvoříme <code>nextBestConfiguration</code> a <code>nextBestFitness</code> na ukládání
+  kandidátů na nejlepší řešení a {javadoc "problem.OperationIterator"} <code>it</code> na získávání operací. Dalším
+  krokem je expandovat pomocí všech operací, což se udělá tak, že expandujeme tak dlouho, dokud iterátor <code>it</code>
+  poskytuje další operace ({javadoc "problem.OperationIterator#hasNext()"}). Kdykoli najdeme konfiguraci s lepší fitness,
+  uložíme ji. Nakonec, pokud jsme nenašli žádnou lepší, vyvoláme výjimku, jinak uložíme nejlepší nalezenou konfiguraci.
 </p>
 
 <pre class="brush: java;">
@@ -140,8 +144,8 @@ public void optimize() throws CannotContinueException {
 </pre>
 
 <p>
-  Now we have our algorithm, lets test it how it works! All we require has been shown in previous chapters. We will use
-  {javadoc "problem.knapsack.Knapsack"} problem and {javadoc "solver.SimpleSolver"} solver:
+  Otestujme náš algoritmus, jestli funguje v pořádku. Vše, co potřebujeme, bylo ukázáno v předchozích kapitolách.
+  Použijeme problém {javadoc "problem.knapsack.Knapsack"} a solver {javadoc "solver.SimpleSolver"}:
 </p>
 
 <pre class="brush: java;">
@@ -173,8 +177,9 @@ public class DemoPrimitiveAlgorithm {
 </pre>
 
 <p>
-  You should be familiar with above, if not, revert to chapters 2.2-2.4. Either way, after you run this piece of code,
-  you should see this in console. If not, you have probably done something wrong in this tutorial.
+  Tento kód by vám měl být povědomý, pokud ne, vraťte se ke kapitolám 2.2 až 2.4. Každopádně po spuštění tohoto kusu
+  kódu by se mělo v konzoli objevit něco jako kód níže. Pokud ne, nejspíše jste udělali něco jinak než je uvedeno v
+  tomto tutorialu.
 </p>
 
 <pre class="brush: plain;">
@@ -193,12 +198,12 @@ public class DemoPrimitiveAlgorithm {
 </pre>
 
 <p>
-  We have found reasonably good solution (not the best one, which is [1, 1, 0, 1] with fitness 473,0) and algorithm
-  ended with an exception that it cannot continue. Both results are as we expected. Source codes of this example could
-  be downloaded here  (<a href="{$basePath}/media/tutorial/basicusage.algorithm.zip">zip</a>,
+  Algoritmus našel poměrně kvalitní řešení (ne nejlepší, které je [1, 1, 0, 1] s fitness 473,0) a skončil s výjimkou,
+  že nemůže dále pokračovat. Oba výsledky jsou podle očekávání. Zdrojové kódy tohoto příkladu jsou ke stažení zde
+  (<a href="{$basePath}/media/tutorial/basicusage.algorithm.zip">zip</a>,
   <a href="{$basePath}/media/tutorial/basicusage.algorithm.tgz">tgz</a>, <a href="{$basePath}/media/tutorial/basicusage.algorithm.7z">7z</a>).
 </p>
 
 <p>
-  Full list of bundled algorithms can be found in <a href="{link Appendix:algorithms}">Appendix B</a>.
+  Úplný seznam algoritmů implementovaných v JCOPu lze nalézt v <a href="{link Appendix:algorithms}">Příloze B</a>.
 </p>

@@ -15,7 +15,7 @@
 </p>
 
 <p>
-  Where {javadoc "result.Result"} holds information about whole {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
+  As {javadoc "result.Result"} holds information about whole {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
   provides information about just one solver iteration. Objects of this class contains all required
   data about how did the algorithm's application ended, such as number of iterations, time spent or best found solution.
 </p>
@@ -105,7 +105,7 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
   to solver use {javadoc "solver.Solver#addRender(cz.cvut.felk.cig.jcop.result.render.Render)"}. This is usually done
   outside of solver, because solver itself does not necessarily know how you want to render data. It know just how to
   apply algorithms on problems, not how results are to be displayed. Lets update our DemoPrimitiveSolver from
-  <a href="{link BasicUsage:solver}#code-demo-primitive-solver-1">previous chapter</a>:
+  previous chapter:
 </p>
 
 <pre class="brush: java;">
@@ -163,7 +163,7 @@ public class DemoPrimitiveSolver {
 <p>
   Because of the fact that we used {javadoc "solver.BaseSolver"} as parent to our solver, we even do not need to add
   {javadoc "result.render.SimpleRender"}, it is default one (if no other is supplied), so our DemoPrimitiveSolver could
-  be even shorter! Also note that there is {javadoc "solver.SimpleSolver"} implementation in JCOP which is very much
+  be even shorter. Also note that there is {javadoc "solver.SimpleSolver"} implementation in JCOP which is very much
   like the one we've just created, although it is a bit more sophisticated. But since for the most part it works the
   same as our PrimitiveSolver, we will be using it instead in next chapters.
 </p>

@@ -1,40 +1,34 @@
-{block #title}Result{/block}
+{block #title}Result (Výsledek){/block}
 {block #chapter}2.4{/block}
 {block #content}
 
 <p>
-  In our previous example, we've finished with solver which will successfully apply an algorithm to a problem, but we did
-  not get any information about it at all. This is where Result steps in. 
+  V naší předchozí ukázce jsme vytvořili solvera, který bude schopen úspěšně aplikovat algoritmus na problém, ale zatím
+  jsme nedostali žádné informace o výsledku. K tomuto účelu se využívá výsledek - Result.
 </p>
 
 <p>
-  Due to nature of solvers being able to run several different algorithms or problems in one {javadoc "solver.Solver#run()"},
-  one solver must be able to hold several results. This is done by implementing interface {javadoc "result.Result"},
-  which can hold our results. This can be actually done by simple list as has its default implementation
-  {javadoc "result.SimpleResult"}. 
+  Kvůli tomu, že solver je schopen používat více algoritmů nebo řešit více problémů v jednom běhu {javadoc "solver.Solver#run()"},
+  jeden solver musí být schopen udržovat několik různých dílčích výsledků. Tohoto je dosaženo rozhraním {javadoc "result.Result"}
+  a jeho nejjednodušší implementací {javadoc "result.SimpleResult"}, která pouze výsledky ukládá do Listu.
 </p>
 
 <p>
-  Where {javadoc "result.Result"} holds information about whole {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
-  provides information about just one solver iteration. Objects of this class contains all required
-  data about how did the algorithm's application ended, such as number of iterations, time spent or best found solution.
+  Stejně jako {javadoc "result.Result"} udržuje informace o celém běhu {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
+  (záznam výsledku) nás informuje o jedné dílčí iteraci solveru. Objekt této třídy obsahuje všechna podstatná data ohledně toho, jak aplikace
+  algoritmu skončila (např. počet iterací, čas běhu nebo nejlepší řešení). Vytvoření result entry je snadné - pouze
+  vytvoříme objekt jedním z jeho konstruktorů. Zde použijeme {javadoc "result.ResultEntry#ResultEntry(cz.cvut.felk.cig.jcop.algorithm.Algorithm, cz.cvut.felk.cig.jcop.problem.Problem, cz.cvut.felk.cig.jcop.problem.Configuration, double, int, cz.cvut.felk.cig.jcop.util.PreciseTimestamp)", "ResultEntry#ResultEntry(...)"}.
+  Zde je jedna věc, kterou jsme zatím neviděli - {javadoc "util.PreciseTimestamp"}. Tato třída je používána k měření
+  přesnějšího času než je obyčejný reálný čas. Víc bude probrána v dalších kapitolách, nyní z ní pouze vytvoříme instanci
+  těsně před spuštění algoritmu a předáme ji do result entry jako startTime.
 </p>
 
 <p>
-  Let's try to add such a result entry to our demo from <a href="{link solver}">previous chapter</a>. Creating a result
-  entry is easy - just create a result entry using one of its constructors. We will use {javadoc "result.ResultEntry#ResultEntry(cz.cvut.felk.cig.jcop.algorithm.Algorithm, cz.cvut.felk.cig.jcop.problem.Problem, cz.cvut.felk.cig.jcop.problem.Configuration, double, int, cz.cvut.felk.cig.jcop.util.PreciseTimestamp)", "ResultEntry#ResultEntry(...)"}.
-  There is however one thing we have not seen yet - {javadoc "util.PreciseTimestamp"}. This class is used to measure
-  time more precisely than simple system time, but we need not to discuss in any further now. We will just create an
-  instance of it before we run our algorithm and then we'll add it to result entry as a start time.
-</p>
-
-<p>
-  From result entry requirements we have an algorithm and a problem we used and a {javadoc "util.PreciseTimestamp"}. It
-  also requires best {javadoc "problem.Configuration"}, best fitness and optimize counter. We take first two from
-  algorithm itself - algorithms are required to provide this information when they implement the
-  {javadoc "algorithm.Algorithm"} interface ({javadoc "algorithm.Algorithm#getBestConfiguration()"} and
-  {javadoc "algorithm.Algorithm#getBestFitness()"} methods). The last one, optimize counter, is responsibility of solver
-  to provide. But since we know we made 10 optimize steps, we could just supply number 10.
+  Z parametrů, které result entry požaduje, máme algoritmus a problém, které na sebe aplikujeme, a {javadoc "util.PreciseTimestamp"}.
+  Dále potřebujeme nejlepší nalezenou {javadoc "problem.Configuration"}, nejlepší fitness a počet optimalizací (optimization counter).
+  První dvě vezmeme přímo z algoritmu - algoritmus je musí poskytovat implementací interfacu {javadoc "algorithm.Algorithm"}
+  (konkrétně metody {javadoc "algorithm.Algorithm#getBestConfiguration()"} a {javadoc "algorithm.Algorithm#getBestFitness()"}).
+  Poslední, počet optimalizací, musí dodat solver. Tím, že víme, že jsme provedli 10 kroků, tak můžeme dodat přímo číslo 10.
 </p>
 
 <pre class="brush: java;">
@@ -77,10 +71,9 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 </pre>
 
 <p>
-  Now we have result entry for our 10-steps-optimization solver iteration and we need to add it to a result. From {javadoc
-  "solver.Solver"} interface we are required to implement {javadoc "solver.Solver#getResult()"} method. But since we
-  are extending {javadoc "solver.BaseSolver"}, {javadoc "result.Result"} has been automatically created for us and we
-  will just add new result entry to it. 
+  Teď, když máme result entry pro iteraci našeho 10-krokého solveru, musíme ho přidat do resultu. Z {javadoc "solver.Solver"}
+  interfacu solver musí implementovat {javadoc "solver.Solver#getResult()"} metodu. Naštěstí protože dědíme z {javadoc "solver.BaseSolver"},
+  {javadoc "result.Result"} je pro nás automaticky vytvořen a nám stačí do něj pouze přidat nový záznam.
 </p>
 
 <pre class="brush: java;">
@@ -99,13 +92,13 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 </pre>
 
 <p>
-  Now we have our results we need to display them (or better - render them). Classes implementing {javadoc "result.render.Render"}
-  interface are used to render results in different ways (for example XML, console etc). There are several in-built
-  renders and we will use {javadoc "result.render.SimpleRender"} which just dumps result to console. To register a render
-  to solver use {javadoc "solver.Solver#addRender(cz.cvut.felk.cig.jcop.result.render.Render)"}. This is usually done
-  outside of solver, because solver itself does not necessarily know how you want to render data. It know just how to
-  apply algorithms on problems, not how results are to be displayed. Lets update our DemoPrimitiveSolver from
-  <a href="{link BasicUsage:solver}#code-demo-primitive-solver-1">previous chapter</a>:
+  Teď když máme výsledky z běhu solveru, potřebujeme je nějak zobrazit (lépe nazýváno vyrenderovat). Třídy, které
+  implementují rozhraní {javadoc "result.render.Render"}, se používají k renderování výsledků různýmy způsoby (např.
+  XML soubor, text do konzole atd). Existuje několik renderů předpřipraveným v JCOPu a my budeme používat {javadoc "result.render.SimpleRender"},
+  který pouze vypíše textový výsledek do konzole. Render se do solveru zaregistruje (přidá) pomocí {javadoc "solver.Solver#addRender(cz.cvut.felk.cig.jcop.result.render.Render)"}.
+  Toto je většinou děláno mimo solver, protože solver sám o sobě nemusí vědět, jak my chceme renderovat data, ví pouze
+  jak aplikovat algoritmy na problémy, ne jak zobrazit výsledek. Upravme tedy náš DemoPrimitiveSolver z
+  minulé kapitoly:
 </p>
 
 <pre class="brush: java;">
@@ -140,9 +133,9 @@ public class DemoPrimitiveSolver {
 </pre>
 
 <p>
-  We've added {javadoc "result.render.SimpleRender"} to out solver and after {javadoc "solver.Solver#run()"} is
-  finished, we've called {javadoc "solver.Solver#render()"}, which will render results with all registered renders. You
-  should get something like this in console, if not, you've probably done something wrong:
+  Přidali jsme {javadoc "result.render.SimpleRender"} do našeho solveru a jakmile metoda {javadoc "solver.Solver#run()"}
+  skončí, zavolali jsme {javadoc "solver.Solver#render()"}, což způsobí, že všechny zaregistrované rendery se vykreslí.
+  Měli byste mít v konzoli něco podobného následujícímu, pokud ne, nejspíše jste něco udělali špatně:
 </p>
 
 <pre class="brush: plain;">
@@ -161,19 +154,19 @@ public class DemoPrimitiveSolver {
 </pre>
 
 <p>
-  Because of the fact that we used {javadoc "solver.BaseSolver"} as parent to our solver, we even do not need to add
-  {javadoc "result.render.SimpleRender"}, it is default one (if no other is supplied), so our DemoPrimitiveSolver could
-  be even shorter! Also note that there is {javadoc "solver.SimpleSolver"} implementation in JCOP which is very much
-  like the one we've just created, although it is a bit more sophisticated. But since for the most part it works the
-  same as our PrimitiveSolver, we will be using it instead in next chapters.
+  Díky tomu, že jsme použili {javadoc "solver.BaseSolver"} jako předka pro našeho solvera, nemusíme dokonce ani přidávat
+  {javadoc "result.render.SimpleRender"}, je nastaven jako výchozí (pokud není zadán žádný jiný). Kód pak může být ještě
+  kratší. Dále je třeba poznamenat, že v JCOP existuje {javadoc "solver.SimpleSolver"}, který funguje velmi podobně jako
+  nás PrimitiveSolver, ačkoli je o trochu sofistikovanější. Tím, že z velké části ale funguje jako demonstrovaný solver,
+  v dalších tutoriálech ho budeme používat.
 </p>
 
 <p>
-  Both classes could be downloaded here (<a href="{$basePath}/media/tutorial/basicusage.result.zip">zip</a>,
+  Obě třídy je možné stáhnout (<a href="{$basePath}/media/tutorial/basicusage.result.zip">zip</a>,
   <a href="{$basePath}/media/tutorial/basicusage.result.tgz">tgz</a>,
   <a href="{$basePath}/media/tutorial/basicusage.result.7z">7z</a>).
 </p>
 
 <p>
-  Full list of bundled renders and listeners can be found in <a href="{link Appendix:rendersListeners}">Appendix E</a>.
+  Kompletní seznam renderů a listenerů může být nalezen v <a href="{link Appendix:rendersListeners}">Příloze A</a>.
 </p>

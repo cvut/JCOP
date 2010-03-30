@@ -31,6 +31,16 @@
       $("a[rel='colorbox']").colorbox({ transition:"fade"});
     });
   </script>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-13306901-2");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
 
   <link rel="shortcut icon" href="{$basePath}/favicon.ico" />
 </head>
@@ -126,12 +136,12 @@
 				<li>
 					<h2>{_"Appendices"}</h2>
 					<ul>
-						<li><a href="{link Appendix:Solvers}"{ifCurrent Appendix:Solvers} class="active"{/if}>{_"Solvers"}</a></li>
-						<li><a href="{link Appendix:Algorithms}"{ifCurrent Appendix:Algorithms} class="active"{/if}>{_"Algorithms"}</a></li>
-						<li><a href="{link Appendix:Problems}"{ifCurrent Appendix:Problems} class="active"{/if}>{_"Problems"}</a></li>
-						<li><a href="{link Appendix:StopConditions}"{ifCurrent Appendix:StopConditions} class="active"{/if}>{_"StopConditions"}</a></li>
-						<li><a href="{link Appendix:RendersListeners}"{ifCurrent Appendix:RendersListeners} class="active"{/if}>{_"Renders, Listeners"}</a></li>
-						<li><a href="{link Appendix:Libraries}"{ifCurrent Appendix:Libraries} class="active"{/if}>{_"Libraries"}</a></li>
+						<li><a href="{link Appendix:Solvers}"{ifCurrent Appendix:solvers} class="active"{/if}>{_"Solvers"}</a></li>
+						<li><a href="{link Appendix:Algorithms}"{ifCurrent Appendix:algorithms} class="active"{/if}>{_"Algorithms"}</a></li>
+						<li><a href="{link Appendix:Problems}"{ifCurrent Appendix:problems} class="active"{/if}>{_"Problems"}</a></li>
+						<li><a href="{link Appendix:StopConditions}"{ifCurrent Appendix:stopConditions} class="active"{/if}>{_"StopConditions"}</a></li>
+						<li><a href="{link Appendix:RendersListeners}"{ifCurrent Appendix:rendersListeners} class="active"{/if}>{_"Renders, Listeners"}</a></li>
+						<li><a href="{link Appendix:Libraries}"{ifCurrent Appendix:libraries} class="active"{/if}>{_"Libraries"}</a></li>
 					</ul>
 				</li>
 			</ul>

@@ -12,24 +12,15 @@
 <p>
   {javadoc "util.PreciseTime"} is used to measure all kind of times in JCOP. Apart from regular time (called <code>
   clock time</code>) there are CPU, User and System times (for more information see <a href="http://en.wikipedia.org/wiki/Time_(Unix)#User_Time_vs_System_Time">
-  CPU/User/System time</a> on Wikipedia. Note that by CPU time JCOP understands User + System time), it allows to
+  CPU/User/System time on Wikipedia</a>. Note that by CPU time JCOP understands User + System time), which allows to
   measure CPU/User/System time of current thread. Keep in mind that despite its name, {javadoc "util.PreciseTime"} is
   not perfectly precise. Times returned depends very much on used operating system and even though returned time is in
   miliseconds precision, it need not be in miliseconds accuracy. 
 </p>
 
 <p>
-  {javadoc "util.PreciseTime"} is used to measure all kind of times in JCOP. Apart from regular time (called <code>
-  clock time</code>) it allows to measure CPU/User/System time of current thread (for more information see
-  <a href="http://en.wikipedia.org/wiki/Time_(Unix)#User_Time_vs_System_Time"> CPU/User/System time</a> on Wikipedia.
-  Note that by CPU time JCOP understands User + System time). Keep in mind that despite its name, {javadoc "util.PreciseTime"} is
-  not perfectly precise. Times returned depends very much on used operating system and even though returned time is in
-  miliseconds precision, it need not be in miliseconds accuracy.
-</p>
-
-<p>
   This class works together with {javadoc "util.PreciseTimestamp"} which stores all four times (clock, cpu, system,
-  user) as one timestamp and represents one point in time. When two difference timestamps are created, you can get how
+  user) as one timestamp and represents one point in time. When two different timestamps are created, you can get how
   much time were spent between them. {javadoc "util.PreciseTimestamp"} is preferred to be used in JCOP whenever you
   want to measure time.
 </p>
@@ -44,14 +35,14 @@
   java.util.Random</a> can), but whenever you do this, all random numbers in whole JCOP (as long as all parts of JCOP
   uses {javadoc "util.JcopRandom"}) will return random numbers in the same order. You can then run one experiment again
   with exactly the same results (well, almost the same - same as long as they do not depend on time for example) really
-  easy!
+  easy.
 </p>
 
 <h3>Comparators</h3>
 
 <p>
   These classes implements <a href="http://java.sun.com/javase/6/docs/api/java/util/Comparator.html">java.util.Comparator</a>
-  interface and are used to sort arrays of elements in JCOP. For example, in genetics algorithm, you need to sort
+  interface and are used to sort arrays of elements in JCOP. For example, in {javadoc "result.SimpleCompareRender"}, you need to sort
   results by their fitness. So you just create a {javadoc "util.compare.ResultEntryFitnessComparator"} and you can sort
   list of ResultEntries to be displayed best to worst.
 </p>
@@ -69,8 +60,9 @@
   ways, but the preferred one is using <code>log4j.properties</code> file. Log4j looks for this file in your classpath
   and tries to configure itself from it. There are three such files bundled with JCOP - log disabled completely (file
   <code>log4j-off.properties</code>), log enabled to console (file <code>log4j-console.properties</code>) and log
-  enabled to console and file (configuration <code>log4j-console-file.properties</code>). They all reside inside <code>
-  jcop.jar</code> archive. You can use one of them (copy it to your source folder and rename it to <code>log4j.properties</code>)
+  enabled to console and file (configuration <code>log4j-console-file.properties</code>). They all reside inside
+  <code>jcop.jar</code> archive or available to download from <a href="http://sourceforge.net/projects/jcop/files/log4j.properties/">SourceForge</a>.
+  You can use one of them (copy it to your source folder and rename it to <code>log4j.properties</code>)
   or write your own (see <a href="http://logging.apache.org/log4j/1.2/manual.html">log4j documentation</a> for details
   then). If you have not configured log4j properly, you are most likely to get something like this in console:
 </p>

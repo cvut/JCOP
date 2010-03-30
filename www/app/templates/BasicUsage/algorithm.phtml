@@ -41,7 +41,7 @@ public class PrimitiveAlgorithm extends BaseAlgorithm {
   implementing {javadoc "problem.StartingConfigurationProblem"}. Second method, {javadoc "algorithm.Algorithm#optimize()"}
   throws a {javadoc "algorithm.CannotContinueException"}. This exception is raised when algorithm has nothing more to
   do. In our example we will throw it when we cannot find a configuration with better fitness than current one. Whenever
-  any exception is raised in {javadoc "algorithm.Algorithm#optimize()"}, solver should immediately stop current solver
+  any exception is raised in {javadoc "algorithm.Algorithm#init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem)"} or {javadoc "algorithm.Algorithm#optimize()"}, solver should immediately stop current solver
   iteration as if any other condition was met.
 </p>
 
@@ -64,7 +64,7 @@ public class PrimitiveAlgorithm extends BaseAlgorithm {
 </p>
 
 <p>
-  Now we can start. First we check if given ObjectiveProblem holds valid problem:
+  Now we can start. First we check if given {javadoc "problem.ObjectiveProblem"} holds valid problem:
 </p>
 
 <pre class="brush: java;">
@@ -105,7 +105,7 @@ public void init(ObjectiveProblem objectiveProblem) throws InvalidProblemExcepti
 
 <p>
   In code below, first we create <code>nextBestConfiguration</code> and <code>nextBestFitness</code> to store candidates
-  for next best solution and an operation iterator <code>it</code> to get operations. Next step is to expand with all
+  for next best solution and an {javadoc "problem.OperationIterator"} <code>it</code> to get operations. Next step is to expand with all
   operations we got, which is done by expanding as long as iterator provides operations
   ({javadoc "problem.OperationIterator#hasNext()"}). Whenever we found a configuration with better fitness, we store it.
   At least if we did not find any one better, end raising an exception. Otherwise store best found configuration.
@@ -140,7 +140,7 @@ public void optimize() throws CannotContinueException {
 </pre>
 
 <p>
-  Now we have our algorithm, lets test it how it works! All we require has been shown in previous chapters. We will use
+  Now we have our algorithm, lets test it how it works. All we require has been shown in previous chapters. We will use
   {javadoc "problem.knapsack.Knapsack"} problem and {javadoc "solver.SimpleSolver"} solver:
 </p>
 

@@ -42,7 +42,7 @@
 
 <p>
   {javadoc "problem.knapsack.KnapsackItem"} is not required by JCOP and is only used by {javadoc "problem.knapsack.Knapsack"}
-  internally to keep track of items (their price and weight) in current knapsack instance.
+  internally to keep track of items (their price, weight and index) in current knapsack instance.
 </p>
 
 <h3>Fitness</h3>
@@ -50,8 +50,8 @@
 <p>
   {javadoc "problem.knapsack.KnapsackFitness"} is default fitness for a knapsack which assigns every configuration a
   numeric value such that non full knapsack has higher fitness than overfilled and configurations with higher total
-  price has higher fitness than lower price. This is very important part of problems since vast majority of algorithms
-  uses default fitnesses to work properly.
+  price has higher fitness than lower price (first named has higher priority). This is very important part of problems
+  since vast majority of algorithms uses default fitnesses to work properly.
 </p>
 
 <h3>Operations</h3>
@@ -103,7 +103,7 @@
   but will have {javadoc "problem.knapsack.AddOperation"} for every item. But if problem will return a list of
   operations for every configuration, JCOP wold consume large amounts of memory for some algorithms. To cope with this,
   problem returns {javadoc "problem.OperationIterator"} which behaves just like iterator
-  over a List of Operations, but creates operations real time when they are needed (lazy initialization).
+  over a <a href="http://java.sun.com/javase/6/docs/api/java/util/List.html">List</a> of Operations, but creates operations real time when they are needed (lazy initialization).
 </p>
 
 <p>
@@ -147,8 +147,8 @@ public class KnapsackIterator implements OperationIterator {
 </pre>
 
 <p>
-  This is almost it! The only thing missing is to implement {javadoc "problem.OperationIterator#hasNext()"} and
-  {javadoc "problem.OperationIterator#getRandomOperation()"} but both are very easy to implement:
+  The only thing missing is to implement {javadoc "problem.OperationIterator#hasNext()"} and
+  {javadoc "problem.OperationIterator#getRandomOperation()"}, but both are very easy to implement:
 </p>
 
 <pre class="brush: java;">
@@ -196,7 +196,7 @@ public Fitness getDefaultFitness() {
 
 <p>
   In previous chapters we have mentioned that an {javadoc "problem.ObjectiveProblem"} is used in solver (and in
-  algorithm as we will see later on) instead on just Problem. This is because of the fact that there are several
+  algorithm as we will see later on) instead of just {javadoc "problem.Problem"}. This is because of the fact that there are several
   interfaces for a problem and since one problem can (and usually does) implement more than one, we will be pressed to
   write something like this in an algorithm (or solver):
 </p>
