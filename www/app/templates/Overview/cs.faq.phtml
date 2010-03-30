@@ -3,7 +3,7 @@
 {block #content}
 
 <p>
-  Tato kapitola pokrývá často kladené dotazy a obvyklé chyby, které dělají začínající uživatelé.
+  Tato kapitola pokrývá často kladené dotazy a&nbsp;obvyklé chyby, které dělají začínající uživatelé.
 </p>
 
 <h3>log4j:WARN No appenders could be found for logger (...)</h3>
@@ -15,12 +15,12 @@ log4j:WARN No appenders could be found for logger (...).
 log4j:WARN Please initialize the log4j system properly.
 </pre>
 <p>
-  chybu v konzoli
+  chybu v&nbsp;konzoli
 </p>
 <h4>Řešení:</h4>
 <p>
   Potřebujete správně inicializovat Log4j. Toho lze dosáhnout tak, že přidáte <code>log4j.properties</code> do
-  classpath (preferované řešení, navíc je zde soubor s výchozím nastavením přímo v JCOPu), použijete manuální konfiguraci
+  classpath (preferované řešení, navíc je zde soubor s&nbsp;výchozím nastavením přímo v&nbsp;JCOPu), použijete manuální konfiguraci
   jako:
 </p>
 <pre class="brush: java;">org.apache.log4j.BasicConfigurator.configure();</pre>

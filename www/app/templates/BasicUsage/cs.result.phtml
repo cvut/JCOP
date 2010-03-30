@@ -3,30 +3,30 @@
 {block #content}
 
 <p>
-  V naší předchozí ukázce jsme vytvořili solvera, který bude schopen úspěšně aplikovat algoritmus na problém, ale zatím
-  jsme nedostali žádné informace o výsledku. K tomuto účelu se využívá výsledek - Result.
+  V&nbsp;naší předchozí ukázce jsme vytvořili solvera, který bude schopen úspěšně aplikovat algoritmus na problém, ale zatím
+  jsme nedostali žádné informace o&nbsp;výsledku. K&nbsp;tomuto účelu se využívá výsledek - Result.
 </p>
 
 <p>
-  Kvůli tomu, že solver je schopen používat více algoritmů nebo řešit více problémů v jednom běhu {javadoc "solver.Solver#run()"},
+  Kvůli tomu, že solver je schopen používat více algoritmů nebo řešit více problémů v&nbsp;jednom běhu {javadoc "solver.Solver#run()"},
   jeden solver musí být schopen udržovat několik různých dílčích výsledků. Tohoto je dosaženo rozhraním {javadoc "result.Result"}
-  a jeho nejjednodušší implementací {javadoc "result.SimpleResult"}, která pouze výsledky ukládá do Listu.
+  a&nbsp;jeho nejjednodušší implementací {javadoc "result.SimpleResult"}, která pouze výsledky ukládá do Listu.
 </p>
 
 <p>
-  Stejně jako {javadoc "result.Result"} udržuje informace o celém běhu {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
-  (záznam výsledku) nás informuje o jedné dílčí iteraci solveru. Objekt této třídy obsahuje všechna podstatná data ohledně toho, jak aplikace
+  Stejně jako {javadoc "result.Result"} udržuje informace o&nbsp;celém běhu {javadoc "solver.Solver#run()"}, {javadoc "result.ResultEntry"}
+  (záznam výsledku) nás informuje o&nbsp;jedné dílčí iteraci solveru. Objekt této třídy obsahuje všechna podstatná data ohledně toho, jak aplikace
   algoritmu skončila (např. počet iterací, čas běhu nebo nejlepší řešení). Vytvoření result entry je snadné - pouze
-  vytvoříme objekt jedním z jeho konstruktorů. Zde použijeme {javadoc "result.ResultEntry#ResultEntry(cz.cvut.felk.cig.jcop.algorithm.Algorithm, cz.cvut.felk.cig.jcop.problem.Problem, cz.cvut.felk.cig.jcop.problem.Configuration, double, int, cz.cvut.felk.cig.jcop.util.PreciseTimestamp)", "ResultEntry#ResultEntry(...)"}.
-  Zde je jedna věc, kterou jsme zatím neviděli - {javadoc "util.PreciseTimestamp"}. Tato třída je používána k měření
-  přesnějšího času než je obyčejný reálný čas. Víc bude probrána v dalších kapitolách, nyní z ní pouze vytvoříme instanci
-  těsně před spuštění algoritmu a předáme ji do result entry jako startTime.
+  vytvoříme objekt jedním z&nbsp;jeho konstruktorů. Zde použijeme {javadoc "result.ResultEntry#ResultEntry(cz.cvut.felk.cig.jcop.algorithm.Algorithm, cz.cvut.felk.cig.jcop.problem.Problem, cz.cvut.felk.cig.jcop.problem.Configuration, double, int, cz.cvut.felk.cig.jcop.util.PreciseTimestamp)", "ResultEntry#ResultEntry(...)"}.
+  Zde je jedna věc, kterou jsme zatím neviděli - {javadoc "util.PreciseTimestamp"}. Tato třída je používána k&nbsp;měření
+  přesnějšího času než je obyčejný reálný čas. Víc bude probrána v&nbsp;dalších kapitolách, nyní z&nbsp;ní pouze vytvoříme instanci
+  těsně před spuštění algoritmu a&nbsp;předáme ji do result entry jako startTime.
 </p>
 
 <p>
-  Z parametrů, které result entry požaduje, máme algoritmus a problém, které na sebe aplikujeme, a {javadoc "util.PreciseTimestamp"}.
-  Dále potřebujeme nejlepší nalezenou {javadoc "problem.Configuration"}, nejlepší fitness a počet optimalizací (optimization counter).
-  První dvě vezmeme přímo z algoritmu - algoritmus je musí poskytovat implementací interfacu {javadoc "algorithm.Algorithm"}
+  Z&nbsp;parametrů, které result entry požaduje, máme algoritmus a&nbsp;problém, které na sebe aplikujeme, a {javadoc "util.PreciseTimestamp"}.
+  Dále potřebujeme nejlepší nalezenou {javadoc "problem.Configuration"}, nejlepší fitness a&nbsp;počet optimalizací (optimization counter).
+  První dvě vezmeme přímo z&nbsp;algoritmu - algoritmus je musí poskytovat implementací interfacu {javadoc "algorithm.Algorithm"}
   (konkrétně metody {javadoc "algorithm.Algorithm#getBestConfiguration()"} a {javadoc "algorithm.Algorithm#getBestFitness()"}).
   Poslední, počet optimalizací, musí dodat solver. Tím, že víme, že jsme provedli 10 kroků, tak můžeme dodat přímo číslo 10.
 </p>
@@ -73,7 +73,7 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 <p>
   Teď, když máme result entry pro iteraci našeho 10-krokého solveru, musíme ho přidat do resultu. Z {javadoc "solver.Solver"}
   interfacu solver musí implementovat {javadoc "solver.Solver#getResult()"} metodu. Naštěstí protože dědíme z {javadoc "solver.BaseSolver"},
-  {javadoc "result.Result"} je pro nás automaticky vytvořen a nám stačí do něj pouze přidat nový záznam.
+  {javadoc "result.Result"} je pro nás automaticky vytvořen a&nbsp;nám stačí do něj pouze přidat nový záznam.
 </p>
 
 <pre class="brush: java;">
@@ -92,13 +92,12 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 </pre>
 
 <p>
-  Teď když máme výsledky z běhu solveru, potřebujeme je nějak zobrazit (lépe nazýváno vyrenderovat). Třídy, které
-  implementují rozhraní {javadoc "result.render.Render"}, se používají k renderování výsledků různýmy způsoby (např.
-  XML soubor, text do konzole atd). Existuje několik renderů předpřipraveným v JCOPu a my budeme používat {javadoc "result.render.SimpleRender"},
+  Teď když máme výsledky z&nbsp;běhu solveru, potřebujeme je nějak zobrazit (lépe nazýváno vyrenderovat). Třídy, které
+  implementují rozhraní {javadoc "result.render.Render"}, se používají k&nbsp;renderování výsledků různýmy způsoby (např.
+  XML soubor, text do konzole atd). Existuje několik renderů předpřipraveným v&nbsp;JCOPu a&nbsp;my budeme používat {javadoc "result.render.SimpleRender"},
   který pouze vypíše textový výsledek do konzole. Render se do solveru zaregistruje (přidá) pomocí {javadoc "solver.Solver#addRender(cz.cvut.felk.cig.jcop.result.render.Render)"}.
-  Toto je většinou děláno mimo solver, protože solver sám o sobě nemusí vědět, jak my chceme renderovat data, ví pouze
-  jak aplikovat algoritmy na problémy, ne jak zobrazit výsledek. Upravme tedy náš DemoPrimitiveSolver z
-  minulé kapitoly:
+  Toto je většinou děláno mimo solver, protože solver sám o&nbsp;sobě nemusí vědět, jak my chceme renderovat data, ví pouze
+  jak aplikovat algoritmy na problémy, ne jak zobrazit výsledek. Upravme tedy náš DemoPrimitiveSolver z&nbsp;minulé kapitoly:
 </p>
 
 <pre class="brush: java;">
@@ -133,9 +132,9 @@ public class DemoPrimitiveSolver {
 </pre>
 
 <p>
-  Přidali jsme {javadoc "result.render.SimpleRender"} do našeho solveru a jakmile metoda {javadoc "solver.Solver#run()"}
+  Přidali jsme {javadoc "result.render.SimpleRender"} do našeho solveru a&nbsp;jakmile metoda {javadoc "solver.Solver#run()"}
   skončí, zavolali jsme {javadoc "solver.Solver#render()"}, což způsobí, že všechny zaregistrované rendery se vykreslí.
-  Měli byste mít v konzoli něco podobného následujícímu, pokud ne, nejspíše jste něco udělali špatně:
+  Měli byste mít v&nbsp;konzoli něco podobného následujícímu, pokud ne, nejspíše jste něco udělali špatně:
 </p>
 
 <pre class="brush: plain;">
@@ -156,9 +155,9 @@ public class DemoPrimitiveSolver {
 <p>
   Díky tomu, že jsme použili {javadoc "solver.BaseSolver"} jako předka pro našeho solvera, nemusíme dokonce ani přidávat
   {javadoc "result.render.SimpleRender"}, je nastaven jako výchozí (pokud není zadán žádný jiný). Kód pak může být ještě
-  kratší. Dále je třeba poznamenat, že v JCOP existuje {javadoc "solver.SimpleSolver"}, který funguje velmi podobně jako
-  nás PrimitiveSolver, ačkoli je o trochu sofistikovanější. Tím, že z velké části ale funguje jako demonstrovaný solver,
-  v dalších tutoriálech ho budeme používat.
+  kratší. Dále je třeba poznamenat, že v&nbsp;JCOP existuje {javadoc "solver.SimpleSolver"}, který funguje velmi podobně jako
+  nás PrimitiveSolver, ačkoli je o&nbsp;trochu sofistikovanější. Tím, že z&nbsp;velké části ale funguje jako demonstrovaný solver,
+  v&nbsp;dalších tutoriálech ho budeme používat.
 </p>
 
 <p>
@@ -168,5 +167,5 @@ public class DemoPrimitiveSolver {
 </p>
 
 <p>
-  Kompletní seznam renderů a listenerů může být nalezen v <a href="{link Appendix:rendersListeners}">Příloze A</a>.
+  Kompletní seznam renderů a&nbsp;listenerů může být nalezen v <a href="{link Appendix:rendersListeners}">Příloze A</a>.
 </p>

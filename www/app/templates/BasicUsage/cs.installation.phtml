@@ -7,13 +7,13 @@
   stažení</a>.
 </p>
 <p>
-  Archiv obsahuje všechno, co potřebujete k běhu JCOPu - jak JAR soubor tak všechny knihovny, které JCOP používá (jako
+  Archiv obsahuje všechno, co potřebujete k&nbsp;běhu JCOPu - jak JAR soubor tak všechny knihovny, které JCOP používá (jako
   například <a href="http://logging.apache.org/log4j/">log4j</a> nebo <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>).
   Obsah archivu je zobrazen na <a href="#fig1">obrázku 1</a>. Můžete ho rozbalit kam chcete, jenom ho budete muset přidat
-  do knihoven v projektu.
+  do knihoven v&nbsp;projektu.
 </p>
 <p>
-  Obvykle je třeba pouze přidat soubor <code>jcop.jar</code> a všechny ostatní knihovny se přidají automaticky. Pokud ne,
+  Obvykle je třeba pouze přidat soubor <code>jcop.jar</code> a&nbsp;všechny ostatní knihovny se přidají automaticky. Pokud ne,
   přidejte je manuálně, stejně jako jste přidali <code>jcop.jar</code>. Následují pokyny jak přidat JAR soubor do projektu
   pro běžně používaná IDE.
 </p>
@@ -23,16 +23,16 @@
 <h3>IntelliJ IDEA 9.0.1 Community Edition</h3>
 
 <p>
-  Vytvořte nový projekt pomocí File &rarr; New Project. Vyberte Create project from scratch a postupujte podle průvodce
-  (nezapomeňte přidat alespoň jeden modul). Poté jděte do File &rarr; Project Structure a vyberte Libraries z Project
-  settings. Klikněte na New Project Library (ikonka plusu nebo alt+insert) a vyplňte jcop jako název. Měli byste vidět
+  Vytvořte nový projekt pomocí File &rarr; New Project. Vyberte Create project from scratch a&nbsp;postupujte podle průvodce
+  (nezapomeňte přidat alespoň jeden modul). Poté jděte do File &rarr; Project Structure a&nbsp;vyberte Libraries z&nbsp;Project
+  settings. Klikněte na New Project Library (ikonka plusu nebo alt+insert) a&nbsp;vyplňte jcop jako název. Měli byste vidět
   něco jako je na <a href="#fig2">obrázku 2</a>.
 </p>
 
 {include "../fig.phtml", "url" => "idea-new-library.png", "url_thumb" => "idea-new-library_resize.png", "title" => "IntelliJ IDEA nová knihovna", "fig" => "2"}
 
 <p>
-  Poté, co jste přidali novou knihovny, klikněte na Attach Classes a přidejte soubor <code>jcop.jar</code>. Výsledek by
+  Poté, co jste přidali novou knihovny, klikněte na Attach Classes a&nbsp;přidejte soubor <code>jcop.jar</code>. Výsledek by
   měl vypadat jako na <a href="#fig3">obrázku 3</a>.
 </p>
 
@@ -52,8 +52,8 @@
 {include "../fig.phtml", "url" => "netbeans-new-project.png", "url_thumb" => "netbeans-new-project_resize.png", "title" => "NetBeans IDE nový projekt", "fig" => "4"}
 
 <p>
-  Klikněte pravým tlačítkem na Libraries ve stromu projektu a vyberte Add JAR/Folder jako je na  <a href="#fig5">obrázku 5</a>
-  a přidejte <code>jcop.jar</code>.
+  Klikněte pravým tlačítkem na Libraries ve stromu projektu a&nbsp;vyberte Add JAR/Folder jako je na  <a href="#fig5">obrázku 5</a>
+  a&nbsp;přidejte <code>jcop.jar</code>.
 </p>
 
 {include "../fig.phtml", "url" => "netbeans-add-jar.png", "url_thumb" => "netbeans-add-jar_resize.png", "title" => "NetBeans IDE Add JAR/Folder", "fig" => "5"}
@@ -65,14 +65,14 @@
 <h3>Eclipse IDE for Java Developers	(1.2.1.20090918-0703)</h3>
 
 <p>
-  Vytvořte nový projekt pomocí File &rarr; New &rarr; Java project. Klikněte pravým tlačítkem na projekt a vyberte
+  Vytvořte nový projekt pomocí File &rarr; New &rarr; Java project. Klikněte pravým tlačítkem na projekt a&nbsp;vyberte
   Properties jako je zobrazeno v <a href="#fig6">obrázku 6</a>.
 </p>
 
 {include "../fig.phtml", "url" => "eclipse-properties.png", "url_thumb" => "eclipse-properties_resize.png", "title" => "Eclipse Properties projektu", "fig" => "6"}
 
 <p>
-  Najeďte na Java Build Path a vyberte Libraries. Poté klikněte na Add External JARs a vyberte <code>jcop.jar</code> jako
+  Najeďte na Java Build Path a&nbsp;vyberte Libraries. Poté klikněte na Add External JARs a&nbsp;vyberte <code>jcop.jar</code> jako
   na <a href="#fig7">obrázku 7</a>.
 </p>
 
@@ -86,7 +86,7 @@
 
 <p>
   Abyste vyzkoušeli, že JCOP je správně nainstalován, použijte tuto jednoduchou aplikaci. Pouze přidejte do vašeho
-  projektu novu Java Main Class s následujícím kódem a pusťte ji (název package se může lišit podle toho, v jaké package
+  projektu novu Java Main Class s&nbsp;následujícím kódem a&nbsp;pusťte ji (název package se může lišit podle toho, v&nbsp;jaké package
   se nachází Main Class).
 </p>
 
@@ -118,7 +118,7 @@ public class Main {
 </pre>
 
 <p>
-  Pokud vše proběhlo bez problémů, měli byste vidět text podobný následujícímu v konzoli:
+  Pokud vše proběhlo bez problémů, měli byste vidět text podobný následujícímu v&nbsp;konzoli:
 </p>
 
 <pre class="brush: plain;">
@@ -143,7 +143,7 @@ public class Main {
  </pre>
 
  <p>
-  , graf podobný <a href="#fig8">obrázku 8</a> by se měl zobrazit a soubory <code>test.xml</code> a <code>test.csv</code>
+  , graf podobný <a href="#fig8">obrázku 8</a> by se měl zobrazit a&nbsp;soubory <code>test.xml</code> a <code>test.csv</code>
   by měly být ve working directory (pracovní složce). Jejich obsah by měl být podobný tomu, co je zobrazeno níže.
  </p>
 

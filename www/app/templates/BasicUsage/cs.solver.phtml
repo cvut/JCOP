@@ -3,15 +3,14 @@
 {block #content}
 
 <p>
-  Jak již bylo zmíněno, solver je něco jako plánovač. Rozhoduje kdy použít který algoritmus, jak dlouho ho používat a
-  na jaké problémy. Dále se stará o sběr výsledků a jejich zobrazení. Solver je definován interfacem {javadoc "solver.Solver"}.
-  Většina metod má výchozí implementaci ve třídě {javadoc "solver.BaseSolver"}, takže zbývá pouze jedna k implementování
+  Jak již bylo zmíněno, solver je něco jako plánovač. Rozhoduje kdy použít který algoritmus, jak dlouho ho používat a&nbsp;na jaké problémy. Dále se stará o&nbsp;sběr výsledků a&nbsp;jejich zobrazení. Solver je definován interfacem {javadoc "solver.Solver"}.
+  Většina metod má výchozí implementaci ve třídě {javadoc "solver.BaseSolver"}, takže zbývá pouze jedna k&nbsp;implementování
   - {javadoc "solver.Solver#run()"}.
 </p>
 
 <p>
-  V této metodě, zvané cyklus solveru, jsou algoritmy aplikovány na problémy. Nejjednodušší věc je udělat solvera, který
-  vezme jeden algoritmus a jeden problém jako algoritmy:
+  V&nbsp;této metodě, zvané cyklus solveru, jsou algoritmy aplikovány na problémy. Nejjednodušší věc je udělat solvera, který
+  vezme jeden algoritmus a&nbsp;jeden problém jako algoritmy:
 </p>
 
 <pre class="brush: java;">
@@ -42,10 +41,10 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 <p>
   Teď však dostaneme chybu - neimplementovali jsme zatím {javadoc "solver.Solver"} interface. Jdeme na to. První věc co
   jsme povinni v {javadoc "solver.Solver#run()"} udělat je zavolat {javadoc "algorithm.Algorithm#init(cz.cvut.felk.cig.jcop.problem.ObjectiveProblem)"}.
-  Tím inicializujeme (a restartujeme) algoritmus na problému. Zatím neřešte, proč používáme {javadoc "problem.ObjectiveProblem"}
+  Tím inicializujeme (a&nbsp;restartujeme) algoritmus na problému. Zatím neřešte, proč používáme {javadoc "problem.ObjectiveProblem"}
   jako argument nebo co přesně dělá, vše bude vysvětleno později. Pouze považujte algoritmus za připravený. Teď potřebujeme
   nechat algoritmus "pracovat" na problémy. Toho je dosaženo opakovaným prováděním optimalizačního kroku voláním metody
-  {javadoc "algorithm.Algorithm#optimize()"}. Nechme našeho solvera udělat 10 optimalizačních kroků a poté skončit:
+  {javadoc "algorithm.Algorithm#optimize()"}. Nechme našeho solvera udělat 10 optimalizačních kroků a&nbsp;poté skončit:
 </p>
 
 <pre class="brush: java;">
@@ -65,9 +64,9 @@ public class PrimitiveSolver extends BaseSolver implements Solver {
 </pre>
 
 <p>
-  A to je vše. Pokud chcete tento solver spustit, pouze vytvořte jeho instanci a zavolejte jeho metodu {javadoc "solver.Solver#run()"}.
-  Protože zatím nevíte mnoho o algoritmech a problémech, vezměte následující kód a spusťte metodu main. Zatím neuvidíte
-  žádné výsledky - ty budou vysvětleny v další kapitole. 
+  A&nbsp;to je vše. Pokud chcete tento solver spustit, pouze vytvořte jeho instanci a&nbsp;zavolejte jeho metodu {javadoc "solver.Solver#run()"}.
+  Protože zatím nevíte mnoho o&nbsp;algoritmech a&nbsp;problémech, vezměte následující kód a&nbsp;spusťte metodu main. Zatím neuvidíte
+  žádné výsledky - ty budou vysvětleny v&nbsp;další kapitole. 
 </p>
 
 <pre class="brush: java;">
@@ -97,7 +96,7 @@ public class DemoPrimitiveSolver {
 
 <p>
   Pokud běh skončí bez výjimky, tak se vám podařilo udělat váš první solver. Pokud je zde chyba, vraťte se zpět tímto
-  tutoriálem a pokuste se najít, co jste udělali jinak. Obě třídy jsou ke stažení zde  
+  tutoriálem a&nbsp;pokuste se najít, co jste udělali jinak. Obě třídy jsou ke stažení zde  
   (<a href="{$basePath}/media/tutorial/basicusage.solver.zip">zip</a>, <a href="{$basePath}/media/tutorial/basicusage.solver.tgz">tgz</a>, 
   <a href="{$basePath}/media/tutorial/basicusage.solver.7z">7z</a>).
 </p>
@@ -105,7 +104,7 @@ public class DemoPrimitiveSolver {
 <h3>Implementované solvery</h3>
 
 <p>
-  V JCOPu je několik solverů již implementovaných a jejich používání je doporučené místo psaní vlastních.  {javadoc
+  V&nbsp;JCOPu je několik solverů již implementovaných a&nbsp;jejich používání je doporučené místo psaní vlastních.  {javadoc
   "solver.SimpleSolver"} se používá, pokud chcete spustit jeden algoritmus na jednom problému, většinou ve vývojové
    fázi. {javadoc "solver.AlgorithmCompareSolver"} je vhodný na porovnávání výkonu více algoritmů na jednom problému.
    Pro celý seznam jděte na <a href="{link Appendix:solvers}">Přílohu A</a>.
@@ -115,20 +114,20 @@ public class DemoPrimitiveSolver {
 
 <p>
   Důležitou částí solveru jsou ukončovací podmínky ({javadoc "solver.condition.StopCondition", "StopConditions"}). Ty
-  jsme v našem jednoduchém solveru neřešili, abychom věci příliš nekomplikovali. Při reálném použití ale potřebujeme
+  jsme v&nbsp;našem jednoduchém solveru neřešili, abychom věci příliš nekomplikovali. Při reálném použití ale potřebujeme
   kontrolovat, kdy přestaneme provádět další iterace solveru. Abychom tohoto mohli dosáhnout, používáme ukončovací
   podmínky.
 </p>
 
 <p>
-  Každý solver může mít zaregistrovaných libovolné množství ukončovacích podmínek a jakmile je alespoň jedna splněna,
+  Každý solver může mít zaregistrovaných libovolné množství ukončovacích podmínek a&nbsp;jakmile je alespoň jedna splněna,
   daná iterace solveru je ukončena. Ukončovací podmínky jsou do solvera přidány voláním {javadoc "solver.Solver#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}.
-  Podmínky fungují jako listenery (a jsou automaticky zaregistrováni jako listenery) pro daný solver a ten jim posílá
-  zprávy o svém postupu. Po každém optimalizačním kroku solver vyhodnotí všechny podmínky a případně se ukončí.
+  Podmínky fungují jako listenery (a&nbsp;jsou automaticky zaregistrováni jako listenery) pro daný solver a&nbsp;ten jim posílá
+  zprávy o&nbsp;svém postupu. Po každém optimalizačním kroku solver vyhodnotí všechny podmínky a&nbsp;případně se ukončí.
 </p>
 
 <p>
-  V JCOPu je implementováno několik různých ukončovacích podmínek. Pro jejich použití jděte na <a href="{link Appendix:stopConditions}">Přílohu D</a>.
+  V&nbsp;JCOPu je implementováno několik různých ukončovacích podmínek. Pro jejich použití jděte na <a href="{link Appendix:stopConditions}">Přílohu D</a>.
   Použití je velmi jednoduché:
 </p>
 
@@ -165,6 +164,6 @@ public class DemoCondition {
 </pre>
 
 <p>
-  Nyní se solver (pozor - již používáme {javadoc "solver.SimpleSolver"}) pokusí udělat maximálně 10 optimalizací a zároveň
+  Nyní se solver (pozor - již používáme {javadoc "solver.SimpleSolver"}) pokusí udělat maximálně 10 optimalizací a&nbsp;zároveň
   nepoběží déle než 10ms (CPU času, viz <a href="{link util}">util</a>).
 </p>

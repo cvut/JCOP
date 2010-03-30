@@ -4,69 +4,69 @@
 
 <p>
   Balíček nástrojů JCOPu obsahuje několik užitečných tříd, které jsou používány na mnoha místech aplikace kvůli
-  zjednodušení opakovaných operací. Util v současné době obsahuje třídy {javadoc "util.PreciseTime"} a {javadoc "util.JcopRandom"}
-  společně s několika komparátory.
+  zjednodušení opakovaných operací. Util v&nbsp;současné době obsahuje třídy {javadoc "util.PreciseTime"} a {javadoc "util.JcopRandom"}
+  společně s&nbsp;několika komparátory.
 </p>
 
 <h3>PreciseTime</h3>
 
 <p>
-  {javadoc "util.PreciseTime"} je používán k měření různých druhů časů v JCOPu. Kromě standardního času (nazývaného <code>
-  clock time</code>) měří ještě CPU, User a System time (pro více informací viz <a href="http://en.wikipedia.org/wiki/Time_(Unix)#User_Time_vs_System_Time">
+  {javadoc "util.PreciseTime"} je používán k&nbsp;měření různých druhů časů v&nbsp;JCOPu. Kromě standardního času (nazývaného <code>
+  clock time</code>) měří ještě CPU, User a&nbsp;System time (pro více informací viz <a href="http://en.wikipedia.org/wiki/Time_(Unix)#User_Time_vs_System_Time">
   CPU/User/System timena Wikipedii</a>. JCOP chápe CPU čas jako User + System time), čímž umožňuje měřit různé časy
   aktuálního vlákna. Je však důležité si uvědomit, že navzdory svému názvu (precise znamená přesný), {javadoc "util.PreciseTime"}
-  není naprosto přesný. Časy z něj získané velmi závisí na použitém operačním systému a ačkoli jeho výstupem je čas
-  s rozlišením na milisekundy, není nutně se stejnou přesností.
+  není naprosto přesný. Časy z&nbsp;něj získané velmi závisí na použitém operačním systému a&nbsp;ačkoli jeho výstupem je čas
+  s&nbsp;rozlišením na milisekundy, není nutně se stejnou přesností.
 </p>
 
 <p>
   Tato třída spolupracuje s {javadoc "util.PreciseTimestamp"}, která obsahuje všechny čtyři časy (clock, cpu, system,
-  user) a odpovídá jednomu časovému okamžiku. Když od sebe odečteme dvě různé {javadoc "util.PreciseTimestamp"},
+  user) a&nbsp;odpovídá jednomu časovému okamžiku. Když od sebe odečteme dvě různé {javadoc "util.PreciseTimestamp"},
   můžeme zjistit, kolik času mezi nimi uplynulo. {javadoc "util.PreciseTimestamp"} je preferované médium pro jakoukoli
-  práci s časem v JCOPu.
+  práci s časem v&nbsp;JCOPu.
 </p>
 
 <h3>JcopRandom</h3>
 
 <p>
   {javadoc "util.JcopRandom"} je rozšíření standardního <a href="http://java.sun.com/javase/6/docs/api/java/util/Random.html">
-  java.util.Random</a>který byl vytvořen s dvojicí cílů. První je statický přístup ke generátoru náhodných čísel, aby
+  java.util.Random</a>který byl vytvořen s&nbsp;dvojicí cílů. První je statický přístup ke generátoru náhodných čísel, aby
   nebylo nutné volat opakovaně <code>new Random()</code> na různých místech kódu pouze pro vytvoření jednoho náhodného
-  čísla. Druhý důvod je však mnohem důležitější. JcopRand může být inicializován s random seed parametrem (stejně jako
+  čísla. Druhý důvod je však mnohem důležitější. JcopRand může být inicializován s&nbsp;random seed parametrem (stejně jako
   <a href="http://java.sun.com/javase/6/docs/api/java/util/Random.html">java.util.Random</a>), ale kdykoli toto uděláme,
-  všechny náhodná čísla v JCOPu (pokud budou používat {javadoc "util.JcopRandom"}) budou stále stejná číselná řada při
-  každém spuštění. Díky tomu je možné spustit opakovaně jeden experiment s naprosto identickými výsledky velmi snadno.
-  (ačkoli - téměř identickými, pokud jejich chování je závislé pouze na náhodě a ne např. na čase)
+  všechny náhodná čísla v&nbsp;JCOPu (pokud budou používat {javadoc "util.JcopRandom"}) budou stále stejná číselná řada při
+  každém spuštění. Díky tomu je možné spustit opakovaně jeden experiment s&nbsp;naprosto identickými výsledky velmi snadno.
+  (ačkoli - téměř identickými, pokud jejich chování je závislé pouze na náhodě a&nbsp;ne např. na čase)
 </p>
 
 <h3>Comparators</h3>
 
 <p>
   Tyto třídy implementují rozhraní <a href="http://java.sun.com/javase/6/docs/api/java/util/Comparator.html">java.util.Comparator</a>
-  a jsou používány k řazení polí různých elementů v JCOPu. Například {javadoc "result.SimpleCompareRender"} render vyžaduje
+  a&nbsp;jsou používány k řazení polí různých elementů v&nbsp;JCOPu. Například {javadoc "result.SimpleCompareRender"} render vyžaduje
   seřadit výsledky podle dosažené fitness. Na to stačí pouze vytvořit {javadoc "util.compare.ResultEntryFitnessComparator"}
-  a pomocí něho seřadit seznam záznamů výsledků, které pak mohou být vypsáno od nejlepšího k nejhoršímu.
+  a&nbsp;pomocí něho seřadit seznam záznamů výsledků, které pak mohou být vypsáno od nejlepšího k&nbsp;nejhoršímu.
 </p>
 
 <h3>Log4j</h3>
 
 <p>
   Ačkoli Log4j není částí Util balíčku, logicky sem zapadá. Je to knihovna třetí strany používaná na nízkoúrovňové
-  logování. Její používání je velmi snadné a pro ukázky, jak s ní pracovat, doporučujeme přečíst <a href="http://logging.apache.org/log4j/1.2/manual.html">Short introduction to log4j</a>
+  logování. Její používání je velmi snadné a&nbsp;pro ukázky, jak s&nbsp;ní pracovat, doporučujeme přečíst <a href="http://logging.apache.org/log4j/1.2/manual.html">Short introduction to log4j</a>
   na její hlavní stránce.
 </p>
 
 <p>
   Jediný požadavek, aby Log4j fungovala, je správně ji inicializovat. Tohoto může být dosaženo několika postupy, ale
-  doporučovaný je použití <code>log4j.properties</code> souboru. Log4j hledá tento soubor v cestě classpath vašeho
-  projektu a pokud ho najde, tak se z něj automaticky nakonfiguruje. V JCOPu jsou přibalené 3 takovéto soubory pro
+  doporučovaný je použití <code>log4j.properties</code> souboru. Log4j hledá tento soubor v&nbsp;cestě classpath vašeho
+  projektu a&nbsp;pokud ho najde, tak se z&nbsp;něj automaticky nakonfiguruje. V&nbsp;JCOPu jsou přibalené 3 takovéto soubory pro
   snadnější užití. První vypne log úplně (soubor <code>log4j-off.properties</code>), druhý zapne logování do konzole
-  (soubor <code>log4j-console.properties</code>) a poslední loguje jak do konzole, tak do souboru (soubor
-  <code>log4j-console-file.properties</code>). Všechny jsou uloženy v archivu <code>jcop.jar</code> nebo ke stažení
-  na <a href="http://sourceforge.net/projects/jcop/files/log4j.properties/">SourceForge</a>. Můžete použít jeden z nich
-  (zkopírujte ho do složky src a přejmenujte na <code>log4j.properties</code>) nebo si napsat vlastní (více viz
+  (soubor <code>log4j-console.properties</code>) a&nbsp;poslední loguje jak do konzole, tak do souboru (soubor
+  <code>log4j-console-file.properties</code>). Všechny jsou uloženy v&nbsp;archivu <code>jcop.jar</code> nebo ke stažení
+  na <a href="http://sourceforge.net/projects/jcop/files/log4j.properties/">SourceForge</a>. Můžete použít jeden z&nbsp;nich
+  (zkopírujte ho do složky src a&nbsp;přejmenujte na <code>log4j.properties</code>) nebo si napsat vlastní (více viz
   <a href="http://logging.apache.org/log4j/1.2/manual.html">log4j dokumentace</a>). Pokud jste Log4j nenakonfigurovali
-  správně, s největší pravděpodobností uvidíte v konzoli něco jako toto:
+  správně, s&nbsp;největší pravděpodobností uvidíte v&nbsp;konzoli něco jako toto:
 </p>
 
 <pre style="color: #7F0000;">
