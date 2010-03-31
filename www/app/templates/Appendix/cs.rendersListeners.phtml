@@ -1,44 +1,44 @@
-{block #title}Renders, Listeners{/block}
+{block #title}Rendery, Listenery{/block}
 {block #chapter}E.{/block}
 {block #content}
 
-<h3>List of all renders in JCOP</h3>
+<h3>Seznam všech renderů a listenerů v JCOPu</h3>
 
 <p>
-  In <a href="#table-1">table 1</a> is a list of all renders and listeners bundled with JCOP, along with destination
-  media, type and how they format results.
+  V <a href="#table-1">tabulce 1</a> je seznam všech renderů (vykreslovačů) a listenerů dodávaných společně s JCOPem.
+  Ke každému je cílový výstup, typ (render nebo listener) a jak popis jak formátuje výsutp.
 </p>
 
 <table class="full" id="table-1">
   <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Format description</th>
-    <th>Media</th>
+    <th>Název</th>
+    <th>Typ</th>
+    <th>Popis formátu</th>
+    <th>Výstup</th>
   </tr>
   <tr>
     <td><a href="#csv-render">CSVRender</a></td>
     <td>Render</td>
-    <td>Creates <abbr title="Comma-separated values"></abbr>CSV using <a href="http://sourceforge.net/projects/javacsv/">JavaCSV</a>
-    library.</td>
+    <td>Vytvoří <abbr title="Comma-separated values">CSV</abbr> soubor pomocí <a href="http://sourceforge.net/projects/javacsv/">JavaCSV</a>
+    knihovny.</td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html">OutputStream</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html">java.io.OutputStream</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (konzole)
     </td>
   </tr>
   <tr>
     <td><a href="#exception-render">ExceptionRender</a></td>
     <td>Render</td>
-    <td>Prints only exceptions for results, but with their full stack trace.</td>
+    <td>Vypíše pouze výjimky pro každý result, ale s jejich celým stack trace.</td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
+      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (konzole)
     </td>
   </tr>
   <tr>
     <td><a href="#jfree-chart-render">JFreeChartRender</a></td>
     <td>Listener</td>
-    <td>Creates chart with on-the-fly results, each solver iteration has its own plot line.</td>
+    <td>Vytvoří graf s výsledky, které se za běhu samy aktualizují. Každá iterace solveru má vlastní křivku v grafu..</td>
     <td>
       <a href="http://java.sun.com/javase/6/docs/api/javax/swing/JFrame.html">JFrame</a>
     </td>
@@ -47,56 +47,57 @@
     <td><a href="#simple-compare-render">SimpleCompareRender</a></td>
     <td>Render</td>
     <td>
-      Sorts result entries by fitness (descending) and by optimize counter (ascending), prints two tables with problem,
-      algorithm and either fitness or optimize counter. Useful for quick comparison of different algorithms/settings.
+      Seřadí výsledky podle fitness (sestupně) a podle počtu optimalizací (vzestupně), které poté vykreslí do dvou
+      tabulek. Každá má problém, algoritmus a poté buď fitness nebo počet optimalizací. Užitečné pro rychlé porovnání
+      více různých algoritmů/nastavení jednoho.
     </td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (konzole)
     </td>
   </tr>
   <tr>
     <td><a href="#simple-render">SimpleRender</a></td>
     <td>Render</td>
     <td>
-      Prints various levels of text information about result entries.
+      Vypisuje textové informace o záznamech výsledku při různých úrovní detailnosti.
     </td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (konzole)
     </td>
   </tr>
   <tr>
     <td><a href="#xml-render">XMLRender</a></td>
     <td>Render</td>
     <td>
-      Creates XML file with rich information about each result entry.
+      Vytvoří XML soubor s detailními informacemi o každém záznamu výsledku.
     </td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a>
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a>
     </td>
   </tr>
 </table>
-<p class="fig-title">Table 1: List of renders and listeners in JCOP.</p>
+<p class="fig-title">Table 1: Seznam všech renderů a listenerů v JCOPu.</p>
 
 <h3 id="csv-render">CSVRender</h3>
 
 <p>
-  {javadoc "result.render.CSVRender"} creates CSV output, one line with headers and then one line for every result
-  entry. Note that by default it uses comma (",") as delimiter and utf-8 encoding, both incompatible with Microsoft
-  Office Excel. Both can be changed either by {javadoc "result.render.CSVRender#setCharset(java.nio.charset.Charset)"}
-  and {javadoc "result.render.CSVRender#setDelimiter(char)"}. Also keep in mind that even <a href="http://www.openoffice.org/">Open Office</a>
-  cannot have more than 1024 columns (Microsoft Office Excel 2003 has only 256, Microsoft Office Excel 2007 should be
-  able to read about 15681 columns) so operation history might me trimmed if it is too long. See <a href="#fig1">figure
-  1</a> for demo output.
+  {javadoc "result.render.CSVRender"} vytvoří CSV výstup, první řádka obsahuje hlavičky a poté je pro každý záznam
+  výsledku jedna řádka. CSVRender ve výchozím nastavení používá čárku jako oddělovač a utf-8 kódování, které obojí jsou
+  nekompatibilní s Microsoft Office Excelem. Je možné pomocí {javadoc "result.render.CSVRender#setCharset(java.nio.charset.Charset)"}
+  a {javadoc "result.render.CSVRender#setDelimiter(char)"} oddělovač i kódování změnit. Dále je nutné dbát na to, že
+  dokonce ani <a href="http://www.openoffice.org/">Open Office</a> neumožňuje mít více jak 1024 sloupců (Microsoft Office Excel 2003
+  má pouze 256, Microsoft Office Excel 2007 by měl zvládat přečíst okolo 15681 sloupců) a tudíž historie operací může
+  být oříznuta. Na obrázku <a href="#fig1">figure 1</a> je demonstrace výstupu.
 </p>
 
-{include "../fig.phtml", "url" => "csv-output.png", "url_thumb" => "csv-output_resize.png", "title" => "CSVRender output opened in Open Office Calc", "fig" => "1"}
+{include "../fig.phtml", "url" => "csv-output.png", "url_thumb" => "csv-output_resize.png", "title" => "Výstup CSVRender otevřený v Open Office Calc", "fig" => "1"}
 
 <p>
-  Below is example how to use {javadoc "result.render.CSVRender"}:
+  Následuje příklad použití {javadoc "result.render.CSVRender"}:
 </p>
 
 <pre class="brush: java;">
@@ -120,9 +121,9 @@ csvRender.setCharset(Charset.forName("ISO-8859-1"));
 <h3 id="exception-render">ExceptionRender</h3>
 
 <p>
-  {javadoc "result.render.ExceptionRender"} creates detailed report only about exceptions raised in solver iteration.
-  Writes to console only and uses <a href="http://java.sun.com/javase/6/docs/api/java/lang/Throwable.html#printStackTrace()">
-  Throwable#printStackTrace()</a> to print results. See below for example output.
+  {javadoc "result.render.ExceptionRender"} vypisuje pouze informace o výjimce, pokud nějaká nastala. Zapisuje do
+  konzole a vypisuje celou stack trace pomocí<a href="http://java.sun.com/javase/6/docs/api/java/lang/Throwable.html#printStackTrace()">
+  Throwable#printStackTrace()</a>. Na příkladu Example 1 je vidět výstup ExceptionRender.
 </p>
 
 <pre class="brush: plain;">
@@ -138,10 +139,10 @@ cz.cvut.felk.cig.jcop.algorithm.CannotContinueException: No more items in queue
 	at java.lang.reflect.Method.invoke(Method.java:597)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:110)
 </pre>
-<p class="fig-title">Example 1: {javadoc "result.render.ExceptionRender"} displaying exception in BFS while solving Knapsack problem.</p>
+<p class="fig-title">Example 1: {javadoc "result.render.ExceptionRender"} zobrazující výjimku v BFS při řešení problému batohu.</p>
 
 <p>
-  Example how to use ExceptionRender:
+  Použití ExceptionRender je následovné:
 </p>
 
 <pre class="brush: java;">
@@ -153,18 +154,19 @@ solver.addRender(new ExceptionRender());
 <h3 id="jfree-chart-render">JFreeChartRender</h3>
 
 <p>
-  {javadoc "result.render.JFreeChartRender"} listens {javadoc "solver.Solver"} for any changes of best solution. If any
-  is found (message {javadoc "solver.message.MessageBetterConfigurationFound"}) it adds one point to chart. Every
-  solver iteration has its own plot line. X axis holds number of optimizations, Y axis fitness of best solution.
-  {javadoc "result.render.JFreeChartRender"} uses <a href="http://www.jfree.org/jfreechart/">JFreeChart</a> library.
-  See <a href="#fig2">figure 2</a> for how results from this render looks like.
+  {javadoc "result.render.JFreeChartRender"} se přidává jako listener do {javadoc "solver.Solver"}, aby byl schopen
+  zaregistrovat každou změnu nejlepšího řešení. Pokud je nějaké nalezeno (zpráva {javadoc "solver.message.MessageBetterConfigurationFound"}),
+  JFreeChartRender přidá jeden bod do grafu. Každá iterace solveru má vlastní křivku v grafu, osa X značí počet
+  optimalizací, kdy bylo řešení nalezeno, a osa Y fitness nejlepšího řešení. {javadoc "result.render.JFreeChartRender"}
+  používá knihovnu <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>. Na obrázku <a href="#fig2">figure 2</a>
+  je vidět jako jeho výstup může vypadat.
 </p>
 
 {include "../fig.phtml", "url" => "jfreechart-output.png", "url_thumb" => "jfreechart-output_resize.png", "title" => "JFreeChartRender output when benchmarking 10 settings of Simulated Annealing on SAT problem", "fig" => "2"}
 
 <p>
-  Currently {javadoc "result.render.JFreeChartRender"} requires only a <code>title</code> as parametr, co its usage
-  is just this snippet:
+  {javadoc "result.render.JFreeChartRender"} vyžaduje pouze parametr <code>title</code> a jeho použití může být zapsáno
+  takto:
 </p>
 
 <pre class="brush: java;">
@@ -176,11 +178,12 @@ solver.addListener(new JFreeChartRender("Demo JFreeChartRender"));
 <h3 id="simple-compare-render">SimpleCompareRender</h3>
 
 <p>
-  {javadoc "result.render.SimpleCompareRender"} makes simple comparison of results by their fitness and number of
-  optimizations. This is useful to be able to see quickly which algorithm (or problem) performed better and which worse.
-  It can write to console, <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a> or any other
-  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a>. Result look like two
-  tables, one sorted by fitness, the other by optimization counter. Below is example of render's output.
+  {javadoc "result.render.SimpleCompareRender"} slouží k rychlému porovnání výsledků podle jejich fitness (kvality
+  řešení) a počtu optimalizací (rychlosti procházení stavového prostoru). Toto je užitečné pokud chcete na první pohled
+  vidět, který algoritmus (nebo problém) si počínal lépe a který hůře. Výsledek může být zapsán do konzole,
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a> (souboru) nebo libovolného
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>. Výsledek vypadá jako tabulka,
+  jedna řazená dle fitness, druhá podle počtu optimalizací. V příkladu Example 2 je ukázkový výstup.
 </p>
 
 <pre class="brush: plain;">
@@ -200,10 +203,10 @@ optimiz.   algorithm                               problem
 3636       SimulatedAnnealing [T=10.0, A=0.9]      SAT [valid-standard.cnf]
 3930       SimulatedAnnealing [T=100.0, A=0.999]   SAT [valid-standard.cnf]
 </pre>
-<p class="fig-title">Example 2: {javadoc "result.render.SimpleCompareRender"} rendering usage of different algorithms on SAT problem with 100ms timeout.</p>
+<p class="fig-title">Example 2: {javadoc "result.render.SimpleCompareRender"} renderuje použití různých algoritmů na SAT problému po dobu 100ms.</p>
 
 <p>
-  {javadoc "result.render.SimpleCompareRender"} can be added to solver this way:
+  {javadoc "result.render.SimpleCompareRender"} lze přidat do solveru tímto způsobem:
 </p>
 
 <pre class="brush: java;">
@@ -222,13 +225,13 @@ solver.addRender(new SimpleCompareRender(System.out));
 <h3 id="simple-render">SimpleRender</h3>
 
 <p>
-  {javadoc "result.render.SimpleRender"} is basic render of JCOP. It provides output to console,
-  <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a> or any other
-  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a>. It has three levels of
-  details, {javadoc "result.render.SimpleRender#OUTPUT_STANDARD"} (which prints almost everything except operation
-  history), {javadoc "result.render.SimpleRender#OUTPUT_MINI"} (which prints just time, number of optimizations, fitness,
-  exception and best solution) and {javadoc "result.render.SimpleRender#OUTPUT_FULL"} (printing almost everything,
-  including full result history). Below are examples of these three formats.
+  {javadoc "result.render.SimpleRender"} je základním renderem JCOPu. Poskytuje výstup jak do konzole,
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a> (souboru) nebo libovolného jiného
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>. Má tři úrovně
+  detailnosti onformací, {javadoc "result.render.SimpleRender#OUTPUT_STANDARD"} (vypisuje téměř vše kromě historie
+  operací), {javadoc "result.render.SimpleRender#OUTPUT_MINI"} (vypisuje pouze čas, počet optimalizací, fitness, výjimku
+  a nejlepší řešení) a {javadoc "result.render.SimpleRender#OUTPUT_FULL"} (vypisuje téměř vše, včetně historie operací).
+  V Example 3, 4 a 5 jsou vidět ukázky všech tří úrovní.
 </p>
 
 <pre class="brush: plain;">
@@ -245,13 +248,13 @@ solver.addRender(new SimpleCompareRender(System.out));
   Fitness:                     -4,0 [-]
   Ended without exception
 </pre>
-<p class="fig-title">Example 3: {javadoc "result.render.SimpleRender"} using {javadoc "result.render.SimpleRender#OUTPUT_STANDARD"} output level to render DFS on SAT with 100ms timeout.</p>
+<p class="fig-title">Example 3: {javadoc "result.render.SimpleRender"} s úrovní výstupu {javadoc "result.render.SimpleRender#OUTPUT_STANDARD"} renderuje DFS použitém na SATu s 100ms timeoutem.</p>
 
 <pre class="brush: plain;">
 === (DepthFirstSearch [], SAT [valid-standard.cnf]) ===
   CPU Time:     110 ms. Optimizations:     511. Fitness:    -4,0. Best solution: Configuration{!="{"}attributes=[0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1], operationHistory={!="{"}247 items}}. Ended without exception.
 </pre>
-<p class="fig-title">Example 4: {javadoc "result.render.SimpleRender"} using {javadoc "result.render.SimpleRender#OUTPUT_MINI"} output level to render DFS on SAT with 100ms timeout.</p>
+<p class="fig-title">Example 4: {javadoc "result.render.SimpleRender"} s úrovní výstupu {javadoc "result.render.SimpleRender#OUTPUT_MINI"} renderuje DFS použitém na SATu s 100ms timeoutem.</p>
 
 <pre class="brush: plain;">
 
@@ -275,10 +278,10 @@ solver.addRender(new SimpleCompareRender(System.out));
            5. SetTrueOperation{!="{"}index=16}
            ... ... ...
 </pre>
-<p class="fig-title">Example 5: {javadoc "result.render.SimpleRender"} using {javadoc "result.render.SimpleRender#OUTPUT_FULL"} output level to render DFS on SAT with 100ms timeout.</p>
+<p class="fig-title">Example 5: {javadoc "result.render.SimpleRender"} s úrovní výstupu {javadoc "result.render.SimpleRender#OUTPUT_FULL"} renderuje DFS použitém na SATu s 100ms timeoutem.</p>
 
 <p>
-  {javadoc "result.render.SimpleRender"} can be added to solver this way:
+  {javadoc "result.render.SimpleRender"} můžete do solveru přidat tímto způsobem:
 </p>
 
 <pre class="brush: java;">
@@ -297,9 +300,9 @@ solver.addRender(new SimpleRender(SimpleRender.OUTPUT_FULL, new File("output-fil
 <h3 id="xml-render">XMLRender</h3>
 
 <p>
-  {javadoc "result.render.XMLRender"} creates XML file with all possible information about results. Useful for
-  automatized processing. Requires <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a> to write
-  into. Below is examples of result XML file.
+  {javadoc "result.render.XMLRender"} vytváří XML soubory, ve kterých jsou všechny dostupné informace o výsledku. Toto
+  je vhodné pro automatické zpracování díky snadnému čtení XML souborů. Vyžaduje <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a>
+  do kterého má zapisovat. Níže je ukázka XML souboru (přeformátována pro snazší čtení).
 </p>
 
 <pre class="brush: xml;">
@@ -324,10 +327,10 @@ solver.addRender(new SimpleRender(SimpleRender.OUTPUT_FULL, new File("output-fil
   &lt;/entry&gt;
 &lt;/result&gt;
 </pre>
-<p class="fig-title">Example 6: {javadoc "result.render.XMLRender"} creates XML file for BFS used on Knapsack.</p>
+<p class="fig-title">Example 6: {javadoc "result.render.XMLRender"} vytvořil XML soubor pro BFS algoritmus použitý na problému batohu.</p>
 
 <p>
-  {javadoc "result.render.XMLRender"} is used as shown in following snippet:
+  {javadoc "result.render.XMLRender"} se přidává do solvera následovně:
 </p>
 
 <pre class="brush: java;">

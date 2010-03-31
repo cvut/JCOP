@@ -2,7 +2,7 @@
 {block #chapter}E.{/block}
 {block #content}
 
-<h3>List of all renders in JCOP</h3>
+<h3>List of all renders and listeners in JCOP</h3>
 
 <p>
   In <a href="#table-1">table 1</a> is a list of all renders and listeners bundled with JCOP, along with destination
@@ -19,11 +19,11 @@
   <tr>
     <td><a href="#csv-render">CSVRender</a></td>
     <td>Render</td>
-    <td>Creates <abbr title="Comma-separated values"></abbr>CSV using <a href="http://sourceforge.net/projects/javacsv/">JavaCSV</a>
+    <td>Creates <abbr title="Comma-separated values">CSV</abbr> using <a href="http://sourceforge.net/projects/javacsv/">JavaCSV</a>
     library.</td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html">OutputStream</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html">java.io.OutputStream</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a><br />
       <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
     </td>
   </tr>
@@ -51,8 +51,8 @@
       algorithm and either fitness or optimize counter. Useful for quick comparison of different algorithms/settings.
     </td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a><br />
       <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
     </td>
   </tr>
@@ -63,8 +63,8 @@
       Prints various levels of text information about result entries.
     </td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a><br />
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a><br />
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a><br />
       <a href="http://java.sun.com/javase/6/docs/api/java/lang/System.html#out">System.out</a> (console)
     </td>
   </tr>
@@ -75,7 +75,7 @@
       Creates XML file with rich information about each result entry.
     </td>
     <td>
-      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a>
+      <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a>
     </td>
   </tr>
 </table>
@@ -163,7 +163,7 @@ solver.addRender(new ExceptionRender());
 {include "../fig.phtml", "url" => "jfreechart-output.png", "url_thumb" => "jfreechart-output_resize.png", "title" => "JFreeChartRender output when benchmarking 10 settings of Simulated Annealing on SAT problem", "fig" => "2"}
 
 <p>
-  Currently {javadoc "result.render.JFreeChartRender"} requires only a <code>title</code> as parametr, co its usage
+  Currently {javadoc "result.render.JFreeChartRender"} requires only a <code>title</code> as a parameter, co its usage
   is just this snippet:
 </p>
 
@@ -178,8 +178,8 @@ solver.addListener(new JFreeChartRender("Demo JFreeChartRender"));
 <p>
   {javadoc "result.render.SimpleCompareRender"} makes simple comparison of results by their fitness and number of
   optimizations. This is useful to be able to see quickly which algorithm (or problem) performed better and which worse.
-  It can write to console, <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a> or any other
-  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a>. Result look like two
+  It can write to console, <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a> or any other
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>. Result look like two
   tables, one sorted by fitness, the other by optimization counter. Below is example of render's output.
 </p>
 
@@ -223,8 +223,8 @@ solver.addRender(new SimpleCompareRender(System.out));
 
 <p>
   {javadoc "result.render.SimpleRender"} is basic render of JCOP. It provides output to console,
-  <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a> or any other
-  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">PrintStream</a>. It has three levels of
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a> or any other
+  <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>. It has three levels of
   details, {javadoc "result.render.SimpleRender#OUTPUT_STANDARD"} (which prints almost everything except operation
   history), {javadoc "result.render.SimpleRender#OUTPUT_MINI"} (which prints just time, number of optimizations, fitness,
   exception and best solution) and {javadoc "result.render.SimpleRender#OUTPUT_FULL"} (printing almost everything,
@@ -298,8 +298,8 @@ solver.addRender(new SimpleRender(SimpleRender.OUTPUT_FULL, new File("output-fil
 
 <p>
   {javadoc "result.render.XMLRender"} creates XML file with all possible information about results. Useful for
-  automatized processing. Requires <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a> to write
-  into. Below is examples of result XML file.
+  automatized processing. Requires <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">java.io.File</a> to write
+  into. Below is examples of result XML file (reformatted for easied read).
 </p>
 
 <pre class="brush: xml;">

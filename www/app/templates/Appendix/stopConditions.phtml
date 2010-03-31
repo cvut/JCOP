@@ -48,7 +48,7 @@
 <p>
   {javadoc "solver.condition.AndCondition"} is used to create complex conditions. It can hold any number of stop
   conditions (added in constructor or by calling {javadoc "solver.condition.AndCondition#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}).
-  Whenever it is evaluates, returns true iff no stop condition in it returned false. It accepts no messages.
+  Whenever it is evaluated, returns true iff no stop condition in it returned false. It accepts no messages.
 </p>
 
 <h3 id="found-solution-condition">FoundSolutionCondition</h3>
@@ -68,18 +68,18 @@
   to increase internal optimization counter and {javadoc "solver.message.MessageSolverStart"} to reset it to zero.
 </p>
 
-<h3 id="or-condition">TimeoutCondition</h3>
+<h3 id="or-condition">OrCondition</h3>
+
+<p>
+  {javadoc "solver.condition.OrCondition"} is used to create complex conditions. It can hold any number of stop
+  conditions (added in constructor or by calling {javadoc "solver.condition.OrCondition#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}).
+  Whenever it is evaluated, returns true iff at least one stop condition in it returned true. It accepts no messages.
+</p>
+
+<h3 id="timeout-condition">TimeoutCondition</h3>
 
 <p>
   {javadoc "solver.condition.TimeoutCondition"} limits how long can one solver iteration run. Limit time in miliseconds
   is given in constructor. Uses {javadoc "util.PreciseTime#getCpuTimeMili()"} to get CPU time. Returns true after
   specified time has elapsed. Accepts {javadoc "solver.message.MessageSolverStart"} to reset timer.
-</p>
-
-<h3 id="timeout-condition">IterationCondition</h3>
-
-<p>
-  {javadoc "solver.condition.IterationCondition"} counts number of optimizations in solver iteration. When a threshold
-  specified in constructor is achieved, it returns true. Accepts {javadoc "solver.message.MessageOptimize"}
-  to increase internal optimization counter and {javadoc "solver.message.MessageSolverStart"} ti reset it to zero.
 </p>

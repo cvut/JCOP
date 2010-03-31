@@ -2,98 +2,98 @@
 {block #chapter}A.{/block}
 {block #content}
 
-<h3>List of all solvers in JCOP</h3>
+<h3>Seznam všech solverů v JCOPu</h3>
 
 <p>
-  In <a href="#table-1">table 1</a> is a list of all solvers bundled with JCOP, along with brief description and default
-  registered renders apart from {javadoc "result.render.SimpleRender"} (which is registered as default to all solvers).
-  Note that all of them extends {javadoc "solver.BaseSolver"}.
+  V <a href="#table-1">tabulce 1</a> je seznam všech solverů dodávaných s JCOPem, společně s krátkým popisem a výchozími
+  registrovaními rendery (navíc k {javadoc "result.render.SimpleRender"}, který je výchozí pro každý solver). Přidáním
+  renderu do solveru se použijí pouze přidané rendery, nikoli výchozí. Všechny solvery zde uvedené jsou potomky {javadoc "solver.BaseSolver"}.
 </p>
 
 <table class="full" id="table-1">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Additional Renders</th>
+    <th>Jméno</th>
+    <th>Popis</th>
+    <th>Další rendery</th>
   </tr>
   <tr>
     <td><a href="#algorithm-compare-solver">AlgorithmCompareSolver</a></td>
-    <td>Runs several algorithms on one problem.</td>
+    <td>Spustí několik algoritmů na stejném problému.</td>
     <td>{javadoc "result.render.SimpleCompareRender"}</td>
   </tr>
   <tr>
     <td><a href="#median-solver">MedianSolver</a></td>
-    <td>Wraps around another solver, runs it several times and returns median from its results.</td>
+    <td>Vezme jiný solver, celý ho několikrát pustí a poté vezme medián z jeho výsledků.</td>
     <td>{javadoc "result.render.SimpleCompareRender"}</td>
   </tr>
   <tr>
     <td><a href="#multi-solver">MultiSolver</a></td>
-    <td>Makes cartesian product of given algorithms and problems and runs all of them.</td>
+    <td>Provede kartézský součin daných algoritmů a problémů a provede všechny tyto kombinace.</td>
     <td>{javadoc "result.render.SimpleCompareRender"}</td>
   </tr>
   <tr>
     <td><a href="#problem-compare-solver">ProblemCompareSolver</a></td>
-    <td>Runs one algorithm on several problems.</td>
+    <td>Spustí jeden algoritmus na více problémech.</td>
     <td>{javadoc "result.render.SimpleCompareRender"}</td>
   </tr>
   <tr>
     <td><a href="#simple-solver">SimpleSolver</a></td>
-    <td>Runs one algorithm on one problem.</td>
+    <td>Spustí jeden algoritmus na jednom problému.</td>
     <td>none</td>
   </tr>
 </table>
-<p class="fig-title">Table 1: List of solvers in JCOP.</p>
+<p class="fig-title">Table 1: Seznam všech solverů v JCOPu.</p>
 
 <h3 id="algorithm-compare-solver">AlgorithmCompareSolver</h3>
 
 <p>
-  {javadoc "solver.AlgorithmCompareSolver"} is created with one problem and multiple algorithms. More algorithms can be
-  added by {javadoc "solver.AlgorithmCompareSolver#addAlgorithm(cz.cvut.felk.cig.jcop.algorithm.Algorithm)"}. Solver
-  uses every algorithm in turn on supplied problem. Has default renders {javadoc "result.render.SimpleRender"} and
+  {javadoc "solver.AlgorithmCompareSolver"} je vytvořen s jedním probémem a více algoritmy. Další algoritmy lze přidat
+  metodou {javadoc "solver.AlgorithmCompareSolver#addAlgorithm(cz.cvut.felk.cig.jcop.algorithm.Algorithm)"}. Solver
+  použije poustupně každý algoritmus na zadaný problém. Výchozí rendery má {javadoc "result.render.SimpleRender"} a
   {javadoc "result.render.SimpleCompareRender"}.
 </p>
 
 <h3 id="median-solver">MedianSolver</h3>
 
 <p>
-  {javadoc "solver.MedianSolver"} is very different from other solvers. It cannot solve itself, but takes another solver
-  and runs it repeatedly, storing results from every run. After that, it makes median from results (results ordered by
-  best fitness) and presents it as a result. This solver is very useful when you have random-based algorithm and want to
-  eliminate statistical errors.
+  {javadoc "solver.MedianSolver"} je zcela jiný než ostatní solvery. Nepracuje sám o sobě, ale jako vstupní parametr
+  bere jiný solver, který poté opakovaně pouští a uchovává výsledky z každého běhu. Poté provede medián výsledků (které
+  jsou seřazeny podle fitness) a toto prezentuje jako výsledek. Tento solver je velmi užitečný pro algoritmy, které
+  pracují s náhodou, protože do značné míry eliminuje statistické chyby.
 </p>
 
 <p>
-  Note that if wrapped solver returns more than one result entry in its result, median requires that in every run solver
-  returns same number of result entries and in same order. 
+  Upozornění: pokud dodaný solver vrací více jak jeden záznam výsledku, MedianSolver vyžaduje, aby při každém běhu tento
+  solver vrátil přesně stejný počet záznamů výsledku a ve stejném pořadí.
 </p>
 
 <p>
-  {javadoc "solver.MedianSolver"} has default renders {javadoc "result.render.SimpleRender"} and
+  {javadoc "solver.MedianSolver"} má výchozí rendery {javadoc "result.render.SimpleRender"} a
   {javadoc "result.render.SimpleCompareRender"}.
 </p>
 
 <h3 id="multi-solver">MultiSolver</h3>
 
 <p>
-  {javadoc "solver.MultiSolver"} is created with a list of problems and list of algorithms. More algorithms and problems
-  can be added by {javadoc "solver.MultiSolver#addAlgorithm(cz.cvut.felk.cig.jcop.algorithm.Algorithm)"} and
-  {javadoc "solver.MultiSolver#addProblem(cz.cvut.felk.cig.jcop.problem.Problem)"}. Solver makes cartesian product, eg.
-  applies every algorithm on every problem in turn. Has default renders {javadoc "result.render.SimpleRender"} and
+  {javadoc "solver.MultiSolver"} je vytvořen se seznamem algoritmů a seznamem problémů. Více algoritmů i problémů lze
+  přidat metodou {javadoc "solver.MultiSolver#addAlgorithm(cz.cvut.felk.cig.jcop.algorithm.Algorithm)"} a
+  {javadoc "solver.MultiSolver#addProblem(cz.cvut.felk.cig.jcop.problem.Problem)"}. Solver vytváří kartézský součin,
+  tzn. aplikuje každý algoritmus postupně na každý problém. Má výchozí rendery {javadoc "result.render.SimpleRender"} a
   {javadoc "result.render.SimpleCompareRender"}.
 </p>
 
 <h3 id="problem-compare-solver">ProblemCompareSolver</h3>
 
 <p>
-  {javadoc "solver.ProblemCompareSolver"} is created with one algorithm and multiple problems. More problems can be
-  added by {javadoc "solver.ProblemCompareSolver#addProblem(cz.cvut.felk.cig.jcop.problem.Problem)"}. Solver
-  uses supplied algorithm on every problem in turn. Has default renders {javadoc "result.render.SimpleRender"} and
+  {javadoc "solver.ProblemCompareSolver"} požaduje na vstupu jeden algoritmus a několik problémů. Další problémy lze
+  dodat pomocí {javadoc "solver.ProblemCompareSolver#addProblem(cz.cvut.felk.cig.jcop.problem.Problem)"}. Solver postupně
+  aplikuje zadaný algoritmus na každý problém. Má výchozí rendery {javadoc "result.render.SimpleRender"} a
   {javadoc "result.render.SimpleCompareRender"}.
 </p>
 
 <h3 id="simple-solver">SimpleSolver</h3>
 
 <p>
-  {javadoc "solver.SimpleSolver"} is useful for simple testing if algorithm or problem works. Takes only single
-  algorithm and single problem and makes one solver iteration.Has default render {javadoc "result.render.SimpleRender"}.
+  {javadoc "solver.SimpleSolver"} je vhodný na jednoduché testování, jestli algoritmus nebo problém fungují správně.
+  Používá pouze jeden algoritmus a jeden problém a udělá právě jednu iteraci solveru. Má výchozí render {javadoc "result.render.SimpleRender"}.
 </p>
