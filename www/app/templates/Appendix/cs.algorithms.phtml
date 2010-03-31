@@ -20,7 +20,7 @@
   </tr>
   <tr>
     <td><a href="#breadth-first-search">BreadthFirstSearch</a><br />(prohledávání&nbsp;do&nbsp;šířky)</td>
-    <td>Grafové prohledávání, kde nově expandové elementy se dávají na konec fronty. Pomalý a paměťově náročný algoritmus,
+    <td>Grafové prohledávání, kde nově expandované elementy se dávají na konec fronty. Pomalý a paměťově náročný algoritmus,
     který ale zaručuje nalezení optimálního řešení.</td>
     <td>Grafové</td>
     <td>{javadoc "problem.StartingConfigurationProblem"}</td>
@@ -43,14 +43,14 @@
   <tr>
     <td><a href="#graph-search-algorithm">GraphSearch</a><br />(grafové&nbsp;prohledávání)</td>
     <td>Abstraktní předek všech grafových algoritmů. Vyžaduje implementaci fronty, kterou bude využívat na ukládání
-    expandovaných elementů..</td>
+    expandovaných elementů.</td>
     <td>Grafové</td>
     <td>{javadoc "problem.StartingConfigurationProblem"}</td>
   </tr>
   <tr>
     <td><a href="#simulated-annealing">SimulatedAnnealing</a><br />(simulované&nbsp;žíhání)</td>
     <td>Lokálně prohledává prostor (vybírá náhodnou operaci) a s klesající pravděpodobností přijímá i zhoršující 
-    rešení.</td>
+    řešení.</td>
     <td>Lokální</td>
     <td>{javadoc "problem.RandomConfigurationProblem"}<br />
     nebo {javadoc "problem.StartingConfigurationProblem"}
@@ -73,8 +73,8 @@
 <h3 id="depth-first-search">DepthFirstSearch</h3>
 
 <p>
-  {javadoc "algorithm.graphsearch.dfs.DepthFirstSearch"} (prohledávání do hlobky) prochází všechny možné konfigurace.
-  Poslední expandované konfigurace jsou zpracovány jako opslední. Je velmi pomalý, ale zaručuje nalezení nejlepší
+  {javadoc "algorithm.graphsearch.dfs.DepthFirstSearch"} (prohledávání do hloubky) prochází všechny možné konfigurace.
+  Poslední expandované konfigurace jsou zpracovány jako poslední. Je velmi pomalý, ale zaručuje nalezení nejlepší
   konfigurace (ačkoli ne nejkratší cesty k ní).
 </p>
 
@@ -118,7 +118,7 @@
 
 <p>
   Simulované žíhání má počáteční teplotu, která se v každém optimalizačním kroku snižuje o určitý koeficient (obě
-  hodnoty lze nastavit). Vyšší teplota znamená větší šanci přijmou horší konfiguraci (a to, jak moc je horší je tato
+  hodnoty lze nastavit). Vyšší teplota znamená větší šanci přijmout horší konfiguraci (a to, jak moc je horší je tato
   konfigurace také ovlivňuje pravděpodobnost přijetí).
 </p>
 

@@ -6,7 +6,7 @@
 
 <p>
   V <a href="#table-1">tabulce 1</a> je seznam všech renderů (vykreslovačů) a listenerů dodávaných společně s JCOPem.
-  Ke každému je cílový výstup, typ (render nebo listener) a jak popis jak formátuje výsutp.
+  Ke každému je cílový výstup, typ (render nebo listener) a jak popis jak formátuje výstup.
 </p>
 
 <table class="full" id="table-1">
@@ -38,7 +38,7 @@
   <tr>
     <td><a href="#jfree-chart-render">JFreeChartRender</a></td>
     <td>Listener</td>
-    <td>Vytvoří graf s výsledky, které se za běhu samy aktualizují. Každá iterace solveru má vlastní křivku v grafu..</td>
+    <td>Vytvoří graf s výsledky, které se za běhu samy aktualizují. Každá iterace solveru má vlastní křivku v grafu.</td>
     <td>
       <a href="http://java.sun.com/javase/6/docs/api/javax/swing/JFrame.html">JFrame</a>
     </td>
@@ -61,7 +61,7 @@
     <td><a href="#simple-render">SimpleRender</a></td>
     <td>Render</td>
     <td>
-      Vypisuje textové informace o záznamech výsledku při různých úrovní detailnosti.
+      Vypisuje textové informace o záznamech výsledku při různých úrovních detailnosti.
     </td>
     <td>
       <a href="http://java.sun.com/javase/6/docs/api/java/io/PrintStream.html">java.io.PrintStream</a><br />
@@ -162,7 +162,7 @@ solver.addRender(new ExceptionRender());
   je vidět jako jeho výstup může vypadat.
 </p>
 
-{include "../fig.phtml", "url" => "jfreechart-output.png", "url_thumb" => "jfreechart-output_resize.png", "title" => "JFreeChartRender output when benchmarking 10 settings of Simulated Annealing on SAT problem", "fig" => "2"}
+{include "../fig.phtml", "url" => "jfreechart-output.png", "url_thumb" => "jfreechart-output_resize.png", "title" => "Výstup JFreeChartRender při porovnávání 10 nastavení simulovaného ochlazování na SAT problému", "fig" => "2"}
 
 <p>
   {javadoc "result.render.JFreeChartRender"} vyžaduje pouze parametr <code>title</code> a jeho použití může být zapsáno

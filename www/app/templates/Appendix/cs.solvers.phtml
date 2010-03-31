@@ -6,7 +6,7 @@
 
 <p>
   V <a href="#table-1">tabulce 1</a> je seznam všech solverů dodávaných s JCOPem, společně s krátkým popisem a výchozími
-  registrovaními rendery (navíc k {javadoc "result.render.SimpleRender"}, který je výchozí pro každý solver). Přidáním
+  registrovanými rendery (navíc k {javadoc "result.render.SimpleRender"}, který je výchozí pro každý solver). Přidáním
   renderu do solveru se použijí pouze přidané rendery, nikoli výchozí. Všechny solvery zde uvedené jsou potomky {javadoc "solver.BaseSolver"}.
 </p>
 
@@ -39,7 +39,7 @@
   <tr>
     <td><a href="#simple-solver">SimpleSolver</a></td>
     <td>Spustí jeden algoritmus na jednom problému.</td>
-    <td>none</td>
+    <td>žádné</td>
   </tr>
 </table>
 <p class="fig-title">Table 1: Seznam všech solverů v JCOPu.</p>
@@ -47,9 +47,9 @@
 <h3 id="algorithm-compare-solver">AlgorithmCompareSolver</h3>
 
 <p>
-  {javadoc "solver.AlgorithmCompareSolver"} je vytvořen s jedním probémem a více algoritmy. Další algoritmy lze přidat
+  {javadoc "solver.AlgorithmCompareSolver"} je vytvořen s jedním problémem a více algoritmy. Další algoritmy lze přidat
   metodou {javadoc "solver.AlgorithmCompareSolver#addAlgorithm(cz.cvut.felk.cig.jcop.algorithm.Algorithm)"}. Solver
-  použije poustupně každý algoritmus na zadaný problém. Výchozí rendery má {javadoc "result.render.SimpleRender"} a
+  použije postupně každý algoritmus na zadaný problém. Výchozí rendery má {javadoc "result.render.SimpleRender"} a
   {javadoc "result.render.SimpleCompareRender"}.
 </p>
 

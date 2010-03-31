@@ -1,12 +1,12 @@
-{block #title}Stop Conditions{/block}
+{block #title}Stop Conditions (ukončovací podmínky){/block}
 {block #chapter}D.{/block}
 {block #content}
 
-<h3>Seznam všech ukončovacích podmínek v JCOPu</h3>
+<h3>Seznam všech ukončovacích podmínek v&nbsp;JCOPu</h3>
 
 <p>
-  V <a href="#table-1">tabulce 1</a> je seznam všech ukončovacích podmínek dodávaných s JCOPem, společně s popisem kdy
-  jsou splněny a jaké přijímají zprávy. Všechny zde uvedené podmínky dědí z {javadoc "solver.condition.BaseCondition"}.
+  V <a href="#table-1">tabulce 1</a> je seznam všech ukončovacích podmínek dodávaných s&nbsp;JCOPem, společně s&nbsp;popisem kdy
+  jsou splněny a&nbsp;jaké přijímají zprávy. Všechny zde uvedené podmínky dědí z {javadoc "solver.condition.BaseCondition"}.
 </p>
 
 <table class="full" id="table-1">
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td><a href="#and-condition">AndCondition</a></td>
-    <td>všechny podpodmínky jsou splněny</td>
+    <td>všechny podmínky jsou splněny</td>
     <td>žádné</td>
   </tr>
   <tr>
@@ -41,48 +41,47 @@
     <td>{javadoc "solver.message.MessageSolverStart"}</td>
   </tr>
 </table>
-<p class="fig-title">Table 1: Seznam všech ukončovacích podmínek v JCOPu.</p>
+<p class="fig-title">Table 1: Seznam všech ukončovacích podmínek v&nbsp;JCOPu.</p>
 
 <h3 id="and-condition">AndCondition</h3>
 
 <p>
-  {javadoc "solver.condition.AndCondition"} se používá na vytváření komplexních podmínek. Může v sobě obsahovat
-  libovolné množství dalších ukončovacích podmínek (dodané buď v konstruktoru nebo voláním {javadoc "solver.condition.AndCondition#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}).
-  Kdykoli je podmínka vyhodnocena, vrací pravdu právě kdy6 žádná dílčí ukončovací podmínka nevrací nepravdu. Nepřijímá
+  {javadoc "solver.condition.AndCondition"} se používá na vytváření komplexních podmínek. Může v&nbsp;sobě obsahovat
+  libovolné množství dalších ukončovacích podmínek (dodané buď v&nbsp;konstruktoru nebo voláním {javadoc "solver.condition.AndCondition#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}).
+  Kdykoli je podmínka vyhodnocena, vrací true, právě když žádná dílčí ukončovací podmínka nevrací false. Nepřijímá
   žádné zprávy.
 </p>
 
 <h3 id="found-solution-condition">FoundSolutionCondition</h3>
 
 <p>
-  {javadoc "solver.condition.FoundSolutionCondition"} vrací pravdu pokud bylo nalezeno alespoň jedno řešení (řešení je
+  {javadoc "solver.condition.FoundSolutionCondition"} vrací true pokud bylo nalezeno alespoň jedno řešení (řešení je
   taková konfigurace, pro kterou {javadoc "problem.Problem#isSolution(cz.cvut.felk.cig.jcop.problem.Configuration)"}
-  vrací pravdu). Přijímá zprávu {javadoc "solver.message.MessageSolverStart"} na resetování svého stavu a
+  vrací true). Přijímá zprávu {javadoc "solver.message.MessageSolverStart"} na resetování svého stavu a
   {javadoc "solver.message.MessageSolutionFound"} jako notifikaci že bylo nalezeno řešení.
 </p>
 
 <h3 id="iteration-condition">IterationCondition</h3>
 
 <p>
-  {javadoc "solver.condition.IterationCondition"} počítá kolik optimalizačních kroků proběhlo v iteraci solveru. Jakmile
-  je dosaženo zadané hranice, vrací pravdu. Přijímá zprávu {javadoc "solver.message.MessageOptimize"} na zvýšení
+  {javadoc "solver.condition.IterationCondition"} počítá, kolik optimalizačních kroků proběhlo v&nbsp;iteraci solveru. Jakmile
+  je dosaženo zadané hranice, vrací true. Přijímá zprávu {javadoc "solver.message.MessageOptimize"} na zvýšení
   interního čítače a {javadoc "solver.message.MessageSolverStart"} na jeho nastavení na nulu.
 </p>
 
 <h3 id="or-condition">OrCondition</h3>
 
 <p>
-  {javadoc "solver.condition.OrCondition"} se používá na vytváření komplexních podmínek. Může v sobě obsahovat
-  libovolné množství dalších ukončovacích podmínek (dodané buď v konstruktoru nebo voláním {javadoc "solver.condition.OrCondition#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}).
-  Kdykoli je podmínka vyhodnocena, vrací pravdu pokud alespoň jedna dílčí ukončovací podmínka vrací nepravdu. Nepřijímá
+  {javadoc "solver.condition.OrCondition"} se používá na vytváření komplexních podmínek. Může v&nbsp;sobě obsahovat
+  libovolné množství dalších ukončovacích podmínek (dodané buď v&nbsp;konstruktoru nebo voláním {javadoc "solver.condition.OrCondition#addStopCondition(cz.cvut.felk.cig.jcop.solver.condition.StopCondition)"}).
+  Kdykoli je podmínka vyhodnocena, vrací true, pokud alespoň jedna dílčí ukončovací podmínka vrací true. Nepřijímá
   žádné zprávy.
 </p>
 
 <h3 id="timeout-condition">TimeoutCondition</h3>
 
 <p>
-  {javadoc "solver.condition.TimeoutCondition"} omezuje jak dlouho může jedna iterace solveru běžet. Omezení se udává v
-  milisekundách a je předáván v konstruktoru. Používá {javadoc "util.PreciseTime#getCpuTimeMili()"} na získání CPU time.
-  Vrací pravdu pokud již daný čas uplynul. Přijímá {javadoc "solver.message.MessageSolverStart"} pro restartování čítače
+  {javadoc "solver.condition.TimeoutCondition"} omezuje jak dlouho může jedna iterace solveru běžet. Omezení se udává v&nbsp;milisekundách a&nbsp;je předáván v&nbsp;konstruktoru. Používá {javadoc "util.PreciseTime#getCpuTimeMili()"} na získání CPU time.
+  Vrací true pokud již daný čas uplynul. Přijímá {javadoc "solver.message.MessageSolverStart"} pro restartování čítače
   času.
 </p>

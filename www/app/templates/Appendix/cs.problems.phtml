@@ -50,8 +50,8 @@
   </tr>
   <tr>
     <td><a href="#sat">SAT</a></td>
-    <td>Přiřaďte logické hodnoty (pravda, lež) proměnným (každá má zadanou hmotnost) tak, aby daná formule byla vyhodnocena
-    jako pravda. Minimalizujte hmotnost proměnných, které mají přiřazenou hodnotu pravda.</td>
+    <td>Přiřaďte logické hodnoty (true, false) proměnným (každá má zadanou hmotnost) tak, aby daná formule byla vyhodnocena
+    jako true. Minimalizujte hmotnost proměnných, které mají přiřazenou hodnotu true.</td>
     <td>
       {javadoc "problem.Problem"}<br />
       {javadoc "problem.StartingConfigurationProblem"}<br />
@@ -76,12 +76,12 @@
 
 <p>
   {javadoc "problem.bucket.Bucket"} (problém přelévání kýblů) začíná s množinou <code>n</code> kýblů, každý se zadanou
-  kapacitou a obsahem. Cílem je v každém kýblu mít zadaný cílový obsah. Povolené operace jsou naplnění kýble na maximum,
-  vylití kýble a přelití jednoho kýble do druhého (pokud v druhém není dost místa, zbytek zůstává v první kýbli).
+  kapacitou a obsahem. Cílem je v každém kýblu mít zadaný cílový obsah. Povolené operace jsou naplnění kýblu na maximum,
+  vylití kýblu a přelití jednoho kýblu do druhého (pokud v druhém není dost místa, zbytek zůstává v první kýblu).
 </p>
 
 <p>
-  Tento probleém se inicializuje pomocí polí integerů, viz níže.
+  Tento problém se inicializuje pomocí polí integerů, viz níže.
 </p>
 
 <pre class="brush: java;">
@@ -89,7 +89,7 @@ Bucket bucket = new Bucket(new int[]{!="{"}14, 10, 6, 2, 8}, new int[]{!="{"}0, 
 </pre>
 
 <p>
-  Tímto je vytvořen problém 5 kýblů, s objemy 14, 10, 6, 2 a 8, počátačním obsahem 0, 0, 1, 0, 0 a cílovým obsahem 12,
+  Tímto je vytvořen problém 5 kýblů, s objemy 14, 10, 6, 2 a 8, počátečním obsahem 0, 0, 1, 0, 0 a cílovým obsahem 12,
   6, 4, 1, 8. Nejlepší řešení pro tyto parametry je (Nalít 2 do 0, Naplnit 1, Nalít 1 do 2, Nalít 2 do
   4, Naplnit 2, Nalít 2 do 3, Nalít 3 do 1, Nalít 0 do 3, Naplnit 0, Nalít 0 do 4), kde čísla jsou indexy kýblů
   (indexováno od 0).
@@ -110,7 +110,7 @@ Bucket bucket = new Bucket(new int[]{!="{"}14, 10, 6, 2, 8}, new int[]{!="{"}0, 
 </p>
 
 <p>
-  JobShop je inicializován pomocí seznamu integerů (prvání úkolů) a počtu strojů. Ukázka viz níže.
+  JobShop je inicializován pomocí seznamu integerů (trvání úkolů) a počtu strojů. Ukázka viz níže.
 </p>
 
 <pre class="brush: java;">
@@ -140,7 +140,7 @@ JobShop jobShop = new JobShop(jobs, 3);
 <p>
   V {javadoc "problem.knapsack.Knapsack"} (problém batohu) je zadaných <code>n</code> věcí (každá má svou hmotnost a cenu
   a je reprezentována pomocí {javadoc "problem.knapsack.KnapsackItem"}) a batoh dané nosnosti. Potřebujeme do batohu dát
-  tak věci, že celková hmotnost neni vyšší než nosnost batohu a zároveň celková cena věcí v batohu je maximální.
+  tak věci, že celková hmotnost není vyšší než nosnost batohu a zároveň celková cena věcí v batohu je maximální.
 </p>
 
 <p>
@@ -154,7 +154,7 @@ Knapsack knapsack = new Knapsack("9000 4 100 18 114 42 136 88 192 3 223");
 </pre>
 
 <p>
-  Toto vytvoří Knapsack s 4 věcmi (vážicí 18, 42, 88 a 8, s cenami 114, 136, 192, 223), id problému je 9000 a batoh má
+  Toto vytvoří Knapsack s 4 věcmi (vážící 18, 42, 88 a 8, s cenami 114, 136, 192, 223), id problému je 9000 a batoh má
   kapacitu 100. Nejlepší řešení je mít věci 0, 1 a 3 v batohu (celková hmotnost 63, celková cena 473). 
 </p>
 
@@ -162,7 +162,7 @@ Knapsack knapsack = new Knapsack("9000 4 100 18 114 42 136 88 192 3 223");
   Dvě poskytované operace jsou {javadoc "problem.knapsack.AddOperation"} (přidá věc do batohu) a {javadoc "problem.knapsack.RemoveOperation"}
   (odebere věc z batohu). Výchozí fitness je {javadoc "problem.knapsack.KnapsackFitness"} a funguje tak, že přetížený
   batoh vrací záporné číslo (vyšší celková cena znamená vyšší fitness). Pokud hmotnost věcí nepřesahuje nosnost, fitness
-  je kladná a rovna celkové ceně věcí v batohu. Konfigurace má jednu proměnnou pro každou věc, hodnota 0 znamená že věc
+  je kladná a rovna celkové ceně věcí v batohu. Konfigurace má jednu proměnnou pro každou věc, hodnota 0 znamená, že věc
   v batohu není, 1 že věc v batohu je.
 </p>
 
@@ -170,8 +170,8 @@ Knapsack knapsack = new Knapsack("9000 4 100 18 114 42 136 88 192 3 223");
 
 <p>
   {javadoc "problem.sat.SAT"} problém má na vstupu <code>n</code> proměnných (každá s danou hmotností) a jednu formuli
-  (ve tvaru součin součtů). Cílem je přiřadit každé proměnné logickou hodnotu pravda nebo lež tak, aby formule byla
-  vyhodnocena jako pravda a zároveň celková hmotnost proměnných ohodnocených jako true byla minimální.
+  (ve tvaru součin součtů). Cílem je přiřadit každé proměnné logickou hodnotu true nebo false tak, aby formule byla
+  vyhodnocena jako true a zároveň celková hmotnost proměnných ohodnocených jako true byla minimální.
 </p>
 
 <p>
@@ -189,11 +189,11 @@ SAT sat = new SAT(new File("data/sat/easy.cnf"));
 </p>
 
 <p>
-  V tomto problému jsou dvě operace - {javadoc "problem.sat.SetTrueOperation"} (nastaví proměnnou na pravda) a {javadoc "problem.sat.SetFalseOperation"}
-  (nastaví hodnotu na lež). Výchozí fitness je {javadoc "problem.sat.SATFitness"}, která se spočítá tak, že pokud je
+  V tomto problému jsou dvě operace - {javadoc "problem.sat.SetTrueOperation"} (nastaví proměnnou na true) a {javadoc "problem.sat.SetFalseOperation"}
+  (nastaví hodnotu na false). Výchozí fitness je {javadoc "problem.sat.SATFitness"}, která se spočítá tak, že pokud je
   formule splněna, fitness je kladné číslo (vyšší hmotnost znamená nižší cenu). Pokud formule splněna není, fitness je
-  negativní počet nesplněných klauzulí. Konfigurace má <code>n</code> proměnných, každá buď 0 (proměnná je lež) neb 1
-  (proměnná je pravda).
+  negativní počet nesplněných klauzulí. Konfigurace má <code>n</code> proměnných, každá buď 0 (proměnná je false) nebo 1
+  (proměnná je true).
 </p>
 
 <h3 id="tsp">TSP</h3>
