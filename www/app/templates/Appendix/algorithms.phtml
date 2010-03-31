@@ -20,7 +20,7 @@
   </tr>
   <tr>
     <td><a href="#breadth-first-search">BreadthFirstSearch</a></td>
-    <td>Graph search algorithm where newly expanded elements are placed to the end of queue. Slow but find optimal
+    <td>Graph search algorithm where newly expanded elements are placed to the end of queue. Slow but finds optimal
     solution.</td>
     <td>Graph search</td>
     <td>{javadoc "problem.StartingConfigurationProblem"}</td>
@@ -71,7 +71,7 @@
 
 <p>
   {javadoc "algorithm.graphsearch.dfs.DepthFirstSearch"} traverses over all possible configurations. First expanded
-  configurations are processed last. Is very slow (since it traverses all configurations, but always finds optimal
+  configurations are processed last. Is very slow (since it traverses all configurations), but always finds optimal
   solution (however shortest path is not guaranteed).
 </p>
 
@@ -82,7 +82,7 @@
 <p>
   {javadoc "algorithm.geneticalgorithm.GeneticAlgorithm"} simulates evolution in nature. Creates population of random configurations and
   then randomly (better configurations has higher chance) selects pair to reproduce into new pair of configurations (to
-  next generation). Every optimization step consists of creating whole new population. Common configurations are size of
+  next generation). Every optimization step consists of creating whole new population. Common settings for this algorithm are size of
   population and mutation rate. Suggested improvements are implementing new {javadoc "algorithm.geneticalgorithm.Selection"},
   {javadoc "algorithm.geneticalgorithm.Mutation"} and {javadoc "algorithm.geneticalgorithm.Reproduction"} classes.
 </p>

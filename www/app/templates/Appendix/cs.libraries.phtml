@@ -1,43 +1,43 @@
-{block #title}Libraries{/block}
+{block #title}Knihovny{/block}
 {block #chapter}F.{/block}
 {block #content}
 
-<h3>List of all third party libraries used in JCOP</h3>
+<h3>Seznam všech knihoven použitých v JCOPu</h3>
 
 <p>
-  In <a href="#table-1">table 1</a> is a list of all third party libraries used in JCOP, along with their brief
-  description, homepage and which parts of JCOP uses it.
+  V <a href="#table-1">tabulce 1</a> je seznam všech knihoven třetích stran používaných v JCOPu, společně s jejich
+  krátkým popisem, domovskou stránkou a které části JCOPu ji využívají.
 </p>
 
 <table class="full" id="table-1">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Název</th>
+    <th>Popis</th>
     <th>Homepage</th>
-    <th>Usage</th>
+    <th>Použití</th>
   </tr>
   <tr>
     <td><a href="#ecs" class="nobr">Jakarta ECS</a></td>
-    <td>ECS allows to use Java Objects to generate markup code such as (X)HTML/XML</td>
+    <td>ECS umožňuje používat javové objekty na generování (X)HTML/XML kódu.</td>
     <td><a href="http://jakarta.apache.org/ecs/" class="nobr">jakarta.apache.org/ecs/</a></td>
     <td>{javadoc "result.render.XMLRender"}</td>
   </tr>
   <tr>
     <td><a href="#java-csv" class="nobr">Java CSV</a></td>
-    <td>Library for reading and writing CSV files.</td>
+    <td>Knihovna pro čtení a zápis do CSV souborů.</td>
     <td><a href="http://sourceforge.net/projects/javacsv/" class="nobr">sourceforge.net/projects/javacsv/</a></td>
     <td>{javadoc "result.render.CSVRender"}</td>
   </tr>
   <tr>
     <td><a href="#jfreechart">JFreeChart</a></td>
-    <td>Displays various types of charts.</td>
+    <td>Zobrazuje různé typy grafů.</td>
     <td><a href="http://jfree.org/jfreechart/" class="nobr">jfree.org/jfreechart/</a></td>
     <td>{javadoc "result.render.JFreeChartRender"}</td>
   </tr>
   <tr>
     <td><a href="#jfreechart">Log4j</a></td>
-    <td>Allows for logging and debugging code.</td>
+    <td>Umožňuje nízkoúrovňové logování.</td>
     <td><a href="http://logging.apache.org/log4j/" class="nobr">logging.apache.org/log4j/</a></td>
-    <td>many places in the project</td>
+    <td>mnoho míst v celém projektu</td>
   </tr>
 </table>

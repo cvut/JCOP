@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td><a href="#bucket">Bucket</a></td>
-    <td>Buckets of given capacity and starting contents are required each to have different contents by using operations
+    <td>Buckets of given capacity and starting contents are required each to have given contents in every bucket by using operations
     fill, spill and pour one bucket into another.</td>
     <td>
       {javadoc "problem.Problem"}<br />
@@ -27,7 +27,8 @@
   </tr>
   <tr>
     <td><a href="#job-shop">JobShop</a></td>
-    <td>Plan <code>n</code> different jobs, each given duration, on <code>n</code> (<code>m</code> &lt; <code>n</code>) identical machines, each able to run one job at
+    <td>Plan <code>n</code> different jobs, each given duration, on <code>m</code> (<code>m</code> &lt; <code>n</code>)
+    identical machines, each able to run one job at
     a time. Find assignment of jobs to machines with minimal total duration.</td>
     <td>
       {javadoc "problem.Problem"}<br />
@@ -49,8 +50,8 @@
   </tr>
   <tr>
     <td><a href="#sat">SAT</a></td>
-    <td>Assign boolean values to variables (each given cost) so that given formula evaluates to true. Minimize cost of
-    variables assigned with true.</td>
+    <td>Assign boolean values to variables (each given weight) so that given formula evaluates to true. Minimize weight
+    of variables assigned with true.</td>
     <td>
       {javadoc "problem.Problem"}<br />
       {javadoc "problem.StartingConfigurationProblem"}<br />
@@ -139,7 +140,7 @@ JobShop jobShop = new JobShop(jobs, 3);
 
 <p>
   In {javadoc "problem.knapsack.Knapsack"} there are <code>n</code> items with given price and weight (represented as
-  {javadoc "problem.knapsack.KnapsackItem"} and capacity of knapsack. We need to put items to knapsack so that total
+  {javadoc "problem.knapsack.KnapsackItem"}) and capacity of knapsack. We need to put items to knapsack so that total
   weight of items is no more than knapsack's capacity and total price is maximal.
 </p>
 

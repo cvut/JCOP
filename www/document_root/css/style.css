@@ -57,6 +57,7 @@ a:hover{}
 #sidebar li li{line-height:30px;margin:0px 30px;padding:0px 0px 0px 15px;border-left:none;background:url(../images/img07.jpg) no-repeat left 12px;}
 #sidebar li li a {padding: 0px 15px 0px 0px;}
 #sidebar li li a:hover, #sidebar li li a.active {background:url(../images/img07.jpg) no-repeat right;}
+#sidebar li li a.nohover {background:none;}
 #sidebar h2{height:46px;padding-top:13px;padding-left:50px;margin-bottom:10px;background:url(../images/img06.jpg) no-repeat left 4px;letter-spacing:-.5px;font-size:1.8em;color:#696969;}
 #sidebar p{margin:0 0px;padding:0px 30px 20px 50px;text-align:justify;}
 #sidebar a{border:none;color:#4D4D4D;text-decoration:none;}

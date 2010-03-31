@@ -1,58 +1,59 @@
-{block #title}Algorithms{/block}
+{block #title}Algoritmy{/block}
 {block #chapter}B.{/block}
 {block #content}
 
-<h3>List of all algorithms in JCOP</h3>
+<h3>Seznam všech algoritmů v JCOPu</h3>
 
 <p>
-  In <a href="#table-1">table 1</a> is a list of all algorithms bundled with JCOP, along with brief description, type of
-  search and required problem interfaces. Note that both graph search algorithms listed here extends
-  {javadoc "algorithm.graphsearch.GraphSearch"} which reduces work required to create own graph search algorithm to
-  almost no more than creating a queue for it. 
+  V <a href="#table-1">tabulce 1</a> je seznam všech algoritmů dodávaných společně s JCOPem, jejich krátký popis, typ
+  prohledávání a jaká vyžaduje rozhraní. Oba zde uvedené algoritmy na grafové prohledávání jsou potomky abstraktního
+  algoritmu {javadoc "algorithm.graphsearch.GraphSearch"}, který snižuje množství opakujícího se kódu při tvorbě
+  nových algoritmů na pouhé vytvoření fronty pro daný algoritmus.
 </p>
 
 <table class="full" id="table-1">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Search type</th>
-    <th>Required interfaces</th>
+    <th>Jméno</th>
+    <th>Popis</th>
+    <th>Typ prohledávání</th>
+    <th>Požadovaná rozhraní</th>
   </tr>
   <tr>
-    <td><a href="#breadth-first-search">BreadthFirstSearch</a></td>
-    <td>Graph search algorithm where newly expanded elements are placed to the end of queue. Slow but find optimal
-    solution.</td>
-    <td>Graph search</td>
+    <td><a href="#breadth-first-search">BreadthFirstSearch</a><br />(prohledávání&nbsp;do&nbsp;šířky)</td>
+    <td>Grafové prohledávání, kde nově expandové elementy se dávají na konec fronty. Pomalý a paměťově náročný algoritmus,
+    který ale zaručuje nalezení optimálního řešení.</td>
+    <td>Grafové</td>
     <td>{javadoc "problem.StartingConfigurationProblem"}</td>
   </tr>
   <tr>
-    <td><a href="#depth-first-search">DepthFirstSearch</a></td>
-    <td>Graph search algorithm where newly expanded elements are placed to the beginning of queue. Requires less memory
-     than BreadthFirstSearch, but doest not guarantee shortest path to solution.</td>
-    <td>Graph search</td>
+    <td><a href="#depth-first-search">DepthFirstSearch</a><br />(prohledávání&nbsp;do&nbsp;hloubky)</td>
+    <td>Grafové prohledávání, kde nově expandované elementy jsou dány na začátek fronty. Vyžaduje méně paměti než
+    prohledávání do šířky, ale nezaručuje nejkratší cestu k řešení.</td>
+    <td>Grafové</td>
     <td>{javadoc "problem.StartingConfigurationProblem"}</td>
   </tr>
   <tr>
-    <td><a href="#genetic-algorithm">GeneticAlgorithm</a></td>
-    <td>Creates population of solutions from previous population by reproduction of two configurations.</td>
-    <td>Global search</td>
+    <td><a href="#genetic-algorithm">GeneticAlgorithm</a><br />(genetický&nbsp;algoritmus)</td>
+    <td>Vytváří populaci řešení z předchozí populace pomocí opakované reprodukce dvou konfigurací.</td>
+    <td>Globální</td>
     <td>{javadoc "problem.RandomConfigurationProblem"}<br />
     {javadoc "problem.GlobalSearchProblem"}
     </td>
   </tr>
   <tr>
-    <td><a href="#graph-search-algorithm">GraphSearch</a></td>
-    <td>Abstract base for all graph search algorithms, requires queue to be implemented at least.</td>
-    <td>Graph search</td>
+    <td><a href="#graph-search-algorithm">GraphSearch</a><br />(grafové&nbsp;prohledávání)</td>
+    <td>Abstraktní předek všech grafových algoritmů. Vyžaduje implementaci fronty, kterou bude využívat na ukládání
+    expandovaných elementů..</td>
+    <td>Grafové</td>
     <td>{javadoc "problem.StartingConfigurationProblem"}</td>
   </tr>
   <tr>
-    <td><a href="#simulated-annealing">SimulatedAnnealing</a></td>
-    <td>Accept changes into worse configuration with lower probability with increasing time, in the end accepts almost
-    only better configurations.</td>
-    <td>Local search</td>
+    <td><a href="#simulated-annealing">SimulatedAnnealing</a><br />(simulované&nbsp;žíhání)</td>
+    <td>Lokálně prohledává prostor (vybírá náhodnou operaci) a s klesající pravděpodobností přijímá i zhoršující 
+    rešení.</td>
+    <td>Lokální</td>
     <td>{javadoc "problem.RandomConfigurationProblem"}<br />
-    or {javadoc "problem.StartingConfigurationProblem"}
+    nebo {javadoc "problem.StartingConfigurationProblem"}
     </td>
   </tr>
 </table>
@@ -60,67 +61,66 @@
 <h3 id="breadth-first-search">BreadthFirstSearch</h3>
 
 <p>
-  {javadoc "algorithm.graphsearch.bfs.BreadthFirstSearch"} traverses over all possible configurations. First expanded
-  configurations are processed first. Is very slow (since it traverses all configurations) and memory consuming, but
-  always finds optimal solution and shortest path to it.
+  {javadoc "algorithm.graphsearch.bfs.BreadthFirstSearch"} (prohledávání do šířky) prochází všechny možné konfigurace.
+  Dříve expandované konfigurace jsou zpracovány jako první. Je velmi pomalý a paměťově náročný, ale vždy najde optimální
+  řešení a nejkratší cestu k němu. 
 </p>
 
-{include "../fig.phtml", "url" => "bfs-animated.gif", "url_thumb" => "bfs-animated_resize.gif", "title" => "Animated BFS, source: <a href=\"http://commons.wikimedia.org/wiki/File:Breadth-First-Search-Algorithm.gif\">commons.wikimedia.org</a>", "fig" => "1"}
+{include "../fig.phtml", "url" => "bfs-animated.gif", "url_thumb" => "bfs-animated_resize.gif", "title" => "Animovaný BFS, zdroj: <a href=\"http://commons.wikimedia.org/wiki/File:Breadth-First-Search-Algorithm.gif\">commons.wikimedia.org</a>", "fig" => "1"}
 
 <h3 id="depth-first-search">DepthFirstSearch</h3>
 
 <p>
-  {javadoc "algorithm.graphsearch.dfs.DepthFirstSearch"} traverses over all possible configurations. First expanded
-  configurations are processed last. Is very slow (since it traverses all configurations, but always finds optimal
-  solution (however shortest path is not guaranteed).
+  {javadoc "algorithm.graphsearch.dfs.DepthFirstSearch"} (prohledávání do hlobky) prochází všechny možné konfigurace.
+  Poslední expandované konfigurace jsou zpracovány jako opslední. Je velmi pomalý, ale zaručuje nalezení nejlepší
+  konfigurace (ačkoli ne nejkratší cesty k ní).
 </p>
 
-{include "../fig.phtml", "url" => "dfs-animated.gif", "url_thumb" => "dfs-animated_resize.gif", "title" => "Animated DFS, source: <a href=\"http://commons.wikimedia.org/wiki/File:Depth-First-Search.gif\">commons.wikimedia.org</a>", "fig" => "2"}
+{include "../fig.phtml", "url" => "dfs-animated.gif", "url_thumb" => "dfs-animated_resize.gif", "title" => "Animovaný DFS, zdroj: <a href=\"http://commons.wikimedia.org/wiki/File:Depth-First-Search.gif\">commons.wikimedia.org</a>", "fig" => "2"}
 
 <h3 id="genetic-algorithm">GeneticAlgorithm</h3>
 
 <p>
-  {javadoc "algorithm.geneticalgorithm.GeneticAlgorithm"} simulates evolution in nature. Creates population of random configurations and
-  then randomly (better configurations has higher chance) selects pair to reproduce into new pair of configurations (to
-  next generation). Every optimization step consists of creating whole new population. Common configurations are size of
-  population and mutation rate. Suggested improvements are implementing new {javadoc "algorithm.geneticalgorithm.Selection"},
-  {javadoc "algorithm.geneticalgorithm.Mutation"} and {javadoc "algorithm.geneticalgorithm.Reproduction"} classes.
+  {javadoc "algorithm.geneticalgorithm.GeneticAlgorithm"} (genetický algoritmus) simuluje evoluci v přírodě. Nejprve
+  vytvoří populaci náhodných konfigurací a poté opakovaně vybere dva jedince (vyšší fitness má vyšší šanci na výběr)
+  a vytvoří z nich potomky do nové populace. Každý optimalizační krok se skládá z vytvoření celé nové populace. Běžné
+  nastavení pro tento algoritmus je velikost populace a míra mutace. Doporučená vylepšení jsou implementace rozhraní
+  {javadoc "algorithm.geneticalgorithm.Selection"}, {javadoc "algorithm.geneticalgorithm.Mutation"} a {javadoc "algorithm.geneticalgorithm.Reproduction"}.
 </p>
 <h3 id="graph-search-algorithm">GraphSearch</h3>
 
 <p>
-  {javadoc "algorithm.graphsearch.GraphSearch"} algorithm removes much of repetitive work when creating graph search
-  algorithms. These usually works almost the same and the only difference is how they store their opened (and closed)
-  states (configurations). One optimization step consists of taking one opened configuration, expand it to all nearby
-  configurations and put these to opened queue (it is not necessarily a <a href="http://en.wikipedia.org/wiki/First_in,_first_out">FIFO
-  queue</a>, it may be any data structure).
+  {javadoc "algorithm.graphsearch.GraphSearch"} (grafové prohledávání) je abstraktní základ pro algoritmy jako jsou
+  BFS nebo DFS. Tyto obvykle fungují téměř stejně a jediný rozdíl je to, jakým způsobem uchovávají jejich otevřené
+  (a zavřené) stavy (konfigurace). Jeden optimalizační krok znamená vzít jednu otevřenou konfiguraci, expandovat ji do
+  všech okolních stavů a tyto dát do otevřené fronty (nemusí se jednat o <a href="http://en.wikipedia.org/wiki/First_in,_first_out">FIFO
+  frontu</a>, může to být libovolná datová struktura).
 </p>
 
 <p>
-  How we interact with the queue is defined by {javadoc "algorithm.graphsearch.GraphSearchQueue"} interface. Three most
-  important methods are {javadoc "algorithm.graphsearch.GraphSearchQueue#fetch()"} to get new opened state to expand,
-  {javadoc "algorithm.graphsearch.GraphSearchQueue#add(cz.cvut.felk.cig.jcop.problem.Configuration)"} to add new state
-  to the queue and {javadoc "algorithm.graphsearch.GraphSearchQueue#testPresence(cz.cvut.felk.cig.jcop.problem.Configuration)"}
-  to test whether given configuration has ever been added to queue (and hence not to be added again). How these methods
-  are implemented alters if search becomes breadth first search, depth first search or some heuristic search for
-  example.
+  Interakce s touto frontou je definována pomocí rozhraní {javadoc "algorithm.graphsearch.GraphSearchQueue"}. Tři
+  nejdůležitější metody jsou {javadoc "algorithm.graphsearch.GraphSearchQueue#fetch()"}, která vrací jeden otevřený stav
+  na expanzi, {javadoc "algorithm.graphsearch.GraphSearchQueue#add(cz.cvut.felk.cig.jcop.problem.Configuration)"} pro
+  přidání nového stavu do fronty a {javadoc "algorithm.graphsearch.GraphSearchQueue#testPresence(cz.cvut.felk.cig.jcop.problem.Configuration)"}
+  na otestování, jestli je daná konfigurace buď v seznamu otevřených nebo zavřených stavů. Implementací těchto metod lze
+  ovlivnit, jestli algoritmus bude prohledávat do šířky, hloubky nebo například používat nějakou heuristickou metodiku.
 </p>
 
 <h3 id="simulated-annealing">SimulatedAnnealing</h3>
 
 <p>
-  {javadoc "algorithm.simulatedannealing.SimulatedAnnealing"} works with just one configuration. In every
-  optimization step it tries to use a random operation on the configuration. If it leads to better solution or it passes
-  the temperature test, it is accepted. Otherwise no change to current configuration is made.
+  {javadoc "algorithm.simulatedannealing.SimulatedAnnealing"} (simulované žíhání) pracuje pouze s jednou konfigurací. V
+  každém optimalizačním kroku se pokusí aplikovat náhodně vybranou operaci na tuto konfiguraci. Pokud je nové řešení
+  lepší nebo splní test teploty, je přijato. Jinak se aktuální konfigurace nemění.
 </p>
 
 <p>
-  Simulated annealing has starting temperature which lowers in every optimization step by certain amount (both values
-  can be changed). The higher the temperature the higher the chance to accept worse configuration and how much worse new
-  configuration is also affect chances.
+  Simulované žíhání má počáteční teplotu, která se v každém optimalizačním kroku snižuje o určitý koeficient (obě
+  hodnoty lze nastavit). Vyšší teplota znamená větší šanci přijmou horší konfiguraci (a to, jak moc je horší je tato
+  konfigurace také ovlivňuje pravděpodobnost přijetí).
 </p>
 
 <p>
-  In order for SimulatedAnnealing to be able to work properly, it requires all problems to have their fitness scaled
-  to 0.0 - 1.0 (inclusive) interval. See {javadoc "problem.BaseFitness"} for more details.
+  Aby mohlo simulované žíhání pracovat správně, potřebuje aby všechny problémy byly schopny dávat jejich fitness v
+  rozsahu od 0.0 do 1.0 (včetně). Tento předpoklad je již obsažen v rozhraní {javadoc "problem.BaseFitness"}.
 </p>
