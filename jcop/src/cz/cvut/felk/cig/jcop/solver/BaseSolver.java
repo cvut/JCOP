@@ -132,23 +132,17 @@ public abstract class BaseSolver implements Solver {
      * @return result entry for this optimization
      */
     protected ResultEntry optimize(ObjectiveProblem objectiveProblem, Algorithm algorithm) {
-        PreciseTimestamp startPreciseTimestamp;
-        Exception algorithmException;
-        Configuration bestConfiguration;
-        int optimizeCounter;
-
-        algorithm.init(objectiveProblem);
-        this.sendMessage(new MessageSolverStart(algorithm, objectiveProblem));
-        logger.info("Started optimize, " + algorithm + " on " + objectiveProblem + ".");
-
-        algorithmException = null;
-        bestConfiguration = null;
-        optimizeCounter = 0;
-        startPreciseTimestamp = new PreciseTimestamp();
-
-        // algorithm has best configuration set
+        PreciseTimestamp startPreciseTimestamp = null;
+        Exception algorithmException = null;
+        Configuration bestConfiguration = null;
+        int optimizeCounter = 0;
 
         try {
+            algorithm.init(objectiveProblem);
+            this.sendMessage(new MessageSolverStart(algorithm, objectiveProblem));
+            logger.info("Started optimize, " + algorithm + " on " + objectiveProblem + ".");
+            
+            startPreciseTimestamp = new PreciseTimestamp();
 
             do {
                 algorithm.optimize();
