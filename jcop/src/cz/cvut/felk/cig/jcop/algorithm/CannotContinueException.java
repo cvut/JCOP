@@ -14,11 +14,6 @@ package cz.cvut.felk.cig.jcop.algorithm;
  */
 public class CannotContinueException extends IllegalStateException {
     /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    /**
      * Constructs an CannotContinueException with the specified detail message.
      *
      * @param message the String that contains a detailed message

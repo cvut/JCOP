@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Ondrej Skalicka
  */
-public class ProblemCompareSolver extends BaseSolver implements Solver {
+public class ProblemCompareSolver extends BaseSolver {
     /**
      * Problems to apply algorithm on.
      */

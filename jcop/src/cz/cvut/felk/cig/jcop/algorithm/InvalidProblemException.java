@@ -10,10 +10,6 @@ package cz.cvut.felk.cig.jcop.algorithm;
  * Example: algorithm requires starting attributes, but problem does not supply it.
  */
 public class InvalidProblemException extends UnsupportedOperationException {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs an InvalidProblemException with the specified detail message.

@@ -15,7 +15,7 @@ import cz.cvut.felk.cig.jcop.problem.Problem;
  *
  * @author Ondrej Skalicka
  */
-public class SimpleSolver extends BaseSolver implements Solver {
+public class SimpleSolver extends BaseSolver {
     /**
      * Problem to be solved.
      */

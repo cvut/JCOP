@@ -11,11 +11,6 @@ package cz.cvut.felk.cig.jcop.problem;
  */
 public class InvalidConfigurationException extends RuntimeException {
     /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    /**
      * Constructs an InvalidConfigurationException with the specified detail message.
      *
      * @param message the String that contains a detailed message

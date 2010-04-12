@@ -16,7 +16,7 @@ import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
  * @author Ondrej Skalicka
  * @see BaseAlgorithm Base abstract implementation, reducing work required to add new algorithm
  */
-public abstract interface Algorithm {
+public interface Algorithm {
     /**
      * Initializes new Algorithm on a problem.
      * <p/>
