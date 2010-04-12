@@ -4,6 +4,7 @@
 
 package cz.cvut.felk.cig.jcop.algorithm.simulatedannealing;
 
+import cz.cvut.felk.cig.jcop.algorithm.ChainAlgorithm;
 import cz.cvut.felk.cig.jcop.algorithm.BaseAlgorithm;
 import cz.cvut.felk.cig.jcop.algorithm.CannotContinueException;
 import cz.cvut.felk.cig.jcop.algorithm.InvalidProblemException;
@@ -29,7 +30,7 @@ import cz.cvut.felk.cig.jcop.util.JcopRandom;
  *
  * @author Ondrej Skalicka
  */
-public class SimulatedAnnealing extends BaseAlgorithm {
+public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm {
     /**
      * Active configuration to be expanded
      */
@@ -128,5 +129,17 @@ public class SimulatedAnnealing extends BaseAlgorithm {
 
         // anneal
         this.temperature *= this.anneal;
+    }
+
+    public void setActiveConfiguration(Configuration activeConfiguration) {
+        double fitness = this.fitness.normalize(this.fitness.getValue(activeConfiguration));
+
+        this.activeConfiguration = activeConfiguration;
+        this.activeFitness = fitness;
+
+        if (fitness > this.bestFitness) {
+            this.bestFitness = fitness;
+            this.bestConfiguration = activeConfiguration;
+        }
     }
 }

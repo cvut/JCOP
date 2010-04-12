@@ -16,11 +16,11 @@ public abstract class BaseFitness implements Fitness {
     /**
      * Minimal possible fitness. If fitness is by any chance lower than this number, it is set to minFitness.
      */
-    protected double minFitness = 0.0;
+    protected double minFitness = Double.NaN;
     /**
      * Maximal possible fitness. If fitness is by any chance higher than this number, it is set to maxFitness.
      */
-    protected double maxFitness = 0.0;
+    protected double maxFitness = Double.NaN;
     /**
      * Asymmetric scaling does not scale fitness evenly but allocates (0.0, 0.5) range to negative fitness values and
      * (0.5, 1.0) to positive values. Zero value will be represented as 0.5. Only works if minFitness &lt; 0.0 and
@@ -28,7 +28,9 @@ public abstract class BaseFitness implements Fitness {
      */
     protected boolean asymmetricScale = true;
 
-    public double normalize(double fitness) {
+    public double normalize(double fitness) throws IllegalStateException {
+        if (this.minFitness == Double.NaN || this.maxFitness == Double.NaN) throw new IllegalStateException("Fitness has not prepared min/max fitnesses");
+
         if (minFitness >= maxFitness) return 0.5;
 
         if (fitness < minFitness) fitness = minFitness;

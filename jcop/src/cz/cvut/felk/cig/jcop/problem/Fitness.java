@@ -38,6 +38,7 @@ public interface Fitness {
      *
      * @param fitness to be normalized
      * @return fitness of configuration in range (0,1) (inclusive)
+     * @throws IllegalStateException if fitness is unable to return normalized value
      */
-    public double normalize(double fitness);
+    public double normalize(double fitness) throws IllegalStateException;
 }

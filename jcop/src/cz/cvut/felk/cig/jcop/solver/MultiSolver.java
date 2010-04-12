@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author Ondrej Skalicka
  */
-public class MultiSolver extends BaseSolver implements Solver {
+public class MultiSolver extends BaseSolver {
     /**
      * Problems to apply algorithms on.
      */
