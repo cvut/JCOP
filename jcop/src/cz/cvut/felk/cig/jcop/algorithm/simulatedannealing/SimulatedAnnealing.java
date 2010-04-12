@@ -75,7 +75,7 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
     }
 
     public void init(ObjectiveProblem problem) throws InvalidProblemException {
-        this.fitness = problem.getDefaultFitness();
+        this.problem = problem;
 
         // SA requires either startingConfiguration or RandomStartingConfiguration problem
         if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration())
@@ -88,6 +88,23 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
             this.activeConfiguration = problem.getRandomConfiguration();
         }
 
+        this.initCommon();
+    }
+
+    public void init(ObjectiveProblem problem, Configuration activeConfiguration) {
+        this.problem = problem;
+        
+        this.activeConfiguration = activeConfiguration;
+
+        this.initCommon();
+    }
+
+    /**
+     * Part of init common to all initialization types.
+     */
+    protected void initCommon () {
+        this.fitness = problem.getDefaultFitness();
+
         this.temperature = this.startingTemperature;
         this.setLabel("T=" + this.temperature + ", A=" + this.anneal);
 
@@ -97,8 +114,6 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
         // calculate fitness
         this.activeFitness = this.fitness.getValue(this.activeConfiguration);
         this.activeNormalizedFitness = this.fitness.normalize(activeFitness);
-
-        this.problem = problem;
     }
 
     public void optimize() throws CannotContinueException {
@@ -131,15 +146,4 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
         this.temperature *= this.anneal;
     }
 
-    public void setActiveConfiguration(Configuration activeConfiguration) {
-        double fitness = this.fitness.normalize(this.fitness.getValue(activeConfiguration));
-
-        this.activeConfiguration = activeConfiguration;
-        this.activeFitness = fitness;
-
-        if (fitness > this.bestFitness) {
-            this.bestFitness = fitness;
-            this.bestConfiguration = activeConfiguration;
-        }
-    }
 }
