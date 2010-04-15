@@ -4,7 +4,6 @@
 
 package cz.cvut.felk.cig.jcop.problem.knapsack;
 
-import cz.cvut.felk.cig.jcop.result.OperationHistory;
 import cz.cvut.felk.cig.jcop.problem.*;
 import cz.cvut.felk.cig.jcop.util.JcopRandom;
 

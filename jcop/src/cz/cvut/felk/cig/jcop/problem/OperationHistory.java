@@ -2,9 +2,7 @@
  * Copyright © 2010 by Ondrej Skalicka. All Rights Reserved
  */
 
-package cz.cvut.felk.cig.jcop.result;
-
-import cz.cvut.felk.cig.jcop.problem.Operation;
+package cz.cvut.felk.cig.jcop.problem;
 
 import java.util.LinkedList;
 import java.util.List;

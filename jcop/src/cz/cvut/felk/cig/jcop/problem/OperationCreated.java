@@ -5,7 +5,7 @@
 package cz.cvut.felk.cig.jcop.problem;
 
 /**
- * This is dummy operation used mostly for {@link cz.cvut.felk.cig.jcop.result.OperationHistory} to indicate that new
+ * This is dummy operation used mostly for {@link OperationHistory} to indicate that new
  * attributes was created (either by {@link cz.cvut.felk.cig.jcop.problem.RandomConfigurationProblem} or {@link
  * cz.cvut.felk.cig.jcop.problem.StartingConfigurationProblem}.
  *
@@ -31,7 +31,7 @@ public final class OperationCreated implements Operation {
 
     /**
      * This operation cannot be executed as it has absolutely no effect but to indicate creation of new attributes in
-     * {@link cz.cvut.felk.cig.jcop.result.OperationHistory}
+     * {@link OperationHistory}
      *
      * @throws UnsupportedOperationException every time called - this operation is not to be called at all.
      */

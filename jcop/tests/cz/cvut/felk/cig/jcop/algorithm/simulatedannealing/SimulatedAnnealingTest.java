@@ -35,5 +35,9 @@ public class SimulatedAnnealingTest {
         simulatedAnnealing.init(new BaseObjectiveProblem(knapsack), configuration);
 
         assert simulatedAnnealing.getBestFitness() == fitness : "Expected fitness to be " + fitness + ", got " + simulatedAnnealing.getBestFitness();
+        assert simulatedAnnealing.getBestConfiguration() == configuration : "Expected solution to be " + configuration + ", got " + simulatedAnnealing.getBestConfiguration();
+
+        // try to perform optimize step - SA should not raise an exception
+        simulatedAnnealing.optimize();
     }
 }

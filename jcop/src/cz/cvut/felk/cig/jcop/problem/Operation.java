@@ -16,7 +16,7 @@ public interface Operation {
      * Executes operation on a attributes.
      * <p/>
      * Creates whole new attributes, no references to the old one are kept (except references via {@link
-     * cz.cvut.felk.cig.jcop.result.OperationHistory}.
+     * OperationHistory}.
      *
      * @param configuration attributes to have operation executed upon
      * @return new attributes, after operation execution

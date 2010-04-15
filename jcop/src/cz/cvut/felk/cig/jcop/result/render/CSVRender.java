@@ -5,8 +5,8 @@
 package cz.cvut.felk.cig.jcop.result.render;
 
 import com.csvreader.CsvWriter;
-import cz.cvut.felk.cig.jcop.result.OperationHistory;
 import cz.cvut.felk.cig.jcop.problem.ConfigurationMap;
+import cz.cvut.felk.cig.jcop.problem.OperationHistory;
 import cz.cvut.felk.cig.jcop.result.Result;
 import cz.cvut.felk.cig.jcop.result.ResultEntry;
 import cz.cvut.felk.cig.jcop.util.PreciseTimestamp;
