@@ -4,9 +4,9 @@
 
 package cz.cvut.felk.cig.jcop.problem.tsp;
 
-import cz.cvut.felk.cig.jcop.result.OperationHistory;
 import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.Operation;
+import cz.cvut.felk.cig.jcop.problem.OperationHistory;
 
 import java.util.List;
 

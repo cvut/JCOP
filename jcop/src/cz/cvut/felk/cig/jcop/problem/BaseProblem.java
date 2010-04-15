@@ -24,7 +24,7 @@ public abstract class BaseProblem implements Problem {
      * <p/>
      * For more info, see {@link cz.cvut.felk.cig.jcop.problem.Problem#getLabel()}.
      */
-    protected String label = "";
+    protected String label = "base problem";
 
     public ConfigurationMap getConfigurationMap() {
         return new IdentityConfigurationMap();

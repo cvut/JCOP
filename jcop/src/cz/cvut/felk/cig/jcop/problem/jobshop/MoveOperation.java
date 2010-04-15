@@ -4,10 +4,10 @@
 
 package cz.cvut.felk.cig.jcop.problem.jobshop;
 
-import cz.cvut.felk.cig.jcop.result.OperationHistory;
 import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.InvalidConfigurationException;
 import cz.cvut.felk.cig.jcop.problem.Operation;
+import cz.cvut.felk.cig.jcop.problem.OperationHistory;
 
 import java.util.List;
 

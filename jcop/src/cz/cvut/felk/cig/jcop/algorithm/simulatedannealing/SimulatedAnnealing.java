@@ -4,9 +4,9 @@
 
 package cz.cvut.felk.cig.jcop.algorithm.simulatedannealing;
 
-import cz.cvut.felk.cig.jcop.algorithm.ChainAlgorithm;
 import cz.cvut.felk.cig.jcop.algorithm.BaseAlgorithm;
 import cz.cvut.felk.cig.jcop.algorithm.CannotContinueException;
+import cz.cvut.felk.cig.jcop.algorithm.ChainAlgorithm;
 import cz.cvut.felk.cig.jcop.algorithm.InvalidProblemException;
 import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;

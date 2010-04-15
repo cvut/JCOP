@@ -43,7 +43,7 @@ public abstract class BaseFitness implements Fitness {
         }
 
 
-        return (fitness - minFitness) / (maxFitness - minFitness);
+        return Math.min(1.0, Math.max((fitness - minFitness) / (maxFitness - minFitness), 0.0));
     }
 
     public double getMaxFitness() {

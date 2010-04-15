@@ -6,7 +6,7 @@ package cz.cvut.felk.cig.jcop.problem.knapsack;
 
 import cz.cvut.felk.cig.jcop.problem.BaseReversibleOperation;
 import cz.cvut.felk.cig.jcop.problem.Configuration;
-import cz.cvut.felk.cig.jcop.result.OperationHistory;
+import cz.cvut.felk.cig.jcop.problem.OperationHistory;
 
 import java.util.List;
 

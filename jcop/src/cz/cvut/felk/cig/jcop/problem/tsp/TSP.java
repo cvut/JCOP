@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Ondrej Skalicka
  */
-public class TSP extends BaseProblem implements StartingConfigurationProblem {
+public class TSP extends BaseProblem implements StartingConfigurationProblem, GlobalSearchProblem {
     /**
      * List of all possible {@link SwitchCityOperation MoveCityOperations}. First operations has source index 0,
      * destination index 1..dimension-1. Then comes operation with source 1, destination 2..dimension-1 etc. Last is
@@ -123,5 +123,11 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem {
 
     public Configuration getStartingConfiguration() {
         return this.startingConfiguration;
+    }
+
+    /* GlobalSearchProblem interface */
+    
+    public Integer getMaximum(int index) {
+        return this.cities.size() - 1;
     }
 }

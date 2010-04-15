@@ -4,8 +4,6 @@
 
 package cz.cvut.felk.cig.jcop.problem;
 
-import cz.cvut.felk.cig.jcop.result.OperationHistory;
-
 import java.util.ArrayList;
 import java.util.List;
 
