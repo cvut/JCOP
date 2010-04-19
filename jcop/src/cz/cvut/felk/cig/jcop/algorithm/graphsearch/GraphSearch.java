@@ -64,8 +64,7 @@ public abstract class GraphSearch extends BaseAlgorithm {
     public void expand(Configuration configuration) {
         OperationIterator it = this.problem.getOperationIterator(configuration);
         while (it.hasNext()) {
-            Operation o = it.next();
-            Configuration c = o.execute(configuration);
+            Configuration c = it.next().execute(configuration);
             if (!this.queue.testPresence(c)) this.queue.add(c);
         }
     }

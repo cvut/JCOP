@@ -46,7 +46,7 @@ public class JFreeChartRender implements MessageListener {
         frame.setVisible(true);
     }
 
-    public void onMessage(Object message) {
+    public void onMessage(Message message) {
         if (message instanceof MessageSolverStart) {
             MessageSolverStart messageSolverStart = (MessageSolverStart) message;
             this.activeSeries = new XYSeries(messageSolverStart.getAlgorithm() + "/" + messageSolverStart.getObjectiveProblem());

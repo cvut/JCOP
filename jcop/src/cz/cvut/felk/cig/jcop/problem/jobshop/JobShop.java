@@ -127,7 +127,7 @@ public class JobShop extends BaseProblem implements StartingConfigurationProblem
         List<Integer> tmp = new ArrayList<Integer>(this.dimension);
         for (int i = 0; i < this.dimension; ++i)
             tmp.add(JcopRandom.nextInt(this.machines));
-        return new Configuration(tmp, new OperationHistory(new OperationCreated("Empty JobShop created (random)")));
+        return new Configuration(tmp, "Empty JobShop created (random)");
     }
 
     /* GlobalSearchProblem interface */

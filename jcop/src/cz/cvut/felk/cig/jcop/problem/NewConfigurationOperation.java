@@ -11,7 +11,7 @@ package cz.cvut.felk.cig.jcop.problem;
  *
  * @author Ondrej Skalicka
  */
-public final class OperationCreated implements Operation {
+public class NewConfigurationOperation implements Operation {
     protected String toString = "New configuration created";
 
     /**
@@ -19,14 +19,14 @@ public final class OperationCreated implements Operation {
      *
      * @param toString string returned from {@link #toString()} calls.
      */
-    public OperationCreated(String toString) {
+    public NewConfigurationOperation(String toString) {
         this.toString = toString;
     }
 
     /**
      * Creates new operation with {@link #toString default text} displayed in {@link #toString()}.
      */
-    public OperationCreated() {
+    public NewConfigurationOperation() {
     }
 
     /**
@@ -36,7 +36,7 @@ public final class OperationCreated implements Operation {
      * @throws UnsupportedOperationException every time called - this operation is not to be called at all.
      */
     public Configuration execute(Configuration configuration) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Operation Created cannot be called directly");
+        throw new UnsupportedOperationException("NewConfigurationOperation cannot be called directly");
     }
 
     /**

@@ -19,7 +19,7 @@ public class UnknownOperation implements Operation {
      * @throws UnsupportedOperationException every time called - this operation is not to be called at all.
      */
     public Configuration execute(Configuration configuration) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Operation Created cannot be called directly");
+        throw new UnsupportedOperationException("UnknownOperation cannot be called directly");
     }
 
     @Override

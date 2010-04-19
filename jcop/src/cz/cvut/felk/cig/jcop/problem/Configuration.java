@@ -31,7 +31,7 @@ public class Configuration implements Comparable<Configuration> {
      * Creates new Configuration with set attributes and operation history.
      *
      * @param attributes       new attributes for Configuration. List is NOT copied so take care not to use it for more
-     *                         than one configuration.
+     *                         than one configuration or change it afterwards.
      * @param operationHistory last item in configuration history.
      */
     public Configuration(List<Integer> attributes, OperationHistory operationHistory) {
@@ -43,21 +43,21 @@ public class Configuration implements Comparable<Configuration> {
     /**
      * Special constructor for creating first configuration (eg. starting configuration). DO NOT use in operations!
      * <p/>
-     * Is equivalent to new Configuration(attributes, new OperationHistory(new OperationCreated(createText))).
+     * Is equivalent to new Configuration(attributes, new OperationHistory(new NewConfigurationOperation(createText))).
      *
      * @param attributes new attributes for Configuration. List is NOT copied so take care not to use it for more than
-     *                   one configuration.
-     * @param createText text for {@link OperationCreated} constructor
+     *                   one configuration or change it afterwards.
+     * @param createText text for {@link NewConfigurationOperation} constructor
      */
     public Configuration(List<Integer> attributes, String createText) {
-        this(attributes, new OperationHistory(new OperationCreated(createText)));
+        this(attributes, new OperationHistory(new NewConfigurationOperation(createText)));
     }
 
     /**
      * Creates new configuration with UnknownOperation in operation history.
      *
      * @param attributes new attributes for Configuration. List is NOT copied so take care not to use it for more than
-     *                   one configuration.
+     *                   one configuration or change it afterwards.
      */
     public Configuration(List<Integer> attributes) {
         this(attributes, new OperationHistory(new UnknownOperation()));

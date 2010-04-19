@@ -114,7 +114,7 @@ public abstract class BaseSolver implements Solver {
         }
     }
 
-    public void sendMessage(Object message) {
+    public void sendMessage(Message message) {
         for (MessageListener messageListener : messageListeners) {
             messageListener.onMessage(message);
         }

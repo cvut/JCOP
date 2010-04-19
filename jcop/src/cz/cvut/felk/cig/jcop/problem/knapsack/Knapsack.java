@@ -208,7 +208,7 @@ public class Knapsack extends BaseProblem implements StartingConfigurationProble
         List<Integer> tmp = new ArrayList<Integer>(this.dimension);
         for (int i = 0; i < this.dimension; ++i)
             tmp.add(JcopRandom.nextBoolean() ? 1 : 0);
-        return new Configuration(tmp, new OperationHistory(new OperationCreated("Empty knapsack created (random)")));
+        return new Configuration(tmp, "Empty knapsack created (random)");
     }
 
     /* GlobalSearchProblem interface */

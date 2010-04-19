@@ -7,6 +7,7 @@ package cz.cvut.felk.cig.jcop.solver;
 import cz.cvut.felk.cig.jcop.result.Result;
 import cz.cvut.felk.cig.jcop.result.render.Render;
 import cz.cvut.felk.cig.jcop.solver.condition.StopCondition;
+import cz.cvut.felk.cig.jcop.solver.message.Message;
 import cz.cvut.felk.cig.jcop.solver.message.MessageListener;
 
 import java.util.List;
@@ -92,5 +93,5 @@ public interface Solver {
      *
      * @param message message to be send
      */
-    public void sendMessage(Object message);
+    public void sendMessage(Message message);
 }

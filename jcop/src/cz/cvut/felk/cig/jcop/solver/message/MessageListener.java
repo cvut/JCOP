@@ -17,5 +17,5 @@ public interface MessageListener {
      *
      * @param message the message passed to the listener
      */
-    void onMessage(Object message);
+    void onMessage(Message message);
 }
