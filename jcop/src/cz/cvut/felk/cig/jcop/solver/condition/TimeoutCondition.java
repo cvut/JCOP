@@ -4,6 +4,7 @@
 
 package cz.cvut.felk.cig.jcop.solver.condition;
 
+import cz.cvut.felk.cig.jcop.solver.message.Message;
 import cz.cvut.felk.cig.jcop.solver.message.MessageSolverStart;
 import cz.cvut.felk.cig.jcop.util.PreciseTime;
 
@@ -33,7 +34,7 @@ public class TimeoutCondition extends BaseCondition {
     }
 
     @Override
-    public void onMessage(Object message) {
+    public void onMessage(Message message) {
         if (message instanceof MessageSolverStart) this.cpuTimeStart = PreciseTime.getCpuTimeMili();
     }
 

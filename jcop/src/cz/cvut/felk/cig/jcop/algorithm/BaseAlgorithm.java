@@ -40,7 +40,7 @@ public abstract class BaseAlgorithm implements Algorithm {
      * <p/>
      * For more info, see {@link cz.cvut.felk.cig.jcop.algorithm.Algorithm#setLabel(String)}.
      */
-    protected String label = "";
+    protected String label = "base algorithm";
 
     public Configuration getBestConfiguration() {
         return this.bestConfiguration;
@@ -49,13 +49,15 @@ public abstract class BaseAlgorithm implements Algorithm {
     public double getBestFitness() {
         return bestFitness;
     }
-
     /**
-     * TODO: maybe recalculate bestFitness if bestConfiguration is set. But it will not be safe if algorithm requires
-     * normalized and we set it to non-normalized or vice versa. 
+     * @inheritDoc
+     *
+     * Note that when fitness is set and there is a {@link #bestConfiguration} set, it recalculates {@link #bestFitness} as well.
      */
     public void setFitness(Fitness fitness) {
         this.fitness = fitness;
+
+        if (this.bestConfiguration != null) this.bestFitness = fitness.getValue(this.bestConfiguration);
     }
 
     public String getLabel() {

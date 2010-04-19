@@ -11,7 +11,7 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
  *
  * @author Ondrej Skalicka
  */
-public class MessageBetterConfigurationFound {
+public class MessageBetterConfigurationFound implements Message {
     /**
      * New best found solution.
      */

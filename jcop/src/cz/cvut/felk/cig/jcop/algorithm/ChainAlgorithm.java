@@ -14,9 +14,16 @@ import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
  */
 public interface ChainAlgorithm extends Algorithm {
     /**
-     * Sets configuration found previously with another algorithm (or other means) for this algorithm to continue on.
+     * Initializes new Algorithm on a problem.
+     * <p/>
+     * Algorithm is expected to prepare its fitness at this point, since solver can override it afterwards.
+     * <p/>
+     * Also, keep in mind that one algorithm could be used repeatedly on several different problems, so init should
+     * reset all local settings.
      *
+     * @param problem problem to be initialized on
      * @param activeConfiguration new active configuration
+     * @throws InvalidProblemException if supplied problem cannot be solved by this algorithm
      */
-    public void init(ObjectiveProblem problem, Configuration activeConfiguration);
+    public void init(ObjectiveProblem problem, Configuration activeConfiguration) throws InvalidProblemException;
 }

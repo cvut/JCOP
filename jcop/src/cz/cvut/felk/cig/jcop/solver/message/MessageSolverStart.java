@@ -12,7 +12,7 @@ import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
  *
  * @author Ondrej Skalicka
  */
-public class MessageSolverStart {
+public class MessageSolverStart implements Message {
     /**
      * Problem that has has started being solved.
      */

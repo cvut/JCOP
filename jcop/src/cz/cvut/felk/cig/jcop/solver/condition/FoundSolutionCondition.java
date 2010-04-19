@@ -4,6 +4,7 @@
 
 package cz.cvut.felk.cig.jcop.solver.condition;
 
+import cz.cvut.felk.cig.jcop.solver.message.Message;
 import cz.cvut.felk.cig.jcop.solver.message.MessageSolutionFound;
 import cz.cvut.felk.cig.jcop.solver.message.MessageSolverStart;
 
@@ -23,7 +24,7 @@ public class FoundSolutionCondition extends BaseCondition {
     }
 
     @Override
-    public void onMessage(Object message) {
+    public void onMessage(Message message) {
         if (message instanceof MessageSolutionFound) this.solutionFound = true;
         else if (message instanceof MessageSolverStart) this.solutionFound = false;
     }

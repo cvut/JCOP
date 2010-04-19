@@ -25,7 +25,7 @@ public interface Algorithm {
      * Also, keep in mind that one algorithm could be used repeatedly on several different problems, so init should
      * reset all local settings.
      *
-     * @param problem problem
+     * @param problem problem to be initialized on
      * @throws InvalidProblemException if supplied problem cannot be solved by this algorithm
      */
     public void init(ObjectiveProblem problem) throws InvalidProblemException;
@@ -45,7 +45,7 @@ public interface Algorithm {
     public Configuration getBestConfiguration();
 
     /**
-     * Updates which fitness to use instead of default.
+     * Updates which fitness to use instead of default. Should be called before first optimize step is made.
      *
      * @param fitness fitness to be used in algorithm
      */

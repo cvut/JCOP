@@ -63,7 +63,7 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
      * @param temperature starting temperature
      */
     public SimulatedAnnealing(double temperature, double anneal) {
-        this.startingTemperature = this.temperature = temperature;
+        this.startingTemperature = temperature;
         this.anneal = anneal;
     }
 

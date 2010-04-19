@@ -12,7 +12,7 @@ import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
  *
  * @author Ondrej Skalicka
  */
-public class MessageSolverStop {
+public class MessageSolverStop implements Message {
     /**
      * Problem that has has stopped being solved.
      */

@@ -9,5 +9,5 @@ package cz.cvut.felk.cig.jcop.solver.message;
  *
  * @author Ondrej Skalicka
  */
-public class MessageOptimize {
+public class MessageOptimize implements Message {
 }

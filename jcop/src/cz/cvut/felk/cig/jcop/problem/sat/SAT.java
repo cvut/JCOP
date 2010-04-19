@@ -229,7 +229,7 @@ public class SAT extends BaseProblem implements StartingConfigurationProblem, Ra
         List<Integer> tmp = new ArrayList<Integer>(this.dimension);
         for (int i = 0; i < this.dimension; ++i)
             tmp.add(JcopRandom.nextBoolean() ? 1 : 0);
-        return new Configuration(tmp, new OperationHistory(new OperationCreated("Empty SAT created (random)")));
+        return new Configuration(tmp, "Empty SAT created (random)");
     }
 
     /* GlobalSearchProblem interface */
