@@ -8,6 +8,7 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ProblemFormatException;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +66,25 @@ public class TSPTest {
 
         }
     }
-/*
+
+    @Test
+    public void testInitFile() throws Exception {
+        problem = new TSP(new File("data/tsp/eil51.tsp"));
+
+        for (int i = 0; i < 6; ++i) {
+            try {
+                problem = new TSP(new File("data/tsp/eil51-invalid" + (i+1) + ".tsp"));
+                assert false : "Expected exception for incorrect input for file data/tsp/eil51-invalid" + (i+1) + ".tsp";
+            } catch (ProblemFormatException ignored) {
+
+            }
+        }
+
+        problem = new TSP(new File("data/tsp/dsj1000.tsp"));
+
+    }
+
+    /*
 // cost no longer exists
     @Test
     public void testCost() throws Exception {

@@ -138,11 +138,11 @@ public abstract class BaseSolver implements Solver {
         int optimizeCounter = 0;
 
         try {
+            startPreciseTimestamp = new PreciseTimestamp();
+            
             algorithm.init(objectiveProblem);
             this.sendMessage(new MessageSolverStart(algorithm, objectiveProblem));
             logger.info("Started optimize, " + algorithm + " on " + objectiveProblem + ".");
-            
-            startPreciseTimestamp = new PreciseTimestamp();
 
             do {
                 algorithm.optimize();
