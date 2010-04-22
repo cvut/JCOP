@@ -13,7 +13,7 @@ import cz.cvut.felk.cig.jcop.solver.condition.IterationCondition;
 import org.testng.annotations.Test;
 
 /**
- * @author Savannah
+ * @author Ondrej Skalicka
  */
 public class SimulatedAnnealingTest {
     @Test

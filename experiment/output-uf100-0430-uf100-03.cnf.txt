@@ -1,0 +1,52 @@
+
+=== Algorithm SimulatedAnnealing [T=0.05, A=0.999] used on problem SAT [uf100-03.cnf] ===
+  CPU Time:                   43578 [ms]
+  System Time:                   15 [ms]
+  User Time:                  43562 [ms]
+  Clock Time:                 45625 [ms]
+  Optimize counter:          500000 [-]
+  Optimize/sec (CPU):         11473 [1/s]
+  Optimize/sec (Clock):       10958 [1/s]
+  Best solution:         Configuration{attributes=[1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0], operationHistory={4947 items}}
+  Depth:                       4947 [-]
+  Fitness:                     -1,0 [-]
+  Ended without exception
+
+=== Algorithm SimulatedAnnealing [T=0.05, A=0.9999] used on problem SAT [uf100-03.cnf] ===
+  CPU Time:                   42953 [ms]
+  System Time:                   16 [ms]
+  User Time:                  42938 [ms]
+  Clock Time:                 44985 [ms]
+  Optimize counter:          500000 [-]
+  Optimize/sec (CPU):         11640 [1/s]
+  Optimize/sec (Clock):       11114 [1/s]
+  Best solution:         Configuration{attributes=[1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0], operationHistory={35820 items}}
+  Depth:                      35820 [-]
+  Fitness:                     -1,0 [-]
+  Ended without exception
+
+=== Algorithm SimulatedAnnealing [T=0.05, A=0.99999] used on problem SAT [uf100-03.cnf] ===
+  CPU Time:                   45094 [ms]
+  System Time:                   16 [ms]
+  User Time:                  45078 [ms]
+  Clock Time:                 47469 [ms]
+  Optimize counter:          500000 [-]
+  Optimize/sec (CPU):         11087 [1/s]
+  Optimize/sec (Clock):       10533 [1/s]
+  Best solution:         Configuration{attributes=[0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1], operationHistory={354181 items}}
+  Depth:                     354181 [-]
+  Fitness:                     -1,0 [-]
+  Ended without exception
+
+=== Algorithm SimulatedAnnealing [T=0.05, A=0.999999] used on problem SAT [uf100-03.cnf] ===
+  CPU Time:                   46969 [ms]
+  System Time:                    1 [ms]
+  User Time:                  46969 [ms]
+  Clock Time:                 49172 [ms]
+  Optimize counter:          500000 [-]
+  Optimize/sec (CPU):         10645 [1/s]
+  Optimize/sec (Clock):       10168 [1/s]
+  Best solution:         Configuration{attributes=[1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0], operationHistory={478090 items}}
+  Depth:                     478090 [-]
+  Fitness:                    -25,0 [-]
+  Ended without exception

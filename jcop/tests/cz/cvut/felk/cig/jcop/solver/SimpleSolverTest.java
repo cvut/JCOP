@@ -37,11 +37,7 @@ public class SimpleSolverTest {
         this.a = new BreadthFirstSearch();
         Logger.getRootLogger().setLevel(Level.WARN);
     }
-
-    @AfterTest
-    public void tearDown() throws Exception {
-    }
-
+    
     @Test
     public void testSolve() throws Exception {
         int counter = 10;
@@ -77,9 +73,5 @@ public class SimpleSolverTest {
 
 
         s.run();
-
-        /*System.out.println("Steps: " + s.getOptimizeCounter());
-        System.out.println("Solution: " + s.getBestConfiguration());
-        System.out.println("Fit: " + p.getDefaultFitness().getValue(s.getBestConfiguration()));*/
     }
 }

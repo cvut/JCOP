@@ -81,6 +81,7 @@ public class TSPTest {
         }
 
         problem = new TSP(new File("data/tsp/dsj1000.tsp"));
+        problem = new TSP(new File("data/tsp/berlin52.tsp"));
 
     }
 

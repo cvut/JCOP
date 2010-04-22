@@ -126,7 +126,7 @@ public class CSVRender implements Render {
                 stringBufferHumanReadable.append("]");
                 csvWriter.write(stringBuffer.toString());
                 csvWriter.write(stringBufferHumanReadable.toString());
-                csvWriter.write(Integer.toString(resultEntry.getBestConfiguration().getOperationHistory().getCounter()));
+                csvWriter.write(Long.toString(resultEntry.getBestConfiguration().getOperationHistory().getCounter()));
                 csvWriter.write(Double.toString(resultEntry.getBestFitness()));
 
                 for (OperationHistory operationHistory : resultEntry.getBestConfiguration().getOperationHistory().getChronologicalList()) {

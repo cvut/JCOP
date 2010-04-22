@@ -125,6 +125,25 @@ public class SimpleRender implements Render {
         this.printStream = new PrintStream(file);
     }
 
+    /**
+     * Creates new simple render with output level and print stream set to a file.
+     * <p/>
+     * Note that SimpleRender will overwrite contents of supplied file. If you create several renders with same File,
+     * their contents will overwrite each other. In such case, create PrintStream beforehand and use {@link
+     * #SimpleRender(int, java.io.PrintStream)} instead.
+     *
+     * @param file        file to write to
+     * @throws FileNotFoundException    If the given file object does not denote an existing, writable regular file and
+     *                                  a new regular file of that name cannot be created, or if some other error occurs
+     *                                  while opening or creating the file
+     * @throws IllegalArgumentException if invalid level is supplied
+     * @see java.io.PrintStream#PrintStream(java.io.File) print stream from file
+     */
+    public SimpleRender(File file) throws FileNotFoundException, IllegalArgumentException {
+        this.outputLevel = SimpleRender.OUTPUT_STANDARD;
+        this.printStream = new PrintStream(file);
+    }
+
     public void render(Result result) {
         for (ResultEntry resultEntry : result.getResultEntries()) {
             switch (this.outputLevel) {

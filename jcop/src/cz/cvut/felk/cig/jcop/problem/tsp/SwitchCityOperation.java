@@ -53,4 +53,12 @@ public class SwitchCityOperation implements Operation {
 
         return new Configuration(newConfiguration, new OperationHistory(this, configuration.getOperationHistory()));
     }
+
+    @Override
+    public String toString() {
+        return "SwitchCityOperation{" +
+                "destinationIndex=" + destinationIndex +
+                ", sourceIndex=" + sourceIndex +
+                '}';
+    }
 }
