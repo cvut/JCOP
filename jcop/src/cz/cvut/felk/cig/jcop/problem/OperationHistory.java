@@ -31,7 +31,34 @@ public class OperationHistory {
      * <p/>
      * Root has 0, each other child has its parent counter+1.
      */
-    protected int counter;
+    protected long counter;
+    /**
+     * Actual size of history.
+     *
+     * This can vary from {@link #counter} if history has been empties. In such case, {@link #counter} remains unchanged, while
+     * size is reset to zero.
+     */
+    protected long size;
+    /**
+     * How many items are allowed in history at most.
+     *
+     * If this number is reached, history is emptied in order to free allocated memory. Constants {@link #LIMIT_DISABLED}
+     * and {@link #LIMIT_UNLIMITED} are allowed values as well as any positive number. 
+     */
+    public static int limit = 1024;
+    /**
+     * No history is collected.
+     *
+     * Every configuration has only one OperationHistory element (with null {@link #parent}).
+     */
+    public static final int LIMIT_DISABLED = 0;
+    /**
+     * History is never erased.
+     *
+     * Note that this can lead to huge memory overhead as single configuration can have as many as hundred million items in
+     * history (which with about 32B for every OperationHistory object means several GB of memory).
+     */
+    public static final int LIMIT_UNLIMITED = -1;
 
     /**
      * Constructs new OperationHistory without parent (eg. root)
@@ -42,6 +69,7 @@ public class OperationHistory {
         this.operation = operation;
         this.parent = null;
         this.counter = 0;
+        this.size = 0;
     }
 
     /**
@@ -52,8 +80,15 @@ public class OperationHistory {
      */
     public OperationHistory(Operation operation, OperationHistory parent) {
         this.operation = operation;
-        this.parent = parent;
         this.counter = parent.getCounter() + 1;
+
+        if (OperationHistory.limit >= 0 && parent.size >= OperationHistory.limit) {
+            this.parent = null;
+            this.size = 0;
+        } else {
+            this.parent = parent;
+            this.size = parent.size + 1;
+        }
     }
 
     /**
@@ -92,7 +127,7 @@ public class OperationHistory {
      *
      * @return counter of node
      */
-    public int getCounter() {
+    public long getCounter() {
         return counter;
     }
 

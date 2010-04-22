@@ -12,6 +12,7 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
 import cz.cvut.felk.cig.jcop.problem.Operation;
 import cz.cvut.felk.cig.jcop.util.JcopRandom;
+import org.apache.log4j.Logger;
 
 /**
  * Simulated annealing algorithm.
@@ -137,6 +138,7 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
             this.activeNormalizedFitness = newNormalizedFitness;
             // if it is best, set it as best
             if (newFitness > this.bestFitness) {
+                Logger.getLogger(this.getClass()).info("Better solution " + newFitness + ", " + newConfiguration);
                 this.bestConfiguration = newConfiguration;
                 this.bestFitness = newFitness;
             }
