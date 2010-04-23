@@ -8,6 +8,7 @@ import cz.cvut.felk.cig.jcop.solver.message.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
@@ -22,15 +23,37 @@ import java.awt.*;
  * @author Ondrej Skalicka
  */
 public class JFreeChartRender implements MessageListener {
+    /**
+     * Dataset containing all series.
+     */
     protected XYSeriesCollection dataSet;
+    /**
+     * Active series to add new values to.
+     */
     protected XYSeries activeSeries;
+    /**
+     * Number of iterations for current active series.
+     */
     protected int optimizeCounter;
+    /**
+     * Last best fitness, used if {@link #insertLast} is true.
+     */
     protected double lastBestFitness;
+    /**
+     * Chart which we render to.
+     */
     protected JFreeChart chart;
-    protected boolean insertLast = true;
+    /**
+     * If true, when a solver ends, one last point will be added to chart.
+     */
+    protected boolean insertLast = false;
 
+    /**
+     * Creates new JFreeChartRender with given title.
+     *
+     * @param title title of the chart
+     */
     public JFreeChartRender(String title) {
-
         dataSet = new XYSeriesCollection();
 
         chart = ChartFactory.createXYLineChart(
@@ -44,8 +67,6 @@ public class JFreeChartRender implements MessageListener {
                 false // urls
         );
 
-
-        // create and display a frame...
         ChartFrame frame = new ChartFrame(title, chart);
         frame.pack();
         frame.setVisible(true);
@@ -75,27 +96,151 @@ public class JFreeChartRender implements MessageListener {
         }
     }
 
-    public JFreeChart getChart() {
-        return chart;
+    /**
+     * Returns render for this chart.
+     *
+     * @return render for this chart.
+     */
+    protected XYLineAndShapeRenderer getRenderer () {
+        return ((XYLineAndShapeRenderer) ((XYPlot) chart.getPlot()).getRenderer());
     }
 
-    public JFreeChartRender useFormatA () {
-        XYPlot plot = (XYPlot) chart.getPlot();
-        XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
-        renderer.setBaseShapesVisible(true);
-        renderer.setBaseShapesFilled(false);
-        chart.getLegend().setItemFont(new Font("Dialog", Font.PLAIN, 9));
-        chart.setBackgroundPaint(Color.white);
-        plot.setBackgroundPaint(Color.white);
-        plot.setRangeGridlinePaint(Color.gray);
-        this.insertLast = false;
+    /**
+     * Returns plot for this chart.
+     * @return plot for this chart.
+     */
+    protected XYPlot getPlot() {
+        return (XYPlot) chart.getPlot();
+    }
+
+    /**
+     * Sets if shapes are drawn in addition to lines.
+     *
+     * Default false.
+     *
+     * @param baseShapesVisible if true, shapes will be drawn in addition to lines.
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setBaseShapesVisible (boolean baseShapesVisible) {
+        getRenderer().setBaseShapesVisible(baseShapesVisible);
+        return this;
+    }
+
+    /**
+     * Sets if shapes are filled or not.
+     *
+     * Default true.
+     *
+     * @param baseShapesFilled if true, shapes are filled
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setBaseShapesFilled (boolean baseShapesFilled) {
+        getRenderer().setBaseShapesFilled(baseShapesFilled);
+        return this;
+    }
+
+    /**
+     * Sets if plot points are connected with lines.
+     *
+     * Default true.
+     *
+     * @param baseLinesVisible if true, plot points are connected with lines
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setBaseLinesVisible (boolean baseLinesVisible) {
+        getRenderer().setBaseLinesVisible(baseLinesVisible);
+        return this;
+    }
+
+    /**
+     * Sets font for legend.
+     *
+     * @param font new font for legend
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setLegendItemFont (Font font) {
+        chart.getLegend().setItemFont(font);
+        return this;
+    }
+
+    /**
+     * Sets background color for chart (both chart and plot).
+     *
+     * @param color new background color
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setBackgroundPaint (Color color) {
+        chart.setBackgroundPaint(color);
+        getPlot().setBackgroundPaint(color);
+        return this;
+    }
+
+    /**
+     * Sets color for grid in chart.
+     *
+     * Default grey.
+     *
+     * @param color new color for chart grid
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setGridPaint (Color color) {
+        getPlot().setRangeGridlinePaint(color);
+        getPlot().setDomainGridlinePaint(color);
+        return this;
+    }
+
+    /**
+     * Control if last element is added to plot on {@link cz.cvut.felk.cig.jcop.solver.message.MessageSolverStop}.
+     *
+     * Default false.
+     *
+     * @param insertLast if true, one more point is added to plot
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setInsertLast (boolean insertLast) {
+        this.insertLast = insertLast;
 
         return this;
     }
 
+    /**
+     * Removes legend from chart.
+     *
+     * Note that this is irreversible chane.
+     *
+     * @return itself (fluent interface)
+     */
     public JFreeChartRender removeLegend () {
         this.chart.removeLegend();
 
+        return this;
+    }
+
+    /**
+     * Sets bounds for domain axis.
+     *
+     * @param lowerBound lower domain bound
+     * @param upperBound upper domain bound
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setDomainAxis (double lowerBound, double upperBound) {
+        ValueAxis valueAxis = getPlot().getDomainAxis();
+        valueAxis.setUpperBound(upperBound);
+        valueAxis.setLowerBound(lowerBound);
+        return this;
+    }
+
+    /**
+     * Sets bounds for range axis.
+     *
+     * @param lowerBound lower range bound
+     * @param upperBound upper range bound
+     * @return itself (fluent interface)
+     */
+    public JFreeChartRender setRangeAxis (double lowerBound, double upperBound) {
+        ValueAxis valueAxis = getPlot().getRangeAxis();
+        valueAxis.setUpperBound(upperBound);
+        valueAxis.setLowerBound(lowerBound);
         return this;
     }
 }

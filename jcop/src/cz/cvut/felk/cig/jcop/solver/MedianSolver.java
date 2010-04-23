@@ -9,6 +9,9 @@ import cz.cvut.felk.cig.jcop.result.ResultEntry;
 import cz.cvut.felk.cig.jcop.result.render.SimpleCompareRender;
 import cz.cvut.felk.cig.jcop.util.compare.ResultEntryFitnessComparator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +42,10 @@ public class MedianSolver extends BaseSolver {
      * Number of times original solver has to be ran.
      */
     protected int repeatedRuns;
+    /**
+     * File to write additional data to.
+     */
+    protected File file;
 
     /**
      * Creates new wrapper around other solver with given number of runs.
@@ -48,11 +55,25 @@ public class MedianSolver extends BaseSolver {
      * @throws IllegalArgumentException if repeatedRuns is lower than 1
      */
     public MedianSolver(Solver solver, int repeatedRuns) throws IllegalArgumentException {
+        this(solver, repeatedRuns, null);
+    }
+
+    /**
+     * Creates new wrapper around other solver with given number of runs. Also, writes basic information about all
+     * solutions into a file.
+     *
+     * @param solver       which solver to run repeatedly
+     * @param repeatedRuns how many times to run the solver
+     * @param file         file to write additional information into
+     * @throws IllegalArgumentException if repeatedRuns is lower than 1
+     */
+    public MedianSolver(Solver solver, int repeatedRuns, File file) {
         if (repeatedRuns < 1)
             throw new IllegalArgumentException("RepeatedRuns must be greater than zero, " + repeatedRuns + " found.");
         this.repeatedRuns = repeatedRuns;
         this.solver = solver;
         this.defaultRenders.add(new SimpleCompareRender());
+        this.file = file;
     }
 
     /**
@@ -101,6 +122,21 @@ public class MedianSolver extends BaseSolver {
             }
 
             this.getResult().addEntry(group.get(middleIndex));
+        }
+
+
+        if (this.file != null) {
+            try {
+                PrintStream printStream = new PrintStream(file);
+                for (List<ResultEntry> group : groups) {
+                    printStream.printf("Sorted entries for %s/%s\n", group.get(0).getAlgorithm(), group.get(0).getProblem());
+                    for (int i = 0; i < group.size(); i++) {
+                        printStream.printf("%03d. %.5f\n", i, group.get(i).getBestFitness());
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
