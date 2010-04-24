@@ -47,6 +47,16 @@ public class JFreeChartRender implements MessageListener {
      * If true, when a solver ends, one last point will be added to chart.
      */
     protected boolean insertLast = false;
+    /**
+     * Chart style used in the thesis.
+     * <p/>
+     * Uses:
+     * <p/>
+     * <ul> <li>setBaseShapesVisible(true)</li> <li>setBaseShapesFilled(false)</li> <li>setBaseLinesVisible(false)</li>
+     * <li>setLegendItemFont(new Font("Dialog", Font.PLAIN, 9))</li> <li>setBackgroundPaint(Color.white)</li>
+     * <li>setGridPaint(Color.gray)</li> <li>setInsertLast(false)</li> <li>removeLegend()</li> </ul>
+     */
+    public final static int STYLE_THESIS = 0;
 
     /**
      * Creates new JFreeChartRender with given title.
@@ -92,7 +102,8 @@ public class JFreeChartRender implements MessageListener {
             return;
         }
         if (message instanceof MessageSolverStop) {
-            if (this.activeSeries != null && this.insertLast) this.activeSeries.add(this.optimizeCounter, this.lastBestFitness);
+            if (this.activeSeries != null && this.insertLast)
+                this.activeSeries.add(this.optimizeCounter, this.lastBestFitness);
         }
     }
 
@@ -101,12 +112,13 @@ public class JFreeChartRender implements MessageListener {
      *
      * @return render for this chart.
      */
-    protected XYLineAndShapeRenderer getRenderer () {
+    protected XYLineAndShapeRenderer getRenderer() {
         return ((XYLineAndShapeRenderer) ((XYPlot) chart.getPlot()).getRenderer());
     }
 
     /**
      * Returns plot for this chart.
+     *
      * @return plot for this chart.
      */
     protected XYPlot getPlot() {
@@ -115,39 +127,39 @@ public class JFreeChartRender implements MessageListener {
 
     /**
      * Sets if shapes are drawn in addition to lines.
-     *
+     * <p/>
      * Default false.
      *
      * @param baseShapesVisible if true, shapes will be drawn in addition to lines.
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setBaseShapesVisible (boolean baseShapesVisible) {
+    public JFreeChartRender setBaseShapesVisible(boolean baseShapesVisible) {
         getRenderer().setBaseShapesVisible(baseShapesVisible);
         return this;
     }
 
     /**
      * Sets if shapes are filled or not.
-     *
+     * <p/>
      * Default true.
      *
      * @param baseShapesFilled if true, shapes are filled
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setBaseShapesFilled (boolean baseShapesFilled) {
+    public JFreeChartRender setBaseShapesFilled(boolean baseShapesFilled) {
         getRenderer().setBaseShapesFilled(baseShapesFilled);
         return this;
     }
 
     /**
      * Sets if plot points are connected with lines.
-     *
+     * <p/>
      * Default true.
      *
      * @param baseLinesVisible if true, plot points are connected with lines
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setBaseLinesVisible (boolean baseLinesVisible) {
+    public JFreeChartRender setBaseLinesVisible(boolean baseLinesVisible) {
         getRenderer().setBaseLinesVisible(baseLinesVisible);
         return this;
     }
@@ -158,7 +170,7 @@ public class JFreeChartRender implements MessageListener {
      * @param font new font for legend
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setLegendItemFont (Font font) {
+    public JFreeChartRender setLegendItemFont(Font font) {
         chart.getLegend().setItemFont(font);
         return this;
     }
@@ -169,7 +181,7 @@ public class JFreeChartRender implements MessageListener {
      * @param color new background color
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setBackgroundPaint (Color color) {
+    public JFreeChartRender setBackgroundPaint(Color color) {
         chart.setBackgroundPaint(color);
         getPlot().setBackgroundPaint(color);
         return this;
@@ -177,13 +189,13 @@ public class JFreeChartRender implements MessageListener {
 
     /**
      * Sets color for grid in chart.
-     *
+     * <p/>
      * Default grey.
      *
      * @param color new color for chart grid
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setGridPaint (Color color) {
+    public JFreeChartRender setGridPaint(Color color) {
         getPlot().setRangeGridlinePaint(color);
         getPlot().setDomainGridlinePaint(color);
         return this;
@@ -191,13 +203,13 @@ public class JFreeChartRender implements MessageListener {
 
     /**
      * Control if last element is added to plot on {@link cz.cvut.felk.cig.jcop.solver.message.MessageSolverStop}.
-     *
+     * <p/>
      * Default false.
      *
      * @param insertLast if true, one more point is added to plot
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setInsertLast (boolean insertLast) {
+    public JFreeChartRender setInsertLast(boolean insertLast) {
         this.insertLast = insertLast;
 
         return this;
@@ -205,12 +217,12 @@ public class JFreeChartRender implements MessageListener {
 
     /**
      * Removes legend from chart.
-     *
+     * <p/>
      * Note that this is irreversible chane.
      *
      * @return itself (fluent interface)
      */
-    public JFreeChartRender removeLegend () {
+    public JFreeChartRender removeLegend() {
         this.chart.removeLegend();
 
         return this;
@@ -223,7 +235,7 @@ public class JFreeChartRender implements MessageListener {
      * @param upperBound upper domain bound
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setDomainAxis (double lowerBound, double upperBound) {
+    public JFreeChartRender setDomainAxis(double lowerBound, double upperBound) {
         ValueAxis valueAxis = getPlot().getDomainAxis();
         valueAxis.setUpperBound(upperBound);
         valueAxis.setLowerBound(lowerBound);
@@ -237,10 +249,34 @@ public class JFreeChartRender implements MessageListener {
      * @param upperBound upper range bound
      * @return itself (fluent interface)
      */
-    public JFreeChartRender setRangeAxis (double lowerBound, double upperBound) {
+    public JFreeChartRender setRangeAxis(double lowerBound, double upperBound) {
         ValueAxis valueAxis = getPlot().getRangeAxis();
         valueAxis.setUpperBound(upperBound);
         valueAxis.setLowerBound(lowerBound);
         return this;
+    }
+
+    /**
+     * Applies prepared style to a chart.
+     *
+     * Recognizes STYLE_THESIS.
+     *
+     * @param style code of style
+     * @return updated chart
+     */
+    public JFreeChartRender setStyle(int style) {
+        switch (style) {
+            case JFreeChartRender.STYLE_THESIS:
+                return this.setBaseShapesVisible(true).
+                        setBaseShapesFilled(false).
+                        setBaseLinesVisible(false).
+                        setLegendItemFont(new Font("Dialog", Font.PLAIN, 9)).
+                        setBackgroundPaint(Color.white).
+                        setGridPaint(Color.gray).
+                        setInsertLast(false).
+                        removeLegend();
+            default:
+                return this;
+        }
     }
 }
