@@ -29,18 +29,15 @@ public class SATExperimentB {
         solver.addAlgorithm(new SimulatedAnnealing(5, 0.9999));
 
         solver.addStopCondition(new IterationCondition(150000));
-
         solver.addListener(new JFreeChartRender("Experiment B").
                 setStyle(JFreeChartRender.STYLE_THESIS).
                 setDomainAxis(0, 510000).
                 setRangeAxis(-80, 110));
 
         MedianSolver medianSolver = new MedianSolver(solver, 10, new File("Bmedian.txt"));
-
         medianSolver.addRender(new SimpleCompareRender(new File("Bcompare.txt")));
 
         medianSolver.run();
-
         medianSolver.render();
     }
 }
