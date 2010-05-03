@@ -138,7 +138,7 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
             this.activeNormalizedFitness = newNormalizedFitness;
             // if it is best, set it as best
             if (newFitness > this.bestFitness) {
-                Logger.getLogger(this.getClass()).info("Better solution " + newFitness + ", " + newConfiguration);
+                Logger.getLogger(this.getClass()).debug("Better solution " + newFitness + ", " + newConfiguration);
                 this.bestConfiguration = newConfiguration;
                 this.bestFitness = newFitness;
             }

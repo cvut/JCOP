@@ -96,20 +96,20 @@ public class BreadthFirstSearchTest {
                 {{1, 1, 1,},}, // round 7: 001 element
                 {}, // round 8: empty
         };
-        Object[] list;
         Configuration c;
 
         for (int i = 0; i < expectations.length; ++i) { // for every round
             assertEquals(expectations[i].length, gs.getQueue().size());
 
-            list = gs.getQueue().toArray();
             for (int j = 0; j < expectations[i].length; ++j) { // for every element
-                assert list[j] instanceof Configuration;
-                c = (Configuration) list[j];
+                c = gs.getQueue().fetch();
+                assert c != null;
 
                 for (int k = 0; k < expectations[i][j].length; ++k) {
                     assertEquals("Round " + i + ", element " + j + ", index " + k + ", FP: " + c.fingerprint(), new Integer(expectations[i][j][k]), c.valueAt(k));
                 }
+
+                gs.getQueue().add(c);
             }
 
             if (gs.getQueue().size() > 0) gs.optimize();

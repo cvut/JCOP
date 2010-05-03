@@ -45,11 +45,4 @@ public interface GraphSearchQueue {
      * @return number of elements in queue
      */
     public int size();
-
-    /**
-     * Returns an array containing all of the elements in this list in proper sequence (from first to last element).
-     *
-     * @return list of all elements
-     */
-    public Object[] toArray();
 }
