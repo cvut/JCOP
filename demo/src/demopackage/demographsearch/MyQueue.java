@@ -40,7 +40,4 @@ public class MyQueue implements GraphSearchQueue {
         return queue.size();
     }
 
-    public Object[] toArray() {
-        return this.queue.toArray();
-    }
 }

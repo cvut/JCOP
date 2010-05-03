@@ -75,37 +75,4 @@ public class DepthFirstSearchTest {
         assertEquals(new Integer(1), bestSolution.valueAt(3));
     }
 
-    @Test
-    public void testOptimizeAllSteps() throws Exception {
-        GraphSearch gs = new DepthFirstSearch();
-        gs.init(this.p);
-        int[][][] expectations = {
-                {{0, 0, 0,},}, // round 0: 000 element
-                {{0, 0, 1,}, {0, 1, 0,}, {1, 0, 0,},}, // round 1: 001, 010, 100 elements
-                {{0, 1, 1,}, {1, 0, 1,}, {0, 1, 0,}, {1, 0, 0,},}, // round 2: 011, 101, 010, 100 elements
-                {{1, 1, 1,}, {1, 0, 1,}, {0, 1, 0,}, {1, 0, 0,},}, // round 3: 111, 101, 010, 001 elements
-                {{1, 1, 0,}, {1, 0, 1,}, {0, 1, 0,}, {1, 0, 0,},}, // round 4: 110, 101, 010, 001 elements
-                {{1, 0, 1,}, {0, 1, 0,}, {1, 0, 0,},}, // round 5: 101, 010, 001 elements
-                {{0, 1, 0,}, {1, 0, 0,},}, // round 6: 010, 001 elements
-                {{1, 0, 0,},}, // round 7: 001 element
-                {}, // round 8: empty
-        };
-        Object[] list;
-        Configuration c;
-        for (int i = 0; i < expectations.length; ++i) { // for every round
-            assertEquals(expectations[i].length, gs.getQueue().size());
-
-            list = gs.getQueue().toArray();
-            for (int j = 0; j < expectations[i].length; ++j) { // for every element
-                assert list[j] instanceof Configuration;
-                c = (Configuration) list[j];
-
-                for (int k = 0; k < expectations[i][j].length; ++k) {
-                    assertEquals("Round " + i + ", element " + j + ", index " + k + ", FP: " + c.fingerprint(), new Integer(expectations[i][j][k]), c.valueAt(k));
-                }
-            }
-
-            if (gs.getQueue().size() > 0) gs.optimize();
-        }
-    }
 }

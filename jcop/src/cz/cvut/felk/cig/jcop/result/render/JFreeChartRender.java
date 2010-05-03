@@ -57,6 +57,16 @@ public class JFreeChartRender implements MessageListener {
      * <li>setGridPaint(Color.gray)</li> <li>setInsertLast(false)</li> <li>removeLegend()</li> </ul>
      */
     public final static int STYLE_THESIS = 0;
+    /**
+     * Chart style used in the thesis.
+     * <p/>
+     * Uses:
+     * <p/>
+     * <ul> <li>setBaseShapesVisible(true)</li> <li>setBaseShapesFilled(false)</li> <li>setBaseLinesVisible(false)</li>
+     * <li>setLegendItemFont(new Font("Dialog", Font.PLAIN, 9))</li> <li>setBackgroundPaint(Color.white)</li>
+     * <li>setGridPaint(Color.gray)</li> <li>setInsertLast(false)</li> </ul>
+     */
+    public final static int STYLE_THESIS_LEGEND = 1;
 
     /**
      * Creates new JFreeChartRender with given title.
@@ -123,6 +133,17 @@ public class JFreeChartRender implements MessageListener {
      */
     protected XYPlot getPlot() {
         return (XYPlot) chart.getPlot();
+    }
+
+    /**
+     * Returns chart for this render.
+     *
+     * This method should be used for customization of chart if no better public method is provided by JFreeChartRender.
+     *
+     * @return chart for this render
+     */
+    public JFreeChart getChart () {
+        return this.chart;
     }
 
     /**
@@ -259,7 +280,7 @@ public class JFreeChartRender implements MessageListener {
     /**
      * Applies prepared style to a chart.
      *
-     * Recognizes STYLE_THESIS.
+     * Recognizes {@link JFreeChartRender#STYLE_THESIS} and {@link JFreeChartRender#STYLE_THESIS_LEGEND}.
      *
      * @param style code of style
      * @return updated chart
@@ -275,6 +296,14 @@ public class JFreeChartRender implements MessageListener {
                         setGridPaint(Color.gray).
                         setInsertLast(false).
                         removeLegend();
+            case JFreeChartRender.STYLE_THESIS_LEGEND:
+                return this.setBaseShapesVisible(true).
+                        setBaseShapesFilled(false).
+                        setBaseLinesVisible(false).
+                        setLegendItemFont(new Font("Dialog", Font.PLAIN, 9)).
+                        setBackgroundPaint(Color.white).
+                        setGridPaint(Color.gray).
+                        setInsertLast(false);
             default:
                 return this;
         }

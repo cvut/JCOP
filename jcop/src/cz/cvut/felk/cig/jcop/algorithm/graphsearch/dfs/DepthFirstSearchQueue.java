@@ -59,7 +59,4 @@ public class DepthFirstSearchQueue implements GraphSearchQueue {
         return queue.size();
     }
 
-    public Object[] toArray() {
-        return this.queue.toArray();
-    }
 }
