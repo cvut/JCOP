@@ -65,6 +65,8 @@ public class GeneticAlgorithm extends BaseAlgorithm {
             throw new IllegalArgumentException("GA requires population size to be even and larger than 1");
         this.mutationRate = mutationRate;
         this.populationSize = populationSize;
+
+        this.setLabel("p=" + populationSize + ", m=" + mutationRate);
     }
 
     public void init(ObjectiveProblem problem) throws InvalidProblemException {
@@ -98,7 +100,7 @@ public class GeneticAlgorithm extends BaseAlgorithm {
         for (int i = 0; i < this.populationSize / 2; ++i) {
             List<Chromosome> children = this.reproduction.reproduce(this.selection.select(), this.selection.select(), this.mutation);
             Chromosome son = children.get(0);
-            Chromosome daughter = children.get(0);
+            Chromosome daughter = children.get(1);
 
             son.setFitness(this.fitness.getValue(son.getConfiguration()));
             daughter.setFitness(this.fitness.getValue(daughter.getConfiguration()));
@@ -117,5 +119,10 @@ public class GeneticAlgorithm extends BaseAlgorithm {
         }
 
         this.population = newGeneration;
+    }
+
+    @Override
+    public void cleanUp() {
+        this.population = null;
     }
 }

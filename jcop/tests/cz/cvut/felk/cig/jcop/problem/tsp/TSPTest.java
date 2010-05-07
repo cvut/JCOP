@@ -22,14 +22,14 @@ public class TSPTest {
 
     @Test
     public void testInit() throws Exception {
-        problem = new TSP(new Integer[][]{{0, 1}, {2, 0}});
+        problem = new TSP(new Double[][]{{0.0, 1.0}, {2.0, 0.0}});
 
         assert problem.cities.size() == 2 : "Expected 2 cities, " + problem.cities.size() + " found";
 
-        problem = new TSP(new Integer[][]{
-                {0, 1, 2},
-                {3, 0, 4},
-                {5, 6, 0},
+        problem = new TSP(new Double[][]{
+                {0.0, 1.0, 2.0},
+                {3.0, 0.0, 4.0},
+                {5.0, 6.0, 0.0},
         });
 
         assert problem.cities.size() == 3 : "Expected 3 cities, " + problem.cities.size() + " found";
@@ -42,25 +42,25 @@ public class TSPTest {
 
 
         try {
-            problem = new TSP(new Integer[][]{});
+            problem = new TSP(new Double[][]{});
             assert false : "Expected exception for empty input";
         } catch (ProblemFormatException ignored) {
 
         }
         try {
-            problem = new TSP(new Integer[][]{{1, 2}, {3}});
+            problem = new TSP(new Double[][]{{1.0, 2.0}, {3.0}});
             assert false : "Expected exception for incorrect input";
         } catch (ProblemFormatException ignored) {
 
         }
         try {
-            problem = new TSP(new Integer[][]{{1, 2}, {3, 4, 5}});
+            problem = new TSP(new Double[][]{{1.0, 2.0}, {3.0, 4.0, 5.0}});
             assert false : "Expected exception for incorrect input";
         } catch (ProblemFormatException ignored) {
 
         }
         try {
-            problem = new TSP(new Integer[][]{{1, 2}, {3, 4}, {5, 6}});
+            problem = new TSP(new Double[][]{{1.0, 2.0}, {3.0, 4.0}, {5.0, 6.0}});
             assert false : "Expected exception for incorrect input";
         } catch (ProblemFormatException ignored) {
 
@@ -85,51 +85,15 @@ public class TSPTest {
 
     }
 
-    /*
-// cost no longer exists
-    @Test
-    public void testCost() throws Exception {
-        problem = new TSP(new Integer[][]{
-                {0, 1, 2},
-                {3, 0, 4},
-                {5, 6, 0},
-        });
-
-        List<Integer> list = new ArrayList<Integer>(3);
-        list.add(0);
-        list.add(1);
-        list.add(2);
-        Configuration configuration = new Configuration(list, "test");
-        // 1 + 4
-        assert problem.getCost(configuration) == 5 : "Expected cost 5, got " + problem.getCost(configuration);
-
-        list = new ArrayList<Integer>(3);
-        list.add(2);
-        list.add(0);
-        list.add(1);
-        configuration = new Configuration(list, "test");
-        // 5 + 1
-        assert problem.getCost(configuration) == 6 : "Expected cost 6, got " + problem.getCost(configuration);
-
-        list = new ArrayList<Integer>(3);
-        list.add(1);
-        list.add(2);
-        list.add(0);
-        configuration = new Configuration(list, "test");
-        // 4 + 5
-        assert problem.getCost(configuration) == 9 : "Expected cost 9, got " + problem.getCost(configuration);
-
-    }*/
-
     @Test
     public void testIsSolution() throws Exception {
         List<Integer> list;
         Configuration configuration;
 
-        problem = new TSP(new Integer[][]{
-                {0, 1, 2},
-                {3, 0, 4},
-                {5, 6, 0},
+        problem = new TSP(new Double[][]{
+                {0.0, 1.0, 2.0},
+                {3.0, 0.0, 4.0},
+                {5.0, 6.0, 0.0},
         });
 
         list = new ArrayList<Integer>(3);
@@ -163,13 +127,13 @@ public class TSPTest {
 
     @Test
     public void testGetStartingConfiguration() throws Exception {
-        problem = new TSP(new Integer[][]{
-                {0, 1, 2, 4, 3, 2},
-                {3, 0, 4, 4, 3, 2},
-                {5, 6, 0, 4, 3, 2},
-                {5, 6, 0, 4, 3, 2},
-                {5, 6, 0, 4, 3, 2},
-                {5, 6, 0, 4, 3, 2},
+        problem = new TSP(new Double[][]{
+                {0.0, 1.0, 2.0, 4.0, 3.0, 2.0},
+                {3.0, 0.0, 4.0, 4.0, 3.0, 2.0},
+                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
+                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
+                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
+                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
         });
 
         Configuration configuration = problem.getStartingConfiguration();

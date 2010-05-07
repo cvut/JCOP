@@ -91,7 +91,7 @@ public class TournamentSelection implements Selection {
         double cumulativeP = p;
 
         // k-1 is because if all but the last one lost, we select last one automatically
-        for (int i = 0; i < k - 1; ++k) {
+        for (int i = 0; i < k - 1; ++i) {
             if (tmp < cumulativeP) return tournamentAttendants.get(i);
             p = p * (1 - this.p);
             cumulativeP += p;

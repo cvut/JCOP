@@ -39,8 +39,6 @@ public class InvertPathOperation implements Operation {
             di += dimension;
         }
 
-        // si = 4, di = 16
-
         while (di > si) {
             newConfiguration.set(si % dimension, configuration.valueAt(di % dimension));
             newConfiguration.set(di % dimension, configuration.valueAt(si % dimension));

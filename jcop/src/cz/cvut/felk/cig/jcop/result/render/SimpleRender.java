@@ -238,8 +238,8 @@ public class SimpleRender implements Render {
         printStream.printf("  Clock Time:            %10d [ms]\n", start.getClockTimeSpent(stop));
 
         printStream.printf("  Optimize counter:      %10d [-]\n", resultEntry.getOptimizeCounter());
-        printStream.printf("  Optimize/sec (CPU):    %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000 / start.getCpuTimeSpent(stop));
-        printStream.printf("  Optimize/sec (Clock):  %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000 / start.getClockTimeSpent(stop));
+        printStream.printf("  Optimize/sec (CPU):    %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000L / start.getCpuTimeSpent(stop));
+        printStream.printf("  Optimize/sec (Clock):  %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000L / start.getClockTimeSpent(stop));
 
 
         if (resultEntry.getBestConfiguration() != null) {

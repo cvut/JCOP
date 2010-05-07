@@ -24,7 +24,7 @@ public class TSPInverting extends TSP {
         super(configFile);
     }
 
-    public TSPInverting(Integer[][] distances) throws ProblemFormatException {
+    public TSPInverting(Double[][] distances) throws ProblemFormatException {
         super(distances);
     }
 

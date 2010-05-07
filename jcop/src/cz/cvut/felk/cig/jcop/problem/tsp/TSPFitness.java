@@ -21,7 +21,7 @@ public class TSPFitness extends BaseFitness implements Fitness {
     /**
      * Maximal theoretical distance of tour. (actually maximal is usually lower, but for sure cannot be higher)
      */
-    protected int maxDistance = 0;
+    protected double maxDistance = 0;
 
     /**
      * Fitness requires Knapsack problem instance to be able to calculate
@@ -32,8 +32,8 @@ public class TSPFitness extends BaseFitness implements Fitness {
         this.problem = problem;
         /* BaseFitness */
         for (City city : this.problem.cities) {
-            int currentMaxDistance = 0;
-            for (int distance : city.distances.values()) {
+            double currentMaxDistance = 0;
+            for (double distance : city.distances.values()) {
                 currentMaxDistance = currentMaxDistance > distance ? currentMaxDistance : distance;
             }
             this.maxDistance += currentMaxDistance;
@@ -54,10 +54,7 @@ public class TSPFitness extends BaseFitness implements Fitness {
      * @return fitness of attributes
      */
     public double getValue(Configuration configuration) {
-        double cost = 0;
-        for (int i = 1; i < this.problem.getDimension(); ++i) {
-            cost += this.problem.cities.get(configuration.valueAt(i - 1)).getDistance(this.problem.cities.get(configuration.valueAt(i)));
-        }
+        double cost = this.problem.pathLength(configuration);
         if (this.problem.isSolution(configuration))
             return this.maxDistance - cost;
         return -cost;

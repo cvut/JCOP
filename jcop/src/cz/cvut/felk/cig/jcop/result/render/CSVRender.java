@@ -102,9 +102,9 @@ public class CSVRender implements Render {
             csvWriter.write(Long.toString(start.getUserTimeSpent(stop)));
             csvWriter.write(Long.toString(start.getClockTimeSpent(stop)));
             // optimize stats
-            csvWriter.write(Integer.toString(resultEntry.getOptimizeCounter()));
-            csvWriter.write(Long.toString(resultEntry.getOptimizeCounter() * 1000 / start.getCpuTimeSpent(stop)));
-            csvWriter.write(Long.toString(resultEntry.getOptimizeCounter() * 1000 / start.getClockTimeSpent(stop)));
+            csvWriter.write(Long.toString(resultEntry.getOptimizeCounter()));
+            csvWriter.write(Long.toString(resultEntry.getOptimizeCounter() * 1000L / start.getCpuTimeSpent(stop)));
+            csvWriter.write(Long.toString(resultEntry.getOptimizeCounter() * 1000L / start.getClockTimeSpent(stop)));
 
             csvWriter.write(resultEntry.getException() == null ? "none" : resultEntry.getException().getClass().toString());
 

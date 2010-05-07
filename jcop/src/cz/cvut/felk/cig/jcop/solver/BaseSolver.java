@@ -150,6 +150,8 @@ public abstract class BaseSolver implements Solver {
                 optimizeCounter++;
 
                 if (algorithm.getBestConfiguration() != null && (bestConfiguration == null || !bestConfiguration.equals(algorithm.getBestConfiguration()))) {
+                    logger.debug("Better solution " + algorithm.getBestFitness() + ", " + optimizeCounter + ", " + algorithm.getBestConfiguration());
+
                     bestConfiguration = algorithm.getBestConfiguration();
 
                     this.sendMessage(new MessageBetterConfigurationFound(bestConfiguration, algorithm.getBestFitness()));
@@ -167,6 +169,8 @@ public abstract class BaseSolver implements Solver {
 
         this.sendMessage(new MessageSolverStop(algorithm, objectiveProblem));
         logger.info("Stopped optimize.");
+
+        algorithm.cleanUp();
 
         return new ResultEntry(algorithm, objectiveProblem, bestConfiguration, algorithm.getBestFitness(), optimizeCounter, algorithmException, startPreciseTimestamp);
     }
