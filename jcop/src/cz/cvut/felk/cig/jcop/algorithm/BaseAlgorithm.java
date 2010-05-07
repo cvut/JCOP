@@ -40,10 +40,14 @@ public abstract class BaseAlgorithm implements Algorithm {
      * <p/>
      * For more info, see {@link cz.cvut.felk.cig.jcop.algorithm.Algorithm#setLabel(String)}.
      */
-    protected String label = "base algorithm";
+    protected String label = "";
 
     public Configuration getBestConfiguration() {
         return this.bestConfiguration;
+    }
+
+    public void cleanUp() {
+        
     }
 
     public double getBestFitness() {
@@ -80,6 +84,7 @@ public abstract class BaseAlgorithm implements Algorithm {
 
     @Override
     public String toString() {
+        if ("".equals(this.getLabel())) return this.getClass().getSimpleName();
         return this.getClass().getSimpleName() + " [" + this.getLabel() + "]";
     }
 }

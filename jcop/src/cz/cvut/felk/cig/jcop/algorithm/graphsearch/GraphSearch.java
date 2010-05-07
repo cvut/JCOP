@@ -9,7 +9,6 @@ import cz.cvut.felk.cig.jcop.algorithm.CannotContinueException;
 import cz.cvut.felk.cig.jcop.algorithm.InvalidProblemException;
 import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
-import cz.cvut.felk.cig.jcop.problem.Operation;
 import cz.cvut.felk.cig.jcop.problem.OperationIterator;
 
 /**
@@ -92,5 +91,10 @@ public abstract class GraphSearch extends BaseAlgorithm {
      */
     public GraphSearchQueue getQueue() {
         return queue;
+    }
+
+    @Override
+    public void cleanUp() {
+        this.queue = null;
     }
 }

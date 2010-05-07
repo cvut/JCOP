@@ -28,7 +28,6 @@ public class KnapsackTest {
 
         Configuration c = k.getStartingConfiguration();
         assertEquals(k.getDimension(), 4);
-//        assertEquals(k.getOperationIterator(c).size(), 4);
 
         Configuration c2 = k.getOperationIterator(c).next().execute(c);
         Fitness fit = k.getDefaultFitness();

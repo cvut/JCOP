@@ -24,7 +24,7 @@ public abstract class BaseProblem implements Problem {
      * <p/>
      * For more info, see {@link cz.cvut.felk.cig.jcop.problem.Problem#getLabel()}.
      */
-    protected String label = "base problem";
+    protected String label = "";
 
     public ConfigurationMap getConfigurationMap() {
         return new IdentityConfigurationMap();
@@ -55,6 +55,7 @@ public abstract class BaseProblem implements Problem {
 
     @Override
     public String toString() {
+        if ("".equals(this.getLabel())) return this.getClass().getSimpleName();
         return this.getClass().getSimpleName() + " [" + this.getLabel() + "]";
     }
 }

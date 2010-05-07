@@ -69,9 +69,6 @@ public class BreadthFirstSearchTest {
 
         bestSolution = gs.getBestConfiguration();
 
-        /*System.out.println("Best Solution: ");
-        System.out.println(bestSolution);*/
-
         assertEquals(new Integer(1), bestSolution.valueAt(0));
         assertEquals(new Integer(1), bestSolution.valueAt(1));
         assertEquals(new Integer(0), bestSolution.valueAt(2));

@@ -56,12 +56,6 @@ public class AlgorithmCompareSolverTest {
         assert resultBFS.getOptimizeCounter() > 0;
 
 
-        // note that this is probably just presumption, maybe not working, disabled just in case
-//        Fitness fitness = problem.getDefaultFitness();
-//        assert fitness.getValue(resultDFS.getBestConfiguration()) > fitness.getValue(resultBFS.getBestConfiguration());
-
         assert resultBFS.getBestConfiguration().getOperationHistory().getCounter() < resultDFS.getBestConfiguration().getOperationHistory().getCounter();
-        // not necessarily true
-        // assert problem.getCost(resultDFS.getBestConfiguration()) > problem.getCost(resultBFS.getBestConfiguration());
     }
 }

@@ -5,7 +5,6 @@
 package cz.cvut.felk.cig.jcop.problem.tsp;
 
 import cz.cvut.felk.cig.jcop.problem.*;
-import cz.cvut.felk.cig.jcop.util.JcopRandom;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  *
  * @author Ondrej Skalicka
  */
-public class TSP extends BaseProblem implements StartingConfigurationProblem, GlobalSearchProblem {
+public class TSP extends BaseProblem implements /*StartingConfigurationProblem, */GlobalSearchProblem, RandomConfigurationProblem {
     /**
      * List of all possible {@link SwitchCityOperation MoveCityOperations}. First operations has source index 0,
      * destination index 1..dimension-1. Then comes operation with source 1, destination 2..dimension-1 etc. Last is
@@ -52,7 +52,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      * @param distances distance matrix. First index is source city, second destination
      * @throws ProblemFormatException if distances is not n*n matrix
      */
-    public TSP(Integer[][] distances) throws ProblemFormatException {
+    public TSP(Double[][] distances) throws ProblemFormatException {
         StringBuffer labelStringBuffer = new StringBuffer("Dist={");
         this.dimension = distances.length;
 
@@ -129,8 +129,8 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
 
         Pattern configPattern = Pattern.compile("^([A-Za-z0-9_]+) *: *(.*)");
         Pattern startPattern = Pattern.compile("^NODE_COORD_SECTION");
-        Pattern stopPattern = Pattern.compile("^EOF");
-        Pattern nodePattern = Pattern.compile("^\\s*(\\d+)\\s+(-?\\d+)(?:\\.\\d+)?\\s+(-?\\d+)(?:\\.\\d+)?\\s*$");
+        Pattern stopPattern = Pattern.compile("^\\s*EOF");
+        Pattern nodePattern = Pattern.compile("^\\s*(\\d+)\\s+(-?\\d+(?:\\.\\d+)?)\\s+(-?\\d+(?:\\.\\d+)?)\\s*$");
 
         boolean coordSection = false;
         int lineCounter = 0;
@@ -139,7 +139,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
         String type = "";
         String edge = "";
         this.dimension = 0;
-        ArrayList<Integer[]> coordinates = new ArrayList<Integer[]>();
+        ArrayList<Double[]> coordinates = new ArrayList<Double[]>();
 
         while ((line = br.readLine()) != null) {
             Matcher m;
@@ -176,7 +176,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
 
                 int index;
                 index = Integer.valueOf(m.group(1));
-                Integer coordinate[] = {Integer.valueOf(m.group(2)), Integer.valueOf(m.group(3))};
+                Double coordinate[] = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
 
                 if (index != coordinates.size() + 1) throw new ProblemFormatException("Found index " + index + " on line (" + lineCounter + ") \"" + line + "\", expected " + (coordinates.size() + 1));
 
@@ -196,9 +196,9 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
             // add distance to target city
             for (int j = 0; j < this.dimension; ++j) {
                 if (i != j) {
-                    int distance;
-                    if (edge.equals("CEIL_2D")) distance = (int)Math.ceil(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
-                    else distance = (int)Math.round(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
+                    double distance;
+                    if (edge.equals("CEIL_2D")) distance = Math.ceil(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
+                    else distance = Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2));
                     city.addDistance(this.cities.get(j), distance);
                 }
             }
@@ -206,13 +206,8 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
 
         // init starting configuration
         List<Integer> startingConfigurationAttributes = new ArrayList<Integer>(this.dimension);
-        /*if (JcopRandom.nextDouble() > 0.5) {
-            System.out.println("AAA");
-            startingConfigurationAttributes.addAll(Arrays.asList(0, 48, 31, 44, 18, 40, 7, 8, 9, 42, 32, 50, 10, 51, 13, 12, 46, 25, 26, 27, 11, 24, 3, 5, 14, 4, 23, 47, 37, 36, 39, 38, 35, 34, 33, 43, 45, 15, 28, 49, 19, 22, 29, 1, 6, 41, 20, 16, 2, 17, 30, 21));
-        } else {*/
-            for (int i = 0; i < this.dimension; ++i)
-                startingConfigurationAttributes.add(i);
-        /*}*/
+        for (int i = 0; i < this.dimension; ++i)
+            startingConfigurationAttributes.add(i);
         this.startingConfiguration = new Configuration(startingConfigurationAttributes, "TSP starting configuration");
 
         this.initOperations();
@@ -236,11 +231,12 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      * @param configuration path
      * @return length
      */
-    public long pathLength (Configuration configuration) {
-        long distance = 0;
+    public double pathLength (Configuration configuration) {
+        double distance = 0.0;
         for (int i = 1; i < this.dimension; ++i) {
             distance += this.cities.get(configuration.valueAt(i - 1)).getDistance(this.cities.get(configuration.valueAt(i)));
         }
+        distance += this.cities.get(configuration.valueAt(configuration.getDimension() - 1)).getDistance(this.cities.get(configuration.valueAt(0)));
 
         return distance;
     }
@@ -281,5 +277,13 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
     
     public Integer getMaximum(int index) {
         return this.cities.size() - 1;
+    }
+
+    /* RandomConfigurationProblem interface */
+
+    public Configuration getRandomConfiguration() {
+        List<Integer> integerList = getStartingConfiguration().asList();
+        Collections.shuffle(integerList);
+        return new Configuration(integerList, "TSP random configuration");
     }
 }

@@ -21,7 +21,14 @@ public class AndCondition extends BaseCondition {
     protected List<StopCondition> stopConditions;
 
     /**
-     * Creates new AndCondition with array of other StopConditions.
+     * Creates new AndCondition with empty list of other StopConditions
+     */
+    public AndCondition() {
+        this.stopConditions = new ArrayList<StopCondition>();
+    }
+
+    /**
+     * Creates new AndCondition with list of other StopConditions.
      *
      * @param stopConditions list of stop conditions to be grouped into one
      */

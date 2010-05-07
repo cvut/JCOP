@@ -21,6 +21,13 @@ public class OrCondition extends BaseCondition {
     protected List<StopCondition> stopConditions;
 
     /**
+     * Creates new OrCondition with empty list of other StopConditions
+     */
+    public OrCondition() {
+        this.stopConditions = new ArrayList<StopCondition>();
+    }
+
+    /**
      * Creates new OrCondition with array of other StopConditions.
      *
      * @param stopConditions list of stop conditions to be grouped into one

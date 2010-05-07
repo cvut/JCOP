@@ -45,6 +45,11 @@ public interface Algorithm {
     public Configuration getBestConfiguration();
 
     /**
+     * Performs clean up after algorithm stopped.
+     */
+    public void cleanUp ();
+
+    /**
      * Updates which fitness to use instead of default. Should be called before first optimize step is made.
      *
      * @param fitness fitness to be used in algorithm

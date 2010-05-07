@@ -12,6 +12,7 @@ import cz.cvut.felk.cig.jcop.util.compare.ResultEntryOptimizeComparator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,7 +62,8 @@ public class SimpleCompareRender implements Render {
     }
 
     public void render(Result result) {
-        List<ResultEntry> resultEntries = result.getResultEntries();
+        // create a copy so we do not change order for other renders
+        List<ResultEntry> resultEntries = new ArrayList<ResultEntry>(result.getResultEntries());
 
         Collections.sort(resultEntries, new ResultEntryFitnessComparator(false));
         this.printStream.println();

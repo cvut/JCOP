@@ -67,7 +67,7 @@ public class MedianSolver extends BaseSolver {
      * @param file         file to write additional information into
      * @throws IllegalArgumentException if repeatedRuns is lower than 1
      */
-    public MedianSolver(Solver solver, int repeatedRuns, File file) {
+    public MedianSolver(Solver solver, int repeatedRuns, File file) throws IllegalArgumentException {
         if (repeatedRuns < 1)
             throw new IllegalArgumentException("RepeatedRuns must be greater than zero, " + repeatedRuns + " found.");
         this.repeatedRuns = repeatedRuns;
