@@ -186,6 +186,20 @@ public class Knapsack extends BaseProblem implements StartingConfigurationProble
         return new KnapsackFitness(this);
     }
 
+    /**
+     * Returns price of items in given configuration.
+     *
+     * Does not check for capacity.
+     *
+     * @param configuration configuration to calculate price of
+     * @return price of configuration
+     */
+    public long getPrice(Configuration configuration) {
+        long total = 0;
+        for (KnapsackItem knapsackItem : getKnapsackItems()) if (configuration.valueAt(knapsackItem.getIndex()) == 1) total += knapsackItem.getPrice();
+        return total;
+    }
+
     /* required for fitness calculations */
 
     public int getCapacity() {
