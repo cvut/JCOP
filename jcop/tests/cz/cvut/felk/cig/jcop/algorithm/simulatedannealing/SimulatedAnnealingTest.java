@@ -13,6 +13,8 @@ import cz.cvut.felk.cig.jcop.solver.condition.IterationCondition;
 import org.testng.annotations.Test;
 
 /**
+ * Tests proper behavior of {@link SimulatedAnnealing} algorithm.
+ *
  * @author Ondrej Skalicka
  */
 public class SimulatedAnnealingTest {

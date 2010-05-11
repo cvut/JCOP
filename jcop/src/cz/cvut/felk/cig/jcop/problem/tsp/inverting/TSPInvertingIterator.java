@@ -11,6 +11,8 @@ import cz.cvut.felk.cig.jcop.util.JcopRandom;
 import java.util.NoSuchElementException;
 
 /**
+ * Works exactly the same as {@link cz.cvut.felk.cig.jcop.problem.tsp.TSPIterator} with the exception that it returns {@link cz.cvut.felk.cig.jcop.problem.tsp.inverting.InvertPathOperation}.
+ *
  * @author Ondrej Skalicka
  */
 public class TSPInvertingIterator implements OperationIterator {

@@ -11,6 +11,8 @@ import cz.cvut.felk.cig.jcop.problem.OperationHistory;
 import java.util.List;
 
 /**
+ * Inverts part of a path using a 2-opt method.
+ *
  * @author Ondrej Skalicka
  */
 public class InvertPathOperation implements Operation {
