@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  *
  * @author Ondrej Skalicka
  */
-public class TSP extends BaseProblem implements /*StartingConfigurationProblem, */GlobalSearchProblem, RandomConfigurationProblem {
+public class TSP extends BaseProblem implements StartingConfigurationProblem, GlobalSearchProblem, RandomConfigurationProblem {
     /**
      * List of all possible {@link SwitchCityOperation MoveCityOperations}. First operations has source index 0,
      * destination index 1..dimension-1. Then comes operation with source 1, destination 2..dimension-1 etc. Last is
