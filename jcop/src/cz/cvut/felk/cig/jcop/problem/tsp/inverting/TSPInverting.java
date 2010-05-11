@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Traveling Salesman Problem with 2-opt operations.
+ * <p/>
+ * TSP problem has a list of cities and every city has distance to every other city. The goal is to find order in which
+ * to visit every city exactly once and minimize travel distance.
+ *
  * @author Ondrej Skalicka
  */
 public class TSPInverting extends TSP {
