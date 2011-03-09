@@ -40,7 +40,7 @@ public class GeneticAlgorithmTest {
         }
         try {
             geneticAlgorithm = new GeneticAlgorithm(10, 0.1);
-            geneticAlgorithm.init(new BaseObjectiveProblem(new TSP(new Double[][]{{1.0, 2.0}, {3.0, 4.0}})));
+            geneticAlgorithm.init(new BaseObjectiveProblem(new TSP(new Integer[][]{{1, 2}, {3, 4}})));
             assert false : "Expected exception, but none was risen.";
         } catch (InvalidProblemException ignore) {
 

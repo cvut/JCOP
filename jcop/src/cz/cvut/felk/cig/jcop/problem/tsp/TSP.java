@@ -41,6 +41,8 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      */
     protected Configuration startingConfiguration;
 
+    protected TSPMetainfoStatic metainfo;
+
     /**
      * Creates new TSP problem from matrix of distances.
      * <p/>
@@ -52,7 +54,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      * @param distances distance matrix. First index is source city, second destination
      * @throws ProblemFormatException if distances is not n*n matrix
      */
-    public TSP(Double[][] distances) throws ProblemFormatException {
+    public TSP(Integer[][] distances) throws ProblemFormatException {
         StringBuffer labelStringBuffer = new StringBuffer("Dist={");
         this.dimension = distances.length;
 
@@ -95,6 +97,17 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
         this.startingConfiguration = new Configuration(startingConfigurationAttributes, "TSP starting configuration");
 
         this.initOperations();
+    }
+
+
+    /**
+     * Rounds double to integer using TSPLIB convention.
+     *
+     * @param x double to be rounded
+     * @return rounded value
+     */
+    private int nint(double x) {
+        return ((x) >= 0 ? (int) Math.floor(x + .5) : (int) -Math.floor(.5 - x));
     }
 
     /**
@@ -196,9 +209,20 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
             // add distance to target city
             for (int j = 0; j < this.dimension; ++j) {
                 if (i != j) {
-                    double distance;
-                    if (edge.equals("CEIL_2D")) distance = Math.ceil(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
-                    else distance = Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2));
+                    int distance;
+                    // commonly used distance is integer, not double (see TSPLIB)
+                    // double distance;
+                    // if (edge.equals("CEIL_2D")) distance = Math.ceil(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
+                    // else distance = Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2));
+                    double z1 = (coordinates.get(i)[0] - coordinates.get(j)[0]) * (coordinates.get(i)[0] - coordinates.get(j)[0]);
+                    double z2 = (coordinates.get(i)[1] - coordinates.get(j)[1]) * (coordinates.get(i)[1] - coordinates.get(j)[1]);
+                    if (edge.equals("CEIL_2D")) {
+                        distance = (int) Math.ceil(Math.sqrt(z1 + z2));
+                    } else {
+                        distance = nint(Math.sqrt(z1 + z2));
+                    }
+
+
                     city.addDistance(this.cities.get(j), distance);
                 }
             }
@@ -211,6 +235,8 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
         this.startingConfiguration = new Configuration(startingConfigurationAttributes, "TSP starting configuration");
 
         this.initOperations();
+
+        this.metainfo = new TSPMetainfoStatic(this.cities);
     }
 
     protected void initOperations () {
@@ -223,6 +249,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
                     this.switchCityOperations.add(new SwitchCityOperation(i, j));
             }
         }
+
     }
 
     /**
