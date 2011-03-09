@@ -25,7 +25,7 @@ public class DemoProblemCompare {
         solver.addProblem(new Bucket(new int[]{14, 10, 6, 2, 8}, new int[]{0, 0, 1, 0, 0}, new int[]{12, 6, 4, 1, 8}));
         solver.addProblem(new Knapsack(new File("data/knapsack/knap_4.txt")));
         solver.addProblem(new SAT(new File("data/sat/valid-standard.cnf")));
-        solver.addProblem(new TSP(new Double[][]{{0.0, 5.0, 2.0}, {4.0, 0.0, 2.0}, {5.0, 6.0, 0.0},}));
+        solver.addProblem(new TSP(new Integer[][]{{0, 5, 2}, {4, 0, 2}, {5, 6, 0},}));
 
         solver.addStopCondition(new TimeoutCondition(250)); // every problem 250ms
 
