@@ -22,14 +22,14 @@ public class TSPTest {
 
     @Test
     public void testInit() throws Exception {
-        problem = new TSP(new Double[][]{{0.0, 1.0}, {2.0, 0.0}});
+        problem = new TSP(new Integer[][]{{0, 1}, {2, 0}});
 
         assert problem.cities.size() == 2 : "Expected 2 cities, " + problem.cities.size() + " found";
 
-        problem = new TSP(new Double[][]{
-                {0.0, 1.0, 2.0},
-                {3.0, 0.0, 4.0},
-                {5.0, 6.0, 0.0},
+        problem = new TSP(new Integer[][]{
+                {0, 1, 2},
+                {3, 0, 4},
+                {5, 6, 0},
         });
 
         assert problem.cities.size() == 3 : "Expected 3 cities, " + problem.cities.size() + " found";
@@ -42,25 +42,25 @@ public class TSPTest {
 
 
         try {
-            problem = new TSP(new Double[][]{});
+            problem = new TSP(new Integer[][]{});
             assert false : "Expected exception for empty input";
         } catch (ProblemFormatException ignored) {
 
         }
         try {
-            problem = new TSP(new Double[][]{{1.0, 2.0}, {3.0}});
+            problem = new TSP(new Integer[][]{{1, 2}, {3}});
             assert false : "Expected exception for incorrect input";
         } catch (ProblemFormatException ignored) {
 
         }
         try {
-            problem = new TSP(new Double[][]{{1.0, 2.0}, {3.0, 4.0, 5.0}});
+            problem = new TSP(new Integer[][]{{1, 2}, {3, 4, 5}});
             assert false : "Expected exception for incorrect input";
         } catch (ProblemFormatException ignored) {
 
         }
         try {
-            problem = new TSP(new Double[][]{{1.0, 2.0}, {3.0, 4.0}, {5.0, 6.0}});
+            problem = new TSP(new Integer[][]{{1, 2}, {3, 4}, {5, 6}});
             assert false : "Expected exception for incorrect input";
         } catch (ProblemFormatException ignored) {
 
@@ -90,10 +90,10 @@ public class TSPTest {
         List<Integer> list;
         Configuration configuration;
 
-        problem = new TSP(new Double[][]{
-                {0.0, 1.0, 2.0},
-                {3.0, 0.0, 4.0},
-                {5.0, 6.0, 0.0},
+        problem = new TSP(new Integer[][]{
+                {0, 1, 2},
+                {3, 0, 4},
+                {5, 6, 0},
         });
 
         list = new ArrayList<Integer>(3);
@@ -127,13 +127,13 @@ public class TSPTest {
 
     @Test
     public void testGetStartingConfiguration() throws Exception {
-        problem = new TSP(new Double[][]{
-                {0.0, 1.0, 2.0, 4.0, 3.0, 2.0},
-                {3.0, 0.0, 4.0, 4.0, 3.0, 2.0},
-                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
-                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
-                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
-                {5.0, 6.0, 0.0, 4.0, 3.0, 2.0},
+        problem = new TSP(new Integer[][]{
+                {0, 1, 2, 4, 3, 2},
+                {3, 0, 4, 4, 3, 2},
+                {5, 6, 0, 4, 3, 2},
+                {5, 6, 0, 4, 3, 2},
+                {5, 6, 0, 4, 3, 2},
+                {5, 6, 0, 4, 3, 2},
         });
 
         Configuration configuration = problem.getStartingConfiguration();

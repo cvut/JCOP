@@ -23,11 +23,11 @@ public class TSPFitnessTest {
         Fitness fitness;
         TSPFitness tspfitness;
 
-        problem = new TSP(new Double[][]{
-                {0.0, 1.0, 2.0, 5.0},
-                {3.0, 0.0, 4.0, 5.0},
-                {5.0, 6.0, 0.0, 5.0},
-                {5.0, 6.0, 5.0, 0.0},
+        problem = new TSP(new Integer[][]{
+                {0, 1, 2, 5},
+                {3, 0, 4, 5},
+                {5, 6, 0, 5},
+                {5, 6, 5, 0},
         });
         fitness = problem.getDefaultFitness();
 

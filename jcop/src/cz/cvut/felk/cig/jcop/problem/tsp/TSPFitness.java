@@ -56,7 +56,11 @@ public class TSPFitness extends BaseFitness implements Fitness {
     public double getValue(Configuration configuration) {
         double cost = this.problem.pathLength(configuration);
         if (this.problem.isSolution(configuration))
-            return this.maxDistance - cost;
-        return -cost;
+            return -cost;
+        return Double.NEGATIVE_INFINITY;
+
+        // if (this.problem.isSolution(configuration))
+        //     return this.maxDistance - cost;
+        // return -cost;
     }
 }

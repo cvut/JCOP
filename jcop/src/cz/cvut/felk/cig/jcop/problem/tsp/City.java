@@ -23,7 +23,7 @@ public class City {
     /**
      * Map of distances to other cities.
      */
-    protected Map<City, Double> distances;
+    protected Map<City, Integer> distances;
 
     /**
      * Creates new city with given index.
@@ -32,7 +32,7 @@ public class City {
      */
     public City(int index) {
         this.index = index;
-        this.distances = new HashMap<City, Double>();
+        this.distances = new HashMap<City, Integer>();
     }
 
     /**
@@ -43,7 +43,7 @@ public class City {
      */
     public City(int index, int dimension) {
         this.index = index;
-        this.distances = new HashMap<City, Double>(dimension);
+        this.distances = new HashMap<City, Integer>(dimension);
     }
 
     /**
@@ -52,7 +52,7 @@ public class City {
      * @param index     index of city
      * @param distances distance map
      */
-    public City(int index, Map<City, Double> distances) {
+    public City(int index, Map<City, Integer> distances) {
         this.index = index;
         this.distances = distances;
     }
@@ -64,7 +64,7 @@ public class City {
      * @param distance distance to city
      * @return self, fluent interface
      */
-    public City addDistance(City city, Double distance) {
+    public City addDistance(City city, Integer distance) {
         this.distances.put(city, distance);
         return this;
     }
@@ -77,7 +77,7 @@ public class City {
      * @param city target city
      * @return distance or null if no route exists
      */
-    public Double getDistance(City city) {
+    public Integer getDistance(City city) {
         return this.distances.get(city);
     }
 
