@@ -41,8 +41,6 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      */
     protected Configuration startingConfiguration;
 
-    protected TSPMetainfoStatic metainfo;
-
     /**
      * Creates new TSP problem from matrix of distances.
      * <p/>
@@ -235,8 +233,6 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
         this.startingConfiguration = new Configuration(startingConfigurationAttributes, "TSP starting configuration");
 
         this.initOperations();
-
-        this.metainfo = new TSPMetainfoStatic(this.cities);
     }
 
     protected void initOperations () {
@@ -313,4 +309,5 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
         Collections.shuffle(integerList);
         return new Configuration(integerList, "TSP random configuration");
     }
+
 }
