@@ -85,6 +85,13 @@ public class Configuration implements Comparable<Configuration> {
         return new ArrayList<Integer>(this.attributes);
     }
 
+
+    public int[] asSimpleArray() {
+        int[] result = new int[this.attributes.size()];
+        for (int i=0; i<this.attributes.size(); i++) result[i] = this.attributes.get(i).intValue();
+        return result;
+    }
+
     /**
      * Fingerprint is somehow similar to hashCode in that way, that two configurations that are considered equal via
      * CompareTo has the same fingerprint. However, contrast to hashCode, if two configurations has the same
