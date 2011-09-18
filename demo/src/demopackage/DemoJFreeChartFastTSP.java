@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class DemoJFreeChartFastTSP {
     public static void main(String[] args) throws IOException {
-        AlgorithmCompareSolver solver = new AlgorithmCompareSolver(new FastTSP(new File("/home/kovarole/idea-projects/jcop/trunk/demo/data/tsp/dsj1000.tsp")));
+        AlgorithmCompareSolver solver = new AlgorithmCompareSolver(new FastTSP(new File("data/tsp/dsj1000.tsp")));
 
         solver.addAlgorithm(new SimulatedAnnealing(100, 0.9));
         //solver.addAlgorithm(new GeneticAlgorithm(16, 0.2));
