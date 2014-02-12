@@ -8,7 +8,7 @@ JCOP comes bundled with several problems and algorithms of its own (see appendix
 
 ## Links
 
-For more information see [http://jcop.sourceforge.net/](homepage of the JCOP project).
+For more information see [the JCOP website](http://jcop.sourceforge.net/).
 
 ## Authors
 
