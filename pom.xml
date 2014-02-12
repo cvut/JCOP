@@ -1,5 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -9,7 +11,35 @@
   <packaging>jar</packaging>
 
   <name>jcop</name>
-  <url>http://maven.apache.org</url>
+  <description>Java Combinatorial Optimization Platform</description>
+  <url>http://jcop.sourceforge.net</url>
+  <inceptionYear>2009</inceptionYear>
+
+  <developers>
+    <developer>
+      <name>Ondřej Skalička</name>
+      <organization>CTU in Prague</organization>
+      <organizationUrl>http://www.cvut.cz</organizationUrl>
+    </developer>
+    <developer>
+      <name>Tomáš Bartoň</name>
+      <email>tomas.barton@fit.cvut.cz</email>
+      <organization>CTU in Prague</organization>
+      <organizationUrl>http://www.cvut.cz</organizationUrl>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>LGPL</name>
+      <url>https://www.gnu.org/licenses/lgpl.html</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/cvut/JCOP</url>
+    <connection>scm:git:git://github.com/cvut/JCOP.git</connection>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
