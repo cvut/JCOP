@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cz.cvut</groupId>
@@ -13,28 +14,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
-
-  <repositories>
-      <repository>
-          <id>central</id>
-          <name>Maven Repository Switchboard</name>
-          <layout>default</layout>
-          <url>http://repo1.maven.org/maven2</url>
-          <snapshots>
-              <enabled>false</enabled>
-          </snapshots>
-      </repository>
-      <repository>
-          <id>central-apache</id>
-          <name>Apache Repository</name>
-          <url>http://repo.maven.apache.org/maven2</url>
-          <layout>default</layout>
-          <snapshots>
-              <enabled>false</enabled>
-          </snapshots>
-      </repository>
-  </repositories>
 
   <dependencies>
     <dependency>
