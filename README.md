@@ -1,4 +1,5 @@
 # JCOP
+[![Build Status](https://travis-ci.org/cvut/JCOP.png?branch=master)](https://travis-ci.org/cvut/JCOP)
 
 JCOP stands for Java Combinatorial Optimization Platform. Its development began in 2009 as a part of Ondřej Skalička's master's thesis. It was created with two main goals in mind. First is to make a platform which allows to create combinatorial algorithms and problems in such a way that it is possible to apply (almost) every algorithm on every problem, without any modifications. This way it should be possible to benchmark several settings of the same algorithm or even different algorithms on one problem and tell which performed better. It is not intended to be able to solve problems extremely fast, just to be able to tell which one is better among the others to be preferred and used on a problem.
 
