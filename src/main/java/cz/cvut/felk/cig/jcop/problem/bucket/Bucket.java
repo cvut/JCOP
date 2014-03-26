@@ -79,10 +79,16 @@ public class Bucket extends BaseProblem implements Problem, DestinationProblem, 
         // check validity of parameters
         if (this.dimension < 1)
             throw new ProblemFormatException("Invalid dimension " + this.dimension);
-        if (destinationContents.length != this.dimension)
-            throw new ProblemFormatException("Destination contents has wrong capacity, expected " + this.dimension + ", get " + destinationContents.length);
-        if (startingContents.length != this.dimension)
-            throw new ProblemFormatException("Starting contents has wrong capacity, expected " + this.dimension + ", get " + startingContents.length);
+        if (destinationContents.length != this.dimension) {
+            throw new ProblemFormatException(String.format(
+                    "Destination contents has wrong capacity, expected %d, given %d",
+                    this.dimension,  destinationContents.length));
+        }
+        if (startingContents.length != this.dimension) {
+            throw new ProblemFormatException(String.format(
+                    "Starting contents has wrong capacity, expected %s, given %d",
+                    startingContents.length, this.dimension));
+        }
 
         // create buckets
         this.buckets = new ArrayList<BucketItem>(this.dimension);

@@ -196,7 +196,11 @@ public class Knapsack extends BaseProblem implements StartingConfigurationProble
      */
     public long getPrice(Configuration configuration) {
         long total = 0;
-        for (KnapsackItem knapsackItem : getKnapsackItems()) if (configuration.valueAt(knapsackItem.getIndex()) == 1) total += knapsackItem.getPrice();
+        for (KnapsackItem knapsackItem : getKnapsackItems()) {
+            if (configuration.valueAt(knapsackItem.getIndex()) == 1) {
+                total += knapsackItem.getPrice();
+            }
+        }
         return total;
     }
 

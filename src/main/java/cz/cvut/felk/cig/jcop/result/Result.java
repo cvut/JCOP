@@ -22,17 +22,17 @@ public interface Result {
      *
      * @param resultEntry entry to add
      */
-    public void addEntry(ResultEntry resultEntry);
+    void addEntry(ResultEntry resultEntry);
 
     /**
      * Returns all entries in a list in order in which they were added.
      *
      * @return all entries for this result
      */
-    public List<ResultEntry> getResultEntries();
+    List<ResultEntry> getResultEntries();
 
     /**
      * Removes all result entries from result
      */
-    public void clearResults();
+    void clearResults();
 }

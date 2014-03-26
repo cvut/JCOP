@@ -20,14 +20,14 @@ public interface Problem {
      * @param configuration tested attributes
      * @return true if attributes is solution to this problem
      */
-    public boolean isSolution(Configuration configuration);
+    boolean isSolution(Configuration configuration);
 
     /**
      * Returns dimension of this problem.
      *
      * @return dimension of problem
      */
-    public int getDimension();
+    int getDimension();
 
     /**
      * Returns default fitness for this problem.
@@ -36,7 +36,7 @@ public interface Problem {
      *
      * @return fitness object
      */
-    public Fitness getDefaultFitness();
+    Fitness getDefaultFitness();
 
     /**
      * Returns iterator for operations which are allowed for supplied attributes.
@@ -47,7 +47,7 @@ public interface Problem {
      * @param configuration attributes to return operationIterator for
      * @return operatorIterator for this attributes
      */
-    public OperationIterator getOperationIterator(Configuration configuration);
+    OperationIterator getOperationIterator(Configuration configuration);
 
     /**
      * Returns attributes mapping for this problem.
@@ -57,7 +57,7 @@ public interface Problem {
      * @return configuration map for this problem
      * @see cz.cvut.felk.cig.jcop.problem.IdentityConfigurationMap default identity implementation of map
      */
-    public ConfigurationMap getConfigurationMap();
+    ConfigurationMap getConfigurationMap();
 
     /**
      * Sets label for problem.
@@ -70,7 +70,7 @@ public interface Problem {
      *
      * @param label new label for problem
      */
-    public void setLabel(String label);
+    void setLabel(String label);
 
     /**
      * Gets label of problem.
@@ -79,5 +79,5 @@ public interface Problem {
      *
      * @return label for problem
      */
-    public String getLabel();
+    String getLabel();
 }

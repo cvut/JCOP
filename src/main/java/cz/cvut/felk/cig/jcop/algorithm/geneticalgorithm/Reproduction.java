@@ -20,5 +20,5 @@ public interface Reproduction {
      * @param mutation mutation which will be used on both children
      * @return list of two children
      */
-    public List<Chromosome> reproduce(Chromosome father, Chromosome mother, Mutation mutation);
+    List<Chromosome> reproduce(Chromosome father, Chromosome mother, Mutation mutation);
 }

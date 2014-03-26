@@ -16,12 +16,12 @@ public interface ReversibleOperation extends Operation {
      *
      * @return reverse for this operation
      */
-    public ReversibleOperation getReverse();
+    ReversibleOperation getReverse();
 
     /**
      * Sets reverse for this reversible operation.
      *
      * @param reverse reverse for this operation
      */
-    public void setReverse(ReversibleOperation reverse);
+    void setReverse(ReversibleOperation reverse);
 }

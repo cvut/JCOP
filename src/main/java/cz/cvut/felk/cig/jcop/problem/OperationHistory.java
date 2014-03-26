@@ -43,7 +43,7 @@ public class OperationHistory {
      * How many items are allowed in history at most.
      *
      * If this number is reached, history is emptied in order to free allocated memory. Constants {@link #LIMIT_DISABLED}
-     * and {@link #LIMIT_UNLIMITED} are allowed values as well as any positive number. 
+     * and {@link #LIMIT_UNLIMITED} are allowed values as well as any positive number.
      */
     public static int limit = 1024;
     /**

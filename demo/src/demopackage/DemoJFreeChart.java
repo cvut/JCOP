@@ -32,7 +32,7 @@ public class DemoJFreeChart {
         solver.addAlgorithm(new SimulatedAnnealing(100, 0.99));
         solver.addAlgorithm(new SimulatedAnnealing(100, 0.999));
         solver.addAlgorithm(new SimulatedAnnealing(100, 0.9999));
-        
+
         solver.addStopCondition(new IterationCondition(20000)); // every problem 20000 iterations
         solver.addListener(new JFreeChartRender("Demo JFreeChartRender"));
         solver.addRender(new SimpleCompareRender());

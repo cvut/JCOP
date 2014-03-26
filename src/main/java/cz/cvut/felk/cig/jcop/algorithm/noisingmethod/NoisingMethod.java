@@ -8,7 +8,8 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
 import cz.cvut.felk.cig.jcop.problem.Operation;
 import cz.cvut.felk.cig.jcop.util.JcopRandom;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Noising method.
@@ -18,12 +19,15 @@ import org.apache.log4j.Logger;
  * has more accurate information and tends to move only to better solutions.
  *
  * Source:
- * Handbook of Metaheuristics 
+ * Handbook of Metaheuristics
  * http://www.springer.com/business+%26+management/operations+research/book/978-1-4419-1663-1
  *
  * @author Oleg Kovarik
  */
 public class NoisingMethod extends BaseAlgorithm implements ChainAlgorithm {
+
+    private static final Logger LOG = LoggerFactory.getLogger(NoisingMethod.class);
+
    /**
      * Active configuration to be expanded
      */
@@ -72,7 +76,8 @@ public class NoisingMethod extends BaseAlgorithm implements ChainAlgorithm {
 
         // NM requires either startingConfiguration or RandomStartingConfiguration problem
         if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration())
-            throw new InvalidProblemException("NoisingMethod algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
+            throw new InvalidProblemException(
+                    "NoisingMethod algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
 
         // fetch starting configuration
         if (problem.hasRandomConfiguration()) {
@@ -143,7 +148,7 @@ public class NoisingMethod extends BaseAlgorithm implements ChainAlgorithm {
         }
 
         if (newFitnessNoNoise > this.bestFitness) {
-            Logger.getLogger(this.getClass()).debug("Better solution " + newFitnessNoNoise + ", " + newConfiguration);
+            LOG.debug("Better solution {}, {}", newFitnessNoNoise, newConfiguration);
             this.bestConfiguration = newConfiguration;
             this.bestFitness = newFitnessNoNoise;
         }

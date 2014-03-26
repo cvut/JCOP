@@ -34,7 +34,7 @@ public class FastInvertSubtourOperation implements Operation {
     /**
      * Matrix of nearest neighbors (city, i-th nearest neighbor)
      */
-    protected int nearestNeighbors[][];
+    protected int[][] nearestNeighbors;
 
     /**
      * Number of available nearest neighbors
@@ -42,7 +42,7 @@ public class FastInvertSubtourOperation implements Operation {
     protected int nn;
 
 
-    public FastInvertSubtourOperation(int sourceIndex, int destinationIndex, int[][] distances, int nearestNeighbors[][]) {
+    public FastInvertSubtourOperation(int sourceIndex, int destinationIndex, int[][] distances, int[][] nearestNeighbors) {
         this.destinationIndex = destinationIndex;
         this.sourceIndex = sourceIndex;
 
@@ -263,7 +263,7 @@ public class FastInvertSubtourOperation implements Operation {
                             move_value = diffs;
                             opt2_flag = true;
                             move_flag = 0;
-                            /*     	    goto exchange; */
+                            /*          goto exchange; */
                         } else {
                             h1 = c1;
                             h2 = s_c1;
@@ -272,7 +272,7 @@ public class FastInvertSubtourOperation implements Operation {
                             move_value = diffp;
                             opt2_flag = true;
                             move_flag = 0;
-                            /*     	    goto exchange; */
+                            /*          goto exchange; */
                         }
                     }
                     /* Now perform the innermost search */
@@ -868,7 +868,7 @@ public class FastInvertSubtourOperation implements Operation {
                                         j = 0;
                                 }
                                 //tour[n] = tour[0];
-                                /*  	      getchar(); */
+                                /*            getchar(); */
                             } else if (h == 1) {
 
                                 /* copy part from pos[h2] to pos[h3] and

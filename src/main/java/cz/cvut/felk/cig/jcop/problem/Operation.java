@@ -22,5 +22,5 @@ public interface Operation {
      * @return new attributes, after operation execution
      * @throws InvalidConfigurationException if operation is used on configuration which it is unable to modify
      */
-    public Configuration execute(Configuration configuration) throws InvalidConfigurationException;
+    Configuration execute(Configuration configuration) throws InvalidConfigurationException;
 }

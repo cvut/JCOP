@@ -99,7 +99,10 @@ public class MedianSolver extends BaseSolver {
             }
 
             if (result.getResultEntries().size() != groups.size())
-                throw new IllegalArgumentException("Wrapped solver must return result with identical number of elements each run, got " + result.getResultEntries().size() + " in run " + i + ", expected " + groups.size());
+                throw new IllegalArgumentException(String.format(
+                        "Wrapped solver must return result with identical number of elements each run, " +
+                        "given %d in run %d, expected %d",
+                        result.getResultEntries().size(), i, groups.size()));
 
             for (int j = 0; j < result.getResultEntries().size(); j++) {
                 ResultEntry resultEntry = result.getResultEntries().get(j);

@@ -65,13 +65,15 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
             this.cities.add(new City(i, this.dimension - 1));
         }
 
-        
+
         // parse distances
         for (int i = 0; i < this.dimension; ++i) {
             City city = this.cities.get(i);
-            if (distances[i].length != this.dimension)
-                throw new ProblemFormatException("Distance matrix' distances[" + i + "].length is not " + this.dimension + ", " + distances[i].length + "found.");
-
+            if (distances[i].length != this.dimension) {
+                throw new ProblemFormatException(String.format(
+                        "Distance matrix' distances[%d].length is not %d, %d found.",
+                        i, this.dimension, distances[i].length));
+            }
             labelStringBuffer.append("{");
 
             // add distance to target city
@@ -127,9 +129,10 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      * EOF
      * </pre>
      *
-     * Where recognized EDGE_WEIGHT_TYPEs are EUC_2D (using {@link Math#round(float)} and CEIL_2D (using {@link Math#ceil(double)}. TYPE has to be TSP. Name and comment
-     * are ignored (only added to label). Anything after EOF is ignored. Fractional parts of coordinations are ignored.
-     * 
+     * Where recognized EDGE_WEIGHT_TYPEs are EUC_2D (using {@link Math#round(float)} and CEIL_2D (using
+     * {@link Math#ceil(double)}. TYPE has to be TSP. Name and comment are ignored (only added to label).
+     * Anything after EOF is ignored. Fractional parts of coordinations are ignored.
+     *
      * @param configFile input file to load data from
      * @throws IOException if problem loading file occurs
      * @throws ProblemFormatException if line format is invalid
@@ -171,9 +174,15 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
                 m = startPattern.matcher(line);
                 if (m.find()) {
                     this.setLabel (name + " (" + comment + "; " + configFile.getName() + ")");
-                    if (!type.equals("TSP")) throw new ProblemFormatException("Type must be TSP, " + type + " found");
-                    if (!edge.equals("EUC_2D") && !edge.equals("CEIL_2D")) throw new ProblemFormatException("Edge type must be EUC_2D or CEIL_2D, " + edge + " found");
-                    if (this.dimension < 2) throw new ProblemFormatException("Requires at least 2 cities, " + this.dimension + " found");
+                    if (!type.equals("TSP")) {
+                        throw new ProblemFormatException("Type must be TSP, " + type + " found");
+                    }
+                    if (!edge.equals("EUC_2D") && !edge.equals("CEIL_2D")) {
+                        throw new ProblemFormatException("Edge type must be EUC_2D or CEIL_2D, " + edge + " found");
+                    }
+                    if (this.dimension < 2) {
+                        throw new ProblemFormatException("Requires at least 2 cities, " + this.dimension + " found");
+                    }
                     coordinates.ensureCapacity(this.dimension);
                     coordSection = true;
                 }
@@ -183,19 +192,30 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
                 if (m.find()) break;
 
                 m = nodePattern.matcher(line);
-                if (!m.find()) throw new ProblemFormatException("Line (" + lineCounter + ") different from node or EOF found after NODE_COORD_SECTION: " + line);
+                if (!m.find()) {
+                    throw new ProblemFormatException(String.format(
+                            "Line (%d) different from node or EOF found after NODE_COORD_SECTION: %s",
+                            lineCounter, line));
+                }
 
                 int index;
                 index = Integer.valueOf(m.group(1));
-                Double coordinate[] = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
+                Double[] coordinate = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
 
-                if (index != coordinates.size() + 1) throw new ProblemFormatException("Found index " + index + " on line (" + lineCounter + ") \"" + line + "\", expected " + (coordinates.size() + 1));
+                if (index != coordinates.size() + 1) {
+                    throw new ProblemFormatException(String.format(
+                            "Found index %d on line (%d) \"%s\", expected %d",
+                            index, lineCounter, line, coordinates.size() + 1));
+                }
 
                 coordinates.add(coordinate);
             }
         }
 
-        if (coordinates.size() != this.dimension) throw new ProblemFormatException("Required " + this.dimension + " coordinates, found " + coordinates.size());
+        if (coordinates.size() != this.dimension) {
+            throw new ProblemFormatException(String.format(
+                    "Required %d coordinates, found %s", this.dimension, coordinates.size()));
+        }
 
         this.cities = new ArrayList<City>(this.dimension);
         for (int i = 0; i < this.dimension; ++i) {
@@ -210,8 +230,13 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
                     int distance;
                     // commonly used distance is integer, not double (see TSPLIB)
                     // double distance;
-                    // if (edge.equals("CEIL_2D")) distance = Math.ceil(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
-                    // else distance = Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2) + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2));
+                    // if (edge.equals("CEIL_2D")) {
+                    //     distance = Math.ceil(Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2)
+                    //              + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2)));
+                    // } else {
+                    //     distance = Math.sqrt(Math.pow(coordinates.get(i)[0] - coordinates.get(j)[0], 2)
+                    //              + Math.pow(coordinates.get(i)[1] - coordinates.get(j)[1], 2));
+                    // }
                     double z1 = (coordinates.get(i)[0] - coordinates.get(j)[0]) * (coordinates.get(i)[0] - coordinates.get(j)[0]);
                     double z2 = (coordinates.get(i)[1] - coordinates.get(j)[1]) * (coordinates.get(i)[1] - coordinates.get(j)[1]);
                     if (edge.equals("CEIL_2D")) {
@@ -259,7 +284,8 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
         for (int i = 1; i < this.dimension; ++i) {
             distance += this.cities.get(configuration.valueAt(i - 1)).getDistance(this.cities.get(configuration.valueAt(i)));
         }
-        distance += this.cities.get(configuration.valueAt(configuration.getDimension() - 1)).getDistance(this.cities.get(configuration.valueAt(0)));
+        distance += this.cities.get(configuration.valueAt(configuration.getDimension() - 1))
+                .getDistance(this.cities.get(configuration.valueAt(0)));
 
         return distance;
     }
@@ -297,7 +323,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
     }
 
     /* GlobalSearchProblem interface */
-    
+
     public Integer getMaximum(int index) {
         return this.cities.size() - 1;
     }

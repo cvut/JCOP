@@ -80,12 +80,14 @@ public class BucketIterator implements OperationIterator {
 
                 // source bucket is empty, skip it right away. fetch info from
                 // first operation in list
-                if (sourceBucketOperations.size() > 0 && this.configuration.valueAt(sourceBucketOperations.get(0).sourceBucket.getIndex()) > 0) {
+                if (sourceBucketOperations.size() > 0
+                        && this.configuration.valueAt(sourceBucketOperations.get(0).sourceBucket.getIndex()) > 0) {
                     // move to next destination bucket
                     this.counter++;
                     while (this.counter < sourceBucketOperations.size()) {
                         // non-full destination
-                        if (this.configuration.valueAt(sourceBucketOperations.get(counter).destinationBucket.getIndex()) < sourceBucketOperations.get(counter).destinationBucket.getCapacity())
+                        if (this.configuration.valueAt(sourceBucketOperations.get(counter).destinationBucket.getIndex())
+                                < sourceBucketOperations.get(counter).destinationBucket.getCapacity())
                             return;
                         // try next bucket
                         this.counter++;
@@ -120,7 +122,8 @@ public class BucketIterator implements OperationIterator {
             this.counter++;
             while (this.counter < this.problem.getDimension()) {
                 // non-full bucket
-                if (this.configuration.valueAt(this.problem.fillOperations.get(counter).bucketItem.getIndex()) < this.problem.buckets.get(counter).getCapacity())
+                if (this.configuration.valueAt(this.problem.fillOperations.get(counter).bucketItem.getIndex())
+                        < this.problem.buckets.get(counter).getCapacity())
                     return;
                 // try next bucket
                 this.counter++;

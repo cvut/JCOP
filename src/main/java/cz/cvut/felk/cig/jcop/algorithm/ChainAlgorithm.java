@@ -8,7 +8,7 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
 
 /**
- * Chain algorithms can continue work of other algorithm by giving them a configuration to work on.  
+ * Chain algorithms can continue work of other algorithm by giving them a configuration to work on.
  *
  * @author Ondrej Skalicka
  */
@@ -25,5 +25,5 @@ public interface ChainAlgorithm extends Algorithm {
      * @param activeConfiguration new active configuration
      * @throws InvalidProblemException if supplied problem cannot be solved by this algorithm
      */
-    public void init(ObjectiveProblem problem, Configuration activeConfiguration) throws InvalidProblemException;
+    void init(ObjectiveProblem problem, Configuration activeConfiguration) throws InvalidProblemException;
 }

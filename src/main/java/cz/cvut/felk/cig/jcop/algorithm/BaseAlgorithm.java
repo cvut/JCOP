@@ -47,7 +47,7 @@ public abstract class BaseAlgorithm implements Algorithm {
     }
 
     public void cleanUp() {
-        
+
     }
 
     public double getBestFitness() {
@@ -80,6 +80,11 @@ public abstract class BaseAlgorithm implements Algorithm {
         BaseAlgorithm that = (BaseAlgorithm) o;
 
         return !(this.getLabel() != null ? !label.equals(that.getLabel()) : that.getLabel() != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return label != null ? label.hashCode() : 0;
     }
 
     @Override

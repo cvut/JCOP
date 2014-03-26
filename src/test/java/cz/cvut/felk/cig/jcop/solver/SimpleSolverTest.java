@@ -37,7 +37,7 @@ public class SimpleSolverTest {
         this.a = new BreadthFirstSearch();
         Logger.getRootLogger().setLevel(Level.WARN);
     }
-    
+
     @Test
     public void testSolve() throws Exception {
         int counter = 10;

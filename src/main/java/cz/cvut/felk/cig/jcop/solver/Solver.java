@@ -22,42 +22,42 @@ public interface Solver {
      * Solves one or more problems using one or more algorithms as long as possible (usually stops upon any
      * StopCondition is met or when algorithm raises CannotContinueException).
      */
-    public void run();
+    void run();
 
     /**
      * Adds new render to solver.
      *
      * @param render render to be added to solver
      */
-    public void addRender(Render render);
+    void addRender(Render render);
 
     /**
      * Gets list of all renders associated with this solver.
      *
      * @return list of all renders in this solver
      */
-    public List<Render> getRenders();
+    List<Render> getRenders();
 
     /**
      * Sets Result to store results of algorithm-problem runs in.
      *
      * @param result store results in this
      */
-    public void setResult(Result result);
+    void setResult(Result result);
 
     /**
      * Returns Result associated with this solver.
      *
      * @return Result associated with this solver
      */
-    public Result getResult();
+    Result getResult();
 
     /**
      * Render Result using all registered Renders.
      *
      * @throws java.io.IOException if cannot write to output
      */
-    public void render();
+    void render();
 
     /**
      * Adds new stop condition to list. All stop conditions are in OR relation, eg. al least one must be met to end run
@@ -68,14 +68,14 @@ public interface Solver {
      *
      * @param stopCondition new stop condition
      */
-    public void addStopCondition(StopCondition stopCondition);
+    void addStopCondition(StopCondition stopCondition);
 
     /**
      * Checks if at least one condition is met. If yes, returns true, otherwise returns false.
      *
      * @return true if at least one condition is met
      */
-    public boolean isConditionMet();
+    boolean isConditionMet();
 
     /**
      * Adds new listener to solver.
@@ -86,12 +86,12 @@ public interface Solver {
      *
      * @param messageListener new message listener to be registered
      */
-    public void addListener(MessageListener messageListener);
+    void addListener(MessageListener messageListener);
 
     /**
      * Sends message to all registered listeners.
      *
      * @param message message to be send
      */
-    public void sendMessage(Message message);
+    void sendMessage(Message message);
 }

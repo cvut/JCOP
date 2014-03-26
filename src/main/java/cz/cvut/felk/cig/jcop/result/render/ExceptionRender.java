@@ -18,7 +18,9 @@ public class ExceptionRender implements Render {
     public void render(Result result) throws IOException {
         for (ResultEntry resultEntry : result.getResultEntries()) {
             if (resultEntry.getException() != null) {
-                System.out.printf("Problem %s/Algorithm %s got Exception %s\n", resultEntry.getProblem(), resultEntry.getAlgorithm(), resultEntry.getException().getClass().getSimpleName());
+                System.out.printf("Problem %s/Algorithm %s got Exception %s\n",
+                        resultEntry.getProblem(), resultEntry.getAlgorithm(),
+                        resultEntry.getException().getClass().getSimpleName());
                 resultEntry.getException().printStackTrace();
             }
         }

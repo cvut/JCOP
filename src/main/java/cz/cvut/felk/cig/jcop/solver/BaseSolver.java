@@ -15,7 +15,8 @@ import cz.cvut.felk.cig.jcop.result.render.SimpleRender;
 import cz.cvut.felk.cig.jcop.solver.condition.StopCondition;
 import cz.cvut.felk.cig.jcop.solver.message.*;
 import cz.cvut.felk.cig.jcop.util.PreciseTimestamp;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import java.util.List;
  * @author Ondrej Skalicka
  */
 public abstract class BaseSolver implements Solver {
+
     /**
      * List of all stop conditions associated with this solver.
      * <p/>
@@ -69,11 +71,11 @@ public abstract class BaseSolver implements Solver {
     protected List<MessageListener> messageListeners = new ArrayList<MessageListener>();
 
     /**
-     * Creates new BaseSolver, gets log {@link Logger#getLogger(Class)} and set result to {@link
+     * Creates new BaseSolver, gets log {@link LoggerFactory#getLogger(Class)} and set result to {@link
      * cz.cvut.felk.cig.jcop.result.SimpleResult}.
      */
     protected BaseSolver() {
-        logger = Logger.getLogger(this.getClass());
+        logger = LoggerFactory.getLogger(this.getClass());
         this.result = new SimpleResult();
         this.defaultRenders.add(new SimpleRender());
     }
@@ -139,18 +141,20 @@ public abstract class BaseSolver implements Solver {
 
         try {
             startPreciseTimestamp = new PreciseTimestamp();
-            
+
             algorithm.init(objectiveProblem);
             this.sendMessage(new MessageSolverStart(algorithm, objectiveProblem));
-            logger.info("Started optimize, " + algorithm + " on " + objectiveProblem + ".");
+            logger.info("Started optimize, {} on {}.", algorithm,  objectiveProblem);
 
             do {
                 algorithm.optimize();
                 this.sendMessage(new MessageOptimize());
                 optimizeCounter++;
 
-                if (algorithm.getBestConfiguration() != null && (bestConfiguration == null || !bestConfiguration.equals(algorithm.getBestConfiguration()))) {
-                    logger.debug("Better solution " + algorithm.getBestFitness() + ", " + optimizeCounter + ", " + algorithm.getBestConfiguration());
+                if (algorithm.getBestConfiguration() != null
+                        && (bestConfiguration == null || !bestConfiguration.equals(algorithm.getBestConfiguration()))) {
+                    logger.debug("Better solution {}, {}, {}",
+                            algorithm.getBestFitness(), optimizeCounter, algorithm.getBestConfiguration());
 
                     bestConfiguration = algorithm.getBestConfiguration();
 
@@ -163,7 +167,7 @@ public abstract class BaseSolver implements Solver {
                 if (this.isConditionMet()) break;
             } while (true);
         } catch (Exception e) {
-            logger.warn("Got exception " + e.getClass().getSimpleName() + ".");
+            logger.warn("Got exception {}.", e.getClass().getSimpleName());
             algorithmException = e;
         }
 
@@ -172,7 +176,8 @@ public abstract class BaseSolver implements Solver {
 
         algorithm.cleanUp();
 
-        return new ResultEntry(algorithm, objectiveProblem, bestConfiguration, algorithm.getBestFitness(), optimizeCounter, algorithmException, startPreciseTimestamp);
+        return new ResultEntry(algorithm, objectiveProblem, bestConfiguration, algorithm.getBestFitness(),
+                optimizeCounter, algorithmException, startPreciseTimestamp);
     }
 
     public void addListener(MessageListener messageListener) {

@@ -18,6 +18,6 @@ public interface StopCondition extends MessageListener {
      *
      * @return true if condition is met
      */
-    public boolean isConditionMet();
+    boolean isConditionMet();
 
 }

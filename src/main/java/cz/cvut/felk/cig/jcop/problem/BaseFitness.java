@@ -29,7 +29,9 @@ public abstract class BaseFitness implements Fitness {
     protected boolean asymmetricScale = true;
 
     public double normalize(double fitness) throws IllegalStateException {
-        if (this.minFitness == Double.NaN || this.maxFitness == Double.NaN) throw new IllegalStateException("Fitness has not prepared min/max fitnesses");
+        if (this.minFitness == Double.NaN || this.maxFitness == Double.NaN) {
+            throw new IllegalStateException("Fitness has not prepared min/max fitnesses");
+        }
 
         if (minFitness >= maxFitness) return 0.5;
 

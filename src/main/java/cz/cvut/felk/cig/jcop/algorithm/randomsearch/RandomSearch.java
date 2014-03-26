@@ -6,7 +6,8 @@ import cz.cvut.felk.cig.jcop.algorithm.ChainAlgorithm;
 import cz.cvut.felk.cig.jcop.algorithm.InvalidProblemException;
 import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Random search algorithm.
@@ -18,6 +19,9 @@ import org.apache.log4j.Logger;
  * @author Oleg Kovarik
  */
 public class RandomSearch extends BaseAlgorithm implements ChainAlgorithm {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RandomSearch.class);
+
     /**
      * Active configuration to be expanded
      */
@@ -35,9 +39,10 @@ public class RandomSearch extends BaseAlgorithm implements ChainAlgorithm {
         this.problem = problem;
 
         // RS requires either startingConfiguration or RandomStartingConfiguration problem
-        if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration())
-            throw new InvalidProblemException("RandomSearch algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
-
+        if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration()) {
+            throw new InvalidProblemException(
+                    "RandomSearch algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
+        }
         // fetch starting configuration
         if (problem.hasStartingConfiguration()) {
             this.activeConfiguration = problem.getStartingConfiguration();
@@ -87,7 +92,7 @@ public class RandomSearch extends BaseAlgorithm implements ChainAlgorithm {
         this.activeNormalizedFitness = newNormalizedFitness;
         // if it is best, set it as best
         if (newFitness > this.bestFitness) {
-            Logger.getLogger(this.getClass()).debug("Better solution " + newFitness + ", " + newConfiguration);
+            LOG.debug("Better solution {}, {}", newFitness, newConfiguration);
             this.bestConfiguration = newConfiguration;
             this.bestFitness = newFitness;
         }

@@ -23,5 +23,5 @@ public interface GlobalSearchProblem {
      * @param index index of variable which maximal value we seek
      * @return maximal value for given index
      */
-    public Integer getMaximum(int index);
+    Integer getMaximum(int index);
 }

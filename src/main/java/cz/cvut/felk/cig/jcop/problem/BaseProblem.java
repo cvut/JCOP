@@ -52,6 +52,10 @@ public abstract class BaseProblem implements Problem {
         return !(this.getLabel() != null ? !label.equals(that.getLabel()) : that.getLabel() != null);
     }
 
+    @Override
+    public int hashCode() {
+        return label != null ? label.hashCode() : 0;
+    }
 
     @Override
     public String toString() {
