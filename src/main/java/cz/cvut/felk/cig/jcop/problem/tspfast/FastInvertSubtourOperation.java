@@ -34,7 +34,7 @@ public class FastInvertSubtourOperation implements Operation {
     /**
      * Matrix of nearest neighbors (city, i-th nearest neighbor)
      */
-    protected int nearestNeighbors[][];
+    protected int[][] nearestNeighbors;
 
     /**
      * Number of available nearest neighbors
@@ -42,7 +42,7 @@ public class FastInvertSubtourOperation implements Operation {
     protected int nn;
 
 
-    public FastInvertSubtourOperation(int sourceIndex, int destinationIndex, int[][] distances, int nearestNeighbors[][]) {
+    public FastInvertSubtourOperation(int sourceIndex, int destinationIndex, int[][] distances, int[][] nearestNeighbors) {
         this.destinationIndex = destinationIndex;
         this.sourceIndex = sourceIndex;
 

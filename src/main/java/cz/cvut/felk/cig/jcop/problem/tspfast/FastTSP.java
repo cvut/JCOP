@@ -179,7 +179,7 @@ public class FastTSP extends BaseProblem implements StartingConfigurationProblem
 
                 int index;
                 index = Integer.valueOf(m.group(1));
-                Double coordinate[] = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
+                Double[] coordinate = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
 
                 if (index != coordinates.size() + 1) throw new ProblemFormatException("Found index " + index + " on line (" + lineCounter + ") \"" + line + "\", expected " + (coordinates.size() + 1));
 
@@ -304,7 +304,7 @@ public class FastTSP extends BaseProblem implements StartingConfigurationProblem
         if ((nn > 0) && (nn < n)) {
             nearestNeighbors = new int[n][nn];
 
-            Neighbor neighbors[] = new Neighbor[n];
+            Neighbor[] neighbors = new Neighbor[n];
             for (int i = 0; i < n; i++) neighbors[i] = new Neighbor();
 
             for (int i = 0; i < n; i++) {

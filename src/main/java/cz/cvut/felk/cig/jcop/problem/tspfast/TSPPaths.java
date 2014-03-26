@@ -10,7 +10,7 @@ package cz.cvut.felk.cig.jcop.problem.tspfast;
 public class TSPPaths {
 
     // generates random permutation of cities
-    public static void randomPathFast(int result[], int size) {
+    public static void randomPathFast(int[] result, int size) {
         //Random generator = new Random();
 
         for (int i = 0; i < size; i++) result[i] = i;

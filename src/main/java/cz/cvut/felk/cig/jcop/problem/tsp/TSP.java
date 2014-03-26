@@ -187,7 +187,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
 
                 int index;
                 index = Integer.valueOf(m.group(1));
-                Double coordinate[] = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
+                Double[] coordinate = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
 
                 if (index != coordinates.size() + 1) throw new ProblemFormatException("Found index " + index + " on line (" + lineCounter + ") \"" + line + "\", expected " + (coordinates.size() + 1));
 
