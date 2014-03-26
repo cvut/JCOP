@@ -88,7 +88,8 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
 
         // SA requires either startingConfiguration or RandomStartingConfiguration problem
         if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration()) {
-            throw new InvalidProblemException("SimulatedAnnealing algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
+            throw new InvalidProblemException(
+                    "SimulatedAnnealing algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
         }
 
         // fetch starting configuration
@@ -151,7 +152,8 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
                 this.activeFitness = newFitness;
                 this.activeNormalizedFitness = newNormalizedFitness;
                 // if it is best, set it as best
-                if ((newFitness > this.bestFitness && this.bestFitness < 0) || (newFitness < this.bestFitness && this.bestFitness >= 0 && newFitness >= 0)) {
+                if ((newFitness > this.bestFitness && this.bestFitness < 0)
+                        || (newFitness < this.bestFitness && this.bestFitness >= 0 && newFitness >= 0)) {
                     LOG.debug("Better solution {}, {}", newFitness, newConfiguration);
                     this.bestConfiguration = newConfiguration;
                     this.bestFitness = newFitness;

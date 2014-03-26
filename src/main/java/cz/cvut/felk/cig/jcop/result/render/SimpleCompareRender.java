@@ -70,7 +70,8 @@ public class SimpleCompareRender implements Render {
         this.printStream.println("Results sorted by fitness (DESC):");
         this.printStream.printf("%-10s %-60s %s\n", "fitness", "algorithm", "problem");
         for (ResultEntry resultEntry : resultEntries) {
-            this.printStream.printf("%-10.1f %-60s %s\n", resultEntry.getBestFitness(), resultEntry.getAlgorithm(), resultEntry.getProblem());
+            this.printStream.printf("%-10.1f %-60s %s\n",
+                    resultEntry.getBestFitness(), resultEntry.getAlgorithm(), resultEntry.getProblem());
         }
 
         Collections.sort(resultEntries, new ResultEntryOptimizeComparator());
@@ -78,7 +79,8 @@ public class SimpleCompareRender implements Render {
         this.printStream.println("Results sorted by optimizations (ASC):");
         this.printStream.printf("%-10s %-60s %s\n", "optimiz.", "algorithm", "problem");
         for (ResultEntry resultEntry : resultEntries) {
-            this.printStream.printf("%-10d %-60s %s\n", resultEntry.getOptimizeCounter(), resultEntry.getAlgorithm(), resultEntry.getProblem());
+            this.printStream.printf("%-10d %-60s %s\n",
+                    resultEntry.getOptimizeCounter(), resultEntry.getAlgorithm(), resultEntry.getProblem());
         }
     }
 }

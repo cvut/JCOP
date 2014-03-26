@@ -64,7 +64,9 @@ public class ResultEntry {
      * @param startTimestamp    starting time
      * @param stopTimestamp     ending time
      */
-    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness, int optimizeCounter, Exception exception, PreciseTimestamp startTimestamp, PreciseTimestamp stopTimestamp) {
+    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration,
+                       double bestFitness, int optimizeCounter, Exception exception,
+                       PreciseTimestamp startTimestamp, PreciseTimestamp stopTimestamp) {
         this.exception = exception;
         this.algorithm = algorithm;
         this.problem = problem;
@@ -86,7 +88,8 @@ public class ResultEntry {
      * @param exception         exception which caused algorithm to stop
      * @param startTimestamp    starting time
      */
-    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness, int optimizeCounter, Exception exception, PreciseTimestamp startTimestamp) {
+    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness,
+                       int optimizeCounter, Exception exception, PreciseTimestamp startTimestamp) {
         this(algorithm, problem, bestConfiguration, bestFitness, optimizeCounter, exception, startTimestamp, new PreciseTimestamp());
     }
 
@@ -101,7 +104,8 @@ public class ResultEntry {
      * @param startTimestamp    starting time
      * @param stopTimestamp     ending time
      */
-    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness, int optimizeCounter, PreciseTimestamp startTimestamp, PreciseTimestamp stopTimestamp) {
+    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness,
+                       int optimizeCounter, PreciseTimestamp startTimestamp, PreciseTimestamp stopTimestamp) {
         this(algorithm, problem, bestConfiguration, bestFitness, optimizeCounter, null, startTimestamp, stopTimestamp);
     }
 
@@ -115,7 +119,8 @@ public class ResultEntry {
      * @param optimizeCounter   number of {@link cz.cvut.felk.cig.jcop.algorithm.Algorithm#optimize()} calls
      * @param startTimestamp    starting time
      */
-    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness, int optimizeCounter, PreciseTimestamp startTimestamp) {
+    public ResultEntry(Algorithm algorithm, Problem problem, Configuration bestConfiguration, double bestFitness,
+                       int optimizeCounter, PreciseTimestamp startTimestamp) {
         this(algorithm, problem, bestConfiguration, bestFitness, optimizeCounter, null, startTimestamp, new PreciseTimestamp());
     }
 

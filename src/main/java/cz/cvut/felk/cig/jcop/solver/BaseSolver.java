@@ -151,8 +151,10 @@ public abstract class BaseSolver implements Solver {
                 this.sendMessage(new MessageOptimize());
                 optimizeCounter++;
 
-                if (algorithm.getBestConfiguration() != null && (bestConfiguration == null || !bestConfiguration.equals(algorithm.getBestConfiguration()))) {
-                    logger.debug("Better solution " + algorithm.getBestFitness() + ", " + optimizeCounter + ", " + algorithm.getBestConfiguration());
+                if (algorithm.getBestConfiguration() != null
+                        && (bestConfiguration == null || !bestConfiguration.equals(algorithm.getBestConfiguration()))) {
+                    logger.debug("Better solution {}, {}, {}",
+                            algorithm.getBestFitness(), optimizeCounter, algorithm.getBestConfiguration());
 
                     bestConfiguration = algorithm.getBestConfiguration();
 
@@ -174,7 +176,8 @@ public abstract class BaseSolver implements Solver {
 
         algorithm.cleanUp();
 
-        return new ResultEntry(algorithm, objectiveProblem, bestConfiguration, algorithm.getBestFitness(), optimizeCounter, algorithmException, startPreciseTimestamp);
+        return new ResultEntry(algorithm, objectiveProblem, bestConfiguration, algorithm.getBestFitness(),
+                optimizeCounter, algorithmException, startPreciseTimestamp);
     }
 
     public void addListener(MessageListener messageListener) {

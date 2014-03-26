@@ -231,15 +231,18 @@ public class SimpleRender implements Render {
 
         printStream.println();
 
-        printStream.printf("=== Algorithm %s used on problem %s ===\n", resultEntry.getAlgorithm(), resultEntry.getProblem());
+        printStream.printf("=== Algorithm %s used on problem %s ===\n",
+                resultEntry.getAlgorithm(), resultEntry.getProblem());
         printStream.printf("  CPU Time:              %10d [ms]\n", start.getCpuTimeSpent(stop));
         printStream.printf("  System Time:           %10d [ms]\n", start.getSystemTimeSpent(stop));
         printStream.printf("  User Time:             %10d [ms]\n", start.getUserTimeSpent(stop));
         printStream.printf("  Clock Time:            %10d [ms]\n", start.getClockTimeSpent(stop));
 
         printStream.printf("  Optimize counter:      %10d [-]\n", resultEntry.getOptimizeCounter());
-        printStream.printf("  Optimize/sec (CPU):    %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000L / start.getCpuTimeSpent(stop));
-        printStream.printf("  Optimize/sec (Clock):  %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000L / start.getClockTimeSpent(stop));
+        printStream.printf("  Optimize/sec (CPU):    %10d [1/s]\n",
+                resultEntry.getOptimizeCounter() * 1000L / start.getCpuTimeSpent(stop));
+        printStream.printf("  Optimize/sec (Clock):  %10d [1/s]\n",
+                resultEntry.getOptimizeCounter() * 1000L / start.getClockTimeSpent(stop));
 
 
         if (resultEntry.getBestConfiguration() != null) {
@@ -250,7 +253,8 @@ public class SimpleRender implements Render {
                 printStream.printf("%s%s", i == 0 ? "" : ", ", map.map(resultEntry.getBestConfiguration().valueAt(i), i));
             }
             printStream.println("]");
-            printStream.printf("  Depth:                 %10d [-]\n", resultEntry.getBestConfiguration().getOperationHistory().getCounter());
+            printStream.printf("  Depth:                 %10d [-]\n",
+                    resultEntry.getBestConfiguration().getOperationHistory().getCounter());
             printStream.printf("  Fitness:               %10.1f [-]\n", resultEntry.getBestFitness());
             printStream.println("  Operation history:");
             for (OperationHistory operationHistory : resultEntry.getBestConfiguration().getOperationHistory().getChronologicalList()) {
@@ -293,20 +297,24 @@ public class SimpleRender implements Render {
 
         printStream.println();
 
-        printStream.printf("=== Algorithm %s used on problem %s ===\n", resultEntry.getAlgorithm(), resultEntry.getProblem());
+        printStream.printf("=== Algorithm %s used on problem %s ===\n",
+                resultEntry.getAlgorithm(), resultEntry.getProblem());
         printStream.printf("  CPU Time:              %10d [ms]\n", start.getCpuTimeSpent(stop));
         printStream.printf("  System Time:           %10d [ms]\n", start.getSystemTimeSpent(stop));
         printStream.printf("  User Time:             %10d [ms]\n", start.getUserTimeSpent(stop));
         printStream.printf("  Clock Time:            %10d [ms]\n", start.getClockTimeSpent(stop));
 
         printStream.printf("  Optimize counter:      %10d [-]\n", resultEntry.getOptimizeCounter());
-        printStream.printf("  Optimize/sec (CPU):    %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000 / start.getCpuTimeSpent(stop));
-        printStream.printf("  Optimize/sec (Clock):  %10d [1/s]\n", resultEntry.getOptimizeCounter() * 1000 / start.getClockTimeSpent(stop));
+        printStream.printf("  Optimize/sec (CPU):    %10d [1/s]\n",
+                resultEntry.getOptimizeCounter() * 1000 / start.getCpuTimeSpent(stop));
+        printStream.printf("  Optimize/sec (Clock):  %10d [1/s]\n",
+                resultEntry.getOptimizeCounter() * 1000 / start.getClockTimeSpent(stop));
 
         printStream.printf("  Best solution:         %10s\n", resultEntry.getBestConfiguration());
 
         if (resultEntry.getBestConfiguration() != null) {
-            printStream.printf("  Depth:                 %10d [-]\n", resultEntry.getBestConfiguration().getOperationHistory().getCounter());
+            printStream.printf("  Depth:                 %10d [-]\n",
+                    resultEntry.getBestConfiguration().getOperationHistory().getCounter());
             printStream.printf("  Fitness:               %10.1f [-]\n", resultEntry.getBestFitness());
         }
 

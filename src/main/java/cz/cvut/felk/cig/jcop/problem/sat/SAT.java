@@ -113,9 +113,10 @@ public class SAT extends BaseProblem implements StartingConfigurationProblem, Ra
                         throw new ProblemFormatException("" + (this.dimension) + " weights required, " + i + " found");
                     this.variables.get(i).setWeight(Integer.parseInt(m.group()));
                 }
-                if (m.find())
-                    throw new ProblemFormatException("" + (this.dimension) + " weights required, at least " + (this.dimension + 1) + " found");
-
+                if (m.find()) {
+                    throw new ProblemFormatException(String.format(
+                            "%d weights required, at least %d found", this.dimension, this.dimension + 1));
+                }
                 continue;
             }
             // clause line
@@ -163,9 +164,10 @@ public class SAT extends BaseProblem implements StartingConfigurationProblem, Ra
 
         if (activeClause.size() > 0) this.formula.addClause(activeClause);
 
-        if (this.formula.clauses.size() != clausesCount)
-            throw new ProblemFormatException("Invalid number of clauses found, expected " + clausesCount + ", found " + this.formula.clauses.size());
-
+        if (this.formula.clauses.size() != clausesCount) {
+            throw new ProblemFormatException(String.format(
+                    "Invalid number of clauses found, expected %d, found %d", clausesCount, this.formula.clauses.size()));
+        }
         this.setLabel(configFile.getName());
         this.initCommons();
     }

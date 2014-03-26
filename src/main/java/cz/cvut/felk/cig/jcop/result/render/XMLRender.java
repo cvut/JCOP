@@ -61,7 +61,8 @@ public class XMLRender implements Render {
             entry.addAttribute("algorithm", resultEntry.getAlgorithm());
             entry.addAttribute("problem", resultEntry.getProblem());
             entry.addAttribute("optimize-counter", resultEntry.getOptimizeCounter());
-            entry.addAttribute("exception", resultEntry.getException() == null ? "" : resultEntry.getException().getClass().getSimpleName());
+            entry.addAttribute("exception", resultEntry.getException() == null ?
+                    "" : resultEntry.getException().getClass().getSimpleName());
 
             PreciseTimestamp start = resultEntry.getStartTimestamp();
             PreciseTimestamp stop = resultEntry.getStopTimestamp();

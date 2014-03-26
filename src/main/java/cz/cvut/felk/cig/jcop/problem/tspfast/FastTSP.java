@@ -119,8 +119,9 @@ public class FastTSP extends BaseProblem implements StartingConfigurationProblem
      * EOF
      * </pre>
      *
-     * Where recognized EDGE_WEIGHT_TYPEs are EUC_2D (using {@link Math#round(float)} and CEIL_2D (using {@link Math#ceil(double)}. TYPE has to be TSP. Name and comment
-     * are ignored (only added to label). Anything after EOF is ignored. Fractional parts of coordinations are ignored.
+     * Where recognized EDGE_WEIGHT_TYPEs are EUC_2D (using {@link Math#round(float)} and CEIL_2D
+     * (using {@link Math#ceil(double)}. TYPE has to be TSP. Name and comment are ignored (only added to label).
+     * Anything after EOF is ignored. Fractional parts of coordinations are ignored.
      *
      * @param configFile input file to load data from
      * @throws IOException if problem loading file occurs
@@ -163,9 +164,15 @@ public class FastTSP extends BaseProblem implements StartingConfigurationProblem
                 m = startPattern.matcher(line);
                 if (m.find()) {
                     this.setLabel (name + " (" + comment + "; " + configFile.getName() + ")");
-                    if (!type.equals("TSP")) throw new ProblemFormatException("Type must be TSP, " + type + " found");
-                    if (!edge.equals("EUC_2D") && !edge.equals("CEIL_2D")) throw new ProblemFormatException("Edge type must be EUC_2D or CEIL_2D, " + edge + " found");
-                    if (this.dimension < 2) throw new ProblemFormatException("Requires at least 2 cities, " + this.dimension + " found");
+                    if (!type.equals("TSP")) {
+                        throw new ProblemFormatException("Type must be TSP, " + type + " found");
+                    }
+                    if (!edge.equals("EUC_2D") && !edge.equals("CEIL_2D")) {
+                        throw new ProblemFormatException("Edge type must be EUC_2D or CEIL_2D, " + edge + " found");
+                    }
+                    if (this.dimension < 2) {
+                        throw new ProblemFormatException("Requires at least 2 cities, " + this.dimension + " found");
+                    }
                     coordinates.ensureCapacity(this.dimension);
                     coordSection = true;
                 }
@@ -175,19 +182,29 @@ public class FastTSP extends BaseProblem implements StartingConfigurationProblem
                 if (m.find()) break;
 
                 m = nodePattern.matcher(line);
-                if (!m.find()) throw new ProblemFormatException("Line (" + lineCounter + ") different from node or EOF found after NODE_COORD_SECTION: " + line);
+                if (!m.find()) {
+                    throw new ProblemFormatException(String.format(
+                            "Line (%s) different from node or EOF found after NODE_COORD_SECTION: %s", line, lineCounter));
+                }
 
                 int index;
                 index = Integer.valueOf(m.group(1));
                 Double[] coordinate = {Double.valueOf(m.group(2)), Double.valueOf(m.group(3))};
 
-                if (index != coordinates.size() + 1) throw new ProblemFormatException("Found index " + index + " on line (" + lineCounter + ") \"" + line + "\", expected " + (coordinates.size() + 1));
+                if (index != coordinates.size() + 1) {
+                    throw new ProblemFormatException(String.format(
+                            "Found index %d on line (%s) \"%s\", expected %d",
+                            index, lineCounter, line, coordinates.size() + 1));
+                }
 
                 coordinates.add(coordinate);
             }
         }
 
-        if (coordinates.size() != this.dimension) throw new ProblemFormatException("Required " + this.dimension + " coordinates, found " + coordinates.size());
+        if (coordinates.size() != this.dimension) {
+            throw new ProblemFormatException(String.format(
+                    "Required %d coordinates, found %d", this.dimension, coordinates.size()));
+        }
 
         distances = new int[this.dimension][this.dimension];
         for (int i = 0; i < this.dimension; ++i) {

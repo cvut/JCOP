@@ -12,7 +12,8 @@ package cz.cvut.felk.cig.jcop.problem;
  * @see BaseObjectiveProblem BaseObjectiveProblem is basic implementation of ObjectiveProblem interface and should be
  *      base class for all problems (or at least all local search problems).
  */
-public interface ObjectiveProblem extends StartingConfigurationProblem, RandomConfigurationProblem, DestinationProblem, Problem, GlobalSearchProblem {
+public interface ObjectiveProblem extends StartingConfigurationProblem, RandomConfigurationProblem,
+                                          DestinationProblem, Problem, GlobalSearchProblem {
 
     /**
      * Checks if problem has destination.

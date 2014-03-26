@@ -39,9 +39,10 @@ public class RandomSearch extends BaseAlgorithm implements ChainAlgorithm {
         this.problem = problem;
 
         // RS requires either startingConfiguration or RandomStartingConfiguration problem
-        if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration())
-            throw new InvalidProblemException("RandomSearch algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
-
+        if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration()) {
+            throw new InvalidProblemException(
+                    "RandomSearch algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
+        }
         // fetch starting configuration
         if (problem.hasStartingConfiguration()) {
             this.activeConfiguration = problem.getStartingConfiguration();

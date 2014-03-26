@@ -76,7 +76,8 @@ public class NoisingMethod extends BaseAlgorithm implements ChainAlgorithm {
 
         // NM requires either startingConfiguration or RandomStartingConfiguration problem
         if (!problem.hasStartingConfiguration() && !problem.hasRandomConfiguration())
-            throw new InvalidProblemException("NoisingMethod algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
+            throw new InvalidProblemException(
+                    "NoisingMethod algorithm requires either StartingConfigurationProblem or RandomConfigurationProblem");
 
         // fetch starting configuration
         if (problem.hasRandomConfiguration()) {
