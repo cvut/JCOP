@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.1//EN" "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+<suppressions>
+    <!-- This file is probably generated...? Suppress all checks for it. -->
+    <suppress files="cz/cvut/felk/cig/jcop/problem/tspfast/FastInvertSubtourOperation.java" checks="." />
+
+    <!-- This should be refactored, but there may occur a problem with backward compatibility. -->
+    <suppress files="cz/cvut/felk/cig/jcop/result/ResultEntry.java" checks="ParameterNumber" />
+</suppressions>
