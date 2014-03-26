@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * has more accurate information and tends to move only to better solutions.
  *
  * Source:
- * Handbook of Metaheuristics 
+ * Handbook of Metaheuristics
  * http://www.springer.com/business+%26+management/operations+research/book/978-1-4419-1663-1
  *
  * @author Oleg Kovarik

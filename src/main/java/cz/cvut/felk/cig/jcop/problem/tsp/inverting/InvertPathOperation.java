@@ -45,7 +45,7 @@ public class InvertPathOperation implements Operation {
             newConfiguration.set(si % dimension, configuration.valueAt(di % dimension));
             newConfiguration.set(di % dimension, configuration.valueAt(si % dimension));
 
-            di--;            
+            di--;
             si++;
         }
 

@@ -65,7 +65,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
             this.cities.add(new City(i, this.dimension - 1));
         }
 
-        
+
         // parse distances
         for (int i = 0; i < this.dimension; ++i) {
             City city = this.cities.get(i);
@@ -129,7 +129,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
      *
      * Where recognized EDGE_WEIGHT_TYPEs are EUC_2D (using {@link Math#round(float)} and CEIL_2D (using {@link Math#ceil(double)}. TYPE has to be TSP. Name and comment
      * are ignored (only added to label). Anything after EOF is ignored. Fractional parts of coordinations are ignored.
-     * 
+     *
      * @param configFile input file to load data from
      * @throws IOException if problem loading file occurs
      * @throws ProblemFormatException if line format is invalid
@@ -297,7 +297,7 @@ public class TSP extends BaseProblem implements StartingConfigurationProblem, Gl
     }
 
     /* GlobalSearchProblem interface */
-    
+
     public Integer getMaximum(int index) {
         return this.cities.size() - 1;
     }

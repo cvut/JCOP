@@ -47,7 +47,7 @@ public abstract class BaseAlgorithm implements Algorithm {
     }
 
     public void cleanUp() {
-        
+
     }
 
     public double getBestFitness() {

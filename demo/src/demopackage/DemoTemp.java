@@ -155,7 +155,7 @@ public class DemoTemp {
 
         solver.run();
         solver.render();*/
-        
+
         Solver solver = new SimpleSolver(new BreadthFirstSearch(), new Knapsack("9000 4 100 18 114 42 136 88 192 3 223"));
 
         solver.addRender(new XMLRender(new File("output-file.xml")));
