@@ -8,7 +8,8 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
 import cz.cvut.felk.cig.jcop.problem.Operation;
 import cz.cvut.felk.cig.jcop.util.JcopRandom;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Noising method.
@@ -24,6 +25,9 @@ import org.apache.log4j.Logger;
  * @author Oleg Kovarik
  */
 public class NoisingMethod extends BaseAlgorithm implements ChainAlgorithm {
+
+    private static final Logger LOG = LoggerFactory.getLogger(NoisingMethod.class);
+
    /**
      * Active configuration to be expanded
      */
@@ -143,7 +147,7 @@ public class NoisingMethod extends BaseAlgorithm implements ChainAlgorithm {
         }
 
         if (newFitnessNoNoise > this.bestFitness) {
-            Logger.getLogger(this.getClass()).debug("Better solution " + newFitnessNoNoise + ", " + newConfiguration);
+            LOG.debug("Better solution {}, {}", newFitnessNoNoise, newConfiguration);
             this.bestConfiguration = newConfiguration;
             this.bestFitness = newFitnessNoNoise;
         }

@@ -11,7 +11,8 @@ import cz.cvut.felk.cig.jcop.problem.Configuration;
 import cz.cvut.felk.cig.jcop.problem.ObjectiveProblem;
 import cz.cvut.felk.cig.jcop.problem.Operation;
 import cz.cvut.felk.cig.jcop.util.JcopRandom;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simulated annealing algorithm.
@@ -34,6 +35,8 @@ import org.apache.log4j.Logger;
  * @author Ondrej Skalicka
  */
 public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SimulatedAnnealing.class);
 
     /**
      * Active configuration to be expanded
@@ -149,7 +152,7 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
                 this.activeNormalizedFitness = newNormalizedFitness;
                 // if it is best, set it as best
                 if ((newFitness > this.bestFitness && this.bestFitness < 0) || (newFitness < this.bestFitness && this.bestFitness >= 0 && newFitness >= 0)) {
-                    Logger.getLogger(this.getClass()).debug("Better solution " + newFitness + ", " + newConfiguration);
+                    LOG.debug("Better solution {}, {}", newFitness, newConfiguration);
                     this.bestConfiguration = newConfiguration;
                     this.bestFitness = newFitness;
                 }
@@ -162,7 +165,7 @@ public class SimulatedAnnealing extends BaseAlgorithm implements ChainAlgorithm 
                 this.activeNormalizedFitness = newNormalizedFitness;
                 // if it is best, set it as best
                 if (newFitness < this.bestFitness && newFitness >= 0) {
-                    Logger.getLogger(this.getClass()).debug("Better solution " + newFitness + ", " + newConfiguration);
+                    LOG.debug("Better solution {}, {}", newFitness, newConfiguration);
                     this.bestConfiguration = newConfiguration;
                     this.bestFitness = newFitness;
                 }
