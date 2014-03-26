@@ -65,6 +65,13 @@ public class BucketItem {
     }
 
     @Override
+    public int hashCode() {
+        int result = capacity;
+        result = 31 * result + index;
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "BucketItem{" +
                 "capacity=" + capacity +

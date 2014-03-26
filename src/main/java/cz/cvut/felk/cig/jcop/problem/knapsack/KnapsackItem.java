@@ -69,6 +69,14 @@ public class KnapsackItem {
     }
 
     @Override
+    public int hashCode() {
+        int result = index;
+        result = 31 * result + weight;
+        result = 31 * result + price;
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "KnapsackItem{" +
                 "index=" + index +

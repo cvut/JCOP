@@ -83,6 +83,11 @@ public abstract class BaseAlgorithm implements Algorithm {
     }
 
     @Override
+    public int hashCode() {
+        return label != null ? label.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
         if ("".equals(this.getLabel())) return this.getClass().getSimpleName();
         return this.getClass().getSimpleName() + " [" + this.getLabel() + "]";
