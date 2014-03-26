@@ -19,5 +19,5 @@ public interface Render {
     /**
      * Renders result to some output.
      */
-    public void render(Result result) throws IOException;
+    void render(Result result) throws IOException;
 }

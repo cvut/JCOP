@@ -25,6 +25,6 @@ public interface ConfigurationMap {
      * @throws IndexOutOfBoundsException if index is out of bounds
      * @see cz.cvut.felk.cig.jcop.problem.IdentityConfigurationMap default implementation
      */
-    public Object map(Integer value, int index) throws IndexOutOfBoundsException;
+    Object map(Integer value, int index) throws IndexOutOfBoundsException;
 
 }

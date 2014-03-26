@@ -21,6 +21,6 @@ public interface StartingConfigurationProblem {
      *
      * @return starting attributes for a problem.
      */
-    public abstract Configuration getStartingConfiguration();
+    Configuration getStartingConfiguration();
 
 }

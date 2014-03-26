@@ -27,7 +27,7 @@ public interface OperationIterator extends Iterator<Operation> {
      * @return randomly chosen operation
      * @throws UnsupportedOperationException if random operation is not supported
      */
-    public Operation getRandomOperation() throws UnsupportedOperationException;
+    Operation getRandomOperation() throws UnsupportedOperationException;
 
     /**
      * Checks if there is more operations left in iterator.

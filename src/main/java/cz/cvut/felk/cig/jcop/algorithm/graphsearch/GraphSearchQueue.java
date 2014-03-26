@@ -18,7 +18,7 @@ public interface GraphSearchQueue {
      *
      * @return either one element or NULL
      */
-    public Configuration fetch();
+    Configuration fetch();
 
     /**
      * Adds new element to queue.
@@ -27,7 +27,7 @@ public interface GraphSearchQueue {
      *
      * @param newElement new element to be added to queue
      */
-    public void add(Configuration newElement);
+    void add(Configuration newElement);
 
     /**
      * Test whether tested element has already been added to queue.
@@ -37,12 +37,12 @@ public interface GraphSearchQueue {
      * @param testedElement element to be tested
      * @return true if element has been there, false otherwise
      */
-    public boolean testPresence(Configuration testedElement);
+    boolean testPresence(Configuration testedElement);
 
     /**
      * Returns the number of elements in queue.
      *
      * @return number of elements in queue
      */
-    public int size();
+    int size();
 }

@@ -23,6 +23,6 @@ public interface DestinationProblem {
      *
      * @return list of all allowed destinations
      */
-    public List<Configuration> getDestinations();
+    List<Configuration> getDestinations();
 
 }

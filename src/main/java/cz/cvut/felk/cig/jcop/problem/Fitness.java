@@ -31,7 +31,7 @@ public interface Fitness {
      * @param configuration configuration to have is fitness measured
      * @return fitness of configuration
      */
-    public double getValue(Configuration configuration);
+    double getValue(Configuration configuration);
 
     /**
      * Returns fitness scaled to 0..1.
@@ -40,5 +40,5 @@ public interface Fitness {
      * @return fitness of configuration in range (0,1) (inclusive)
      * @throws IllegalStateException if fitness is unable to return normalized value
      */
-    public double normalize(double fitness) throws IllegalStateException;
+    double normalize(double fitness) throws IllegalStateException;
 }

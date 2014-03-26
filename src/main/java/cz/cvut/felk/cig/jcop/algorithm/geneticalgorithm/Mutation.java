@@ -21,5 +21,5 @@ public interface Mutation {
      *
      * @param attributes attributes to be mutated.
      */
-    public void mutate(List<Integer> attributes);
+    void mutate(List<Integer> attributes);
 }

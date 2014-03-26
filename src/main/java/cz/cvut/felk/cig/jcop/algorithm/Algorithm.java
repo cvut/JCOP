@@ -28,40 +28,40 @@ public interface Algorithm {
      * @param problem problem to be initialized on
      * @throws InvalidProblemException if supplied problem cannot be solved by this algorithm
      */
-    public void init(ObjectiveProblem problem) throws InvalidProblemException;
+    void init(ObjectiveProblem problem) throws InvalidProblemException;
 
     /**
      * Performs one optimization step.
      *
      * @throws CannotContinueException if no more optimization steps are possible
      */
-    public void optimize() throws CannotContinueException;
+    void optimize() throws CannotContinueException;
 
     /**
      * Returns best found configuration.
      *
      * @return best found configuration
      */
-    public Configuration getBestConfiguration();
+    Configuration getBestConfiguration();
 
     /**
      * Performs clean up after algorithm stopped.
      */
-    public void cleanUp ();
+    void cleanUp ();
 
     /**
      * Updates which fitness to use instead of default. Should be called before first optimize step is made.
      *
      * @param fitness fitness to be used in algorithm
      */
-    public void setFitness(Fitness fitness);
+    void setFitness(Fitness fitness);
 
     /**
      * Returns fitness of best found configuration.
      *
      * @return fitness of best found configuration
      */
-    public double getBestFitness();
+    double getBestFitness();
 
     /**
      * Sets label for algorithm.
@@ -75,7 +75,7 @@ public interface Algorithm {
      *
      * @param label new label for algorithm
      */
-    public void setLabel(String label);
+    void setLabel(String label);
 
     /**
      * Gets label of algorithm.
@@ -84,5 +84,5 @@ public interface Algorithm {
      *
      * @return label for algorithm
      */
-    public String getLabel();
+    String getLabel();
 }

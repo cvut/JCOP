@@ -19,12 +19,12 @@ public interface Selection {
      *
      * @param population whole population
      */
-    public void init(List<Chromosome> population);
+    void init(List<Chromosome> population);
 
     /**
      * Selects one parent from current population (set in {@link #init(java.util.List)}).
      *
      * @return selected parent
      */
-    public Chromosome select();
+    Chromosome select();
 }

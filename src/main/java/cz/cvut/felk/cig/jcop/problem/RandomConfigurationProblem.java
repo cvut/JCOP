@@ -18,6 +18,6 @@ public interface RandomConfigurationProblem {
      *
      * @return one random configuration
      */
-    public Configuration getRandomConfiguration();
+    Configuration getRandomConfiguration();
 
 }
